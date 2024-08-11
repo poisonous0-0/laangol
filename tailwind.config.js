@@ -9,6 +9,10 @@ export default {
       height: {
         '128': '48.75rem',
       },
+      width: {
+        '96': '66rem',
+        '81' : '26rem'
+      },
       weight: {
         '96': '31.25rem',
       },
@@ -20,7 +24,7 @@ export default {
         'secondary': '#B0D52B',
       },
       fontFamily: {
-        'sans': ['Manrope', 'sans-serif', ]
+        'sans': ['Manrope', 'sans-serif'],
       },
       fontSize: {
         'lg': '1.25rem',

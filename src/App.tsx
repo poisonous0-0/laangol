@@ -1,6 +1,6 @@
-import Landing_page from "./pages/Landing_page";
+import Login_page from "./pages/Authentication/Login_page";
 const App: React.FC = () => {
-  return <Landing_page />;
+	return <Login_page />;
 };
 
 export default App;
