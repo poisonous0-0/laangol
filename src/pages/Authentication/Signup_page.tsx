@@ -1,8 +1,16 @@
+import { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import bg from "../../assets/login_and_signup_banner.png";
 import Authentication_Input from "../../components/Authentication_Input/Authentication_Input";
+import RadioButton from "../../components/Radio_Button/RadioButton";
 
 const Signup_page = () => {
+	const [selectedValue, setSelectedValue] = useState("option1");
+
+	const handleRadioChange = (value: string) => {
+		setSelectedValue(value);
+	};
+
 	return (
 		<>
 			<header>
@@ -52,6 +60,32 @@ const Signup_page = () => {
 								required
 								className="w-full"
 							/>
+							<div className="user_type_selection flex flex-col gap-y-2">
+								<p>Select your user type</p>
+								<div className="flex gap-x-6">
+									<RadioButton
+										label="Farmer"
+										value="farmer"
+										name="options"
+										checked={selectedValue === "farmer"}
+										onChange={handleRadioChange}
+									/>
+									<RadioButton
+										label="Admin"
+										value="admin"
+										name="options"
+										checked={selectedValue === "admin"}
+										onChange={handleRadioChange}
+									/>
+									<RadioButton
+										label="Consumer"
+										value="consumer"
+										name="options"
+										checked={selectedValue === "consumer"}
+										onChange={handleRadioChange}
+									/>
+								</div>
+							</div>
 							<div className="flex items-center">
 								<input
 									id="link-checkbox"
