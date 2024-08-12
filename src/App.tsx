@@ -1,6 +1,11 @@
-import Login_page from "./pages/Authentication/Login_page";
-const App: React.FC = () => {
-	return <Login_page />;
+import Signup_page from "./pages/Authentication/Signup_page";
+
+const App = () => {
+	return (
+		<div>
+			<Signup_page />
+		</div>
+	);
 };
 
 export default App;
