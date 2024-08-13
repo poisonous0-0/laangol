@@ -1,0 +1,3 @@
+Set-ExecutionPolicy RemoteSigned -Scope Process
+
+env\scripts\activate
