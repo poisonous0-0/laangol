@@ -10,8 +10,6 @@ const App = () => {
 			<div className="p-4 main flex-grow bg-lime-100 border border-lime-400 rounded-md overflow-hidden">
 				<Outlet />
 			</div>
-		<div>
-			<Signup_page />
 		</div>
 	);
 };
