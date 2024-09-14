@@ -22,6 +22,10 @@ export default {
       colors: {
         'primary': '#647233',
         'secondary': '#B0D52B',
+        'lime': {
+        800: '#B0D52B',
+        900: '#647233',
+        }
       },
       fontFamily: {
         'sans': ['Manrope', 'sans-serif'],
