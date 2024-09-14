@@ -13,16 +13,27 @@ from rest_framework.permissions import IsAuthenticated
 
 @api_view(['POST'])
 def login(request):
-    user= get_object_or_404(DbUser, email=request.data['email'])
+    email = request.data.get('email')
+    password = request.data.get('password')
 
-    if not check_password(request.data['password'], user.password):
-        return Response({"detail ": "Not Found"}, status=status.HTTP_400_BAD_REQUEST)
+    if not email or not password:
+        return Response({"detail": "Email and password are required"}, status=status.HTTP_400_BAD_REQUEST)
+
+    # Fetch the user from the custom user model
+    user = get_object_or_404(DbUser, email=email)
     
-    Convert_user=Django_user.objects.get(email=request.data['email'])
+    # Verify the password
+    if not check_password(password, user.password):
+        return Response({"detail": "Invalid password"}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Fetch the Django user for token creation
+    Convert_user = get_object_or_404(Django_user, email=email)
     token, created = Token.objects.get_or_create(user=Convert_user)
 
-    serializer=UserSerializers(instance=user)
-    return Response({"token": token.key, "user": serializer.data})
+    # Serialize the user data
+    serializer = UserSerializers(instance=user)
+    
+    return Response({"token": token.key, "user": serializer.data}, status=status.HTTP_200_OK)
 
 
 
