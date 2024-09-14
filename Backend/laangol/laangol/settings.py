@@ -91,6 +91,8 @@ DATABASES = {
         'HOST': 'localhost',            # Set to empty string for localhost
         'PORT': '3306',                 # Default MySQL port
     }
+
+    
 }
 
 

@@ -53,3 +53,5 @@ def signup(request):
 def gettoken(request):
     return Response("Passed for {}".format(request.user.email))
 
+
+
