@@ -7,14 +7,12 @@ import Adding_items from "../Marketplace/Adding_items";
 
 const Marketplace_main = () => {
 	return (
-		<Router>
-			<Routes>
-				<Route path="/marketplace1" element={<Marketplace_1 />} />
-				<Route path="/marketplace2" element={<Marketplace_2 />} />
-				<Route path="/product_info" element={<Product_description />} />
-				<Route path="/add_items" element={<Adding_items />} />
-			</Routes>
-		</Router>
+		<Routes>
+			<Route path="/marketplace1" element={<Marketplace_1 />} />
+			<Route path="/marketplace2" element={<Marketplace_2 />} />
+			<Route path="/product_info" element={<Product_description />} />
+			<Route path="/add_items" element={<Adding_items />} />
+		</Routes>
 	);
 };
 
