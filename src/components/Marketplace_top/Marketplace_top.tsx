@@ -1,4 +1,6 @@
 import Button from "../Button/Button";
+import { Link } from "react-router-dom";
+
 const Marketplace_top = () => {
 	return (
 		<>
@@ -8,7 +10,9 @@ const Marketplace_top = () => {
 						<h1>Marketplace</h1>
 					</div>
 					<div className="addProduct_button">
-						<Button className="">Add your product</Button>
+						<Link to="/add_items">
+							<Button className="">Add your product</Button>
+						</Link>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 import Button from "../../components/Button/Button";
 import Input_text from "../../components/Input_Text/Input_text";
+import { Link } from "react-router-dom";
 
 const Adding_items = () => {
 	return (
@@ -41,9 +42,12 @@ const Adding_items = () => {
 			</p>
 
 			<div className="mt-4 submission flex flex-col items-center space-y-5 w-full">
-				<Button className="w-full md:w-auto bg-lime-800 text-lime-900 px-4 py-2">
-					Add your Product
-				</Button>
+				<Link to="/product_info">
+					<Button className="w-full md:w-auto bg-lime-800 text-lime-900 px-4 py-2">
+						Add your Product
+					</Button>
+				</Link>
+
 				<Button className="w-full md:w-auto bg-lime-800 text-lime-900 px-4 py-2">
 					Visit Marketplace
 				</Button>

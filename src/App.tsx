@@ -3,7 +3,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 
 const App = () => {
 	return (
-		<div className="m-3 flex space-x-3 items-end min-h-screen overflow-hidden">
+		<div className="m-3 flex space-x-3 items-center min-h-screen overflow-hidden">
 			<div className="sidebar h-full">
 				<Sidebar />
 			</div>
