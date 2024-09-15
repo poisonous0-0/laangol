@@ -23,6 +23,20 @@ const Adding_items = () => {
 					<Input_text label="Product Name" />
 					<Input_text label="Product Description" />
 					<Input_text label="Product Quantity" />
+					<Input_text label="Product Price" />
+					<label className="text-lime-900">Upload your image</label>
+					<label
+						htmlFor="file-input"
+						className="cursor-pointer px-4 py-2 bg-lime-800 text-black rounded-md hover:bg-lime-700"
+					>
+						Choose File
+					</label>
+					<input
+						type="file"
+						id="file-input"
+						name="ImageStyle"
+						className="hidden"
+					/>
 				</form>
 			</div>
 
