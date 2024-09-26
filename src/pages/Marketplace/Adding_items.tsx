@@ -61,10 +61,11 @@ const Adding_items = () => {
 						Add your Product
 					</Button>
 				</Link>
-
-				<Button className="w-full md:w-auto bg-lime-800 text-lime-900 px-4 py-2">
-					Visit Marketplace
-				</Button>
+				<Link to="/marketplace2">
+					<Button className="w-full md:w-auto bg-lime-800 text-lime-900 px-4 py-2">
+						Visit Marketplace
+					</Button>
+				</Link>
 			</div>
 		</>
 	);
