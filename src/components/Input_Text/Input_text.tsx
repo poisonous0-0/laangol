@@ -11,7 +11,7 @@ const Input_text: React.FC<InputBoxProps> = ({ label, type = "text" }) => {
 			<label className="mb-2 text-lime-900">{label}</label>
 			<input
 				type={type}
-				className="px-4 py-2 border border-lime-500 bg-lime-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+				className="px-4 py-2 border border-lime-500 bg-lime-100 rounded-md focus:outline-none "
 			/>
 		</div>
 	);

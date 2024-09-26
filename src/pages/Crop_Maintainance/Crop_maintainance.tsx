@@ -1,5 +1,3 @@
-import React from "react";
-
 const Crop_maintainance = () => {
 	return (
 		<div>

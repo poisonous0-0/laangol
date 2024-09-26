@@ -10,7 +10,7 @@ const Marketplace_top = () => {
 						<h1>Marketplace</h1>
 					</div>
 					<div className="addProduct_button">
-						<Link to="/add_items">
+						<Link to="add_items">
 							<Button className="">Add your product</Button>
 						</Link>
 					</div>

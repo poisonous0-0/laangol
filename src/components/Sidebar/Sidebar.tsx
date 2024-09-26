@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import ShoppingButton from "../Button_2/Button_2";
-import Laangol from "../../assets/laangol.png";
 import Cart from "../../assets/cart.png";
 import Chat from "../../assets/chat.png";
 import Crop from "../../assets/crop.png";
@@ -12,14 +11,14 @@ import Storehouse from "../../assets/storehouse.png";
 
 // Constants
 const menuItems = [
-	{ img: Marketplace, text: "Marketplace", path: "/" },
-	{ img: Crop, text: "Crop Maintenance", path: "/crop_maintainence" },
-	{ img: Labor, text: "Labor Management", path: "/marketplace" },
-	{ img: Storehouse, text: "Storehouse Rental", path: "/marketplace" },
-	{ img: Helpline, text: "Crop Suggestions", path: "/marketplace" },
+	{ img: Marketplace, text: "Marketplace", path: "marketplace" },
+	{ img: Crop, text: "Crop Maintenance", path: "crop_maintenance" },
+	{ img: Labor, text: "Labor Management", path: "labor" },
+	{ img: Storehouse, text: "Storehouse Rental", path: "storehouse" },
+	{ img: Helpline, text: "Crop Suggestions", path: "helpline" },
 ];
 
-// Component
+// Sidebar Component
 const Sidebar = () => {
 	const [expanded, setExpanded] = useState(false);
 
@@ -27,51 +26,59 @@ const Sidebar = () => {
 	const handleMouseLeave = () => setExpanded(false);
 
 	return (
-		<div className="h-screen sm:max-w-60 lg:max-w-72 w-full pb-20 flex flex-col items-center justify-between bg-white">
-			{/* Top Part */}
-			<div className="top-part">
-				<img
-					src={Laangol}
-					alt="Laangol Logo"
-					className="w-32 sm:w-40 lg:w-56"
-				/>
-			</div>
-
+		<div
+			className={`h-full bg-lime-100 rounded-md transition-all duration-500 ease-in-out transform ${
+				expanded ? "p-5 w-56 sm:w-60 md:w-64 lg:w-80 z-10" : "w-14"
+			} flex flex-col items-start justify-between`} // Ensure overflow-hidden to prevent scrolling
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+		>
 			{/* Middle Part */}
-			<div
-				className={`middle-part flex flex-col gap-y-6 text-lime-700 font-medium transition-all duration-300`}
-				onMouseEnter={handleMouseEnter}
-				onMouseLeave={handleMouseLeave}
-			>
+			<div className="middle-part flex flex-col gap-y-6 text-lime-700 font-medium">
 				{menuItems.map((item, index) => (
 					<Link
-						to={item.path} // Add path for the specific page
+						to={item.path}
 						key={index}
-						className={`transition-all duration-500 ease-in-out flex items-center gap-x-3 sm:gap-x-5 rounded-lg p-2 hover:bg-lime-200 ${
-							expanded ? "w-full sm:w-60 lg:w-72" : "w-14 sm:w-16"
+						className={`transition-all duration-300 ease-in-out flex items-center gap-x-3 md:gap-x-5 p-2 hover:bg-lime-200 rounded-lg ${
+							expanded ? "w-full" : "w-14"
 						}`}
-						style={{ whiteSpace: "nowrap" }}
 					>
-						<img src={item.img} alt={item.text} className="w-8 sm:w-10" />
+						<img
+							src={item.img}
+							alt={item.text}
+							className="w-6 sm:w-8 md:w-10"
+						/>
 						{expanded && (
-							<p className="text-sm sm:text-md lg:text-lg">{item.text}</p>
+							<p className="text-sm sm:text-md md:text-base lg:text-base">
+								{item.text}
+							</p>
 						)}
 					</Link>
 				))}
 			</div>
 
 			{/* Bottom Part */}
-			<div className="bottom-part">
-				<div className="m-3 flex flex-col gap-y-6">
+			<div className="bottom-part mb-4 text-lime-900">
+				<div className="flex flex-col gap-y-6">
 					<ShoppingButton className="flex items-center gap-x-3 sm:gap-x-6">
-						<img src={Chat} alt="Chat" className="w-8 sm:w-10" />
-						<p className="hidden sm:block pr-16 sm:pr-24">Chat</p>
+						<img src={Chat} alt="Chat" className="w-6 sm:w-8 md:w-10" />
+						{expanded && (
+							<p className="text-sm sm:text-md md:text-base lg:text-base">
+								Chat
+							</p>
+						)}
 					</ShoppingButton>
 					<ShoppingButton className="flex items-center gap-x-3 sm:gap-x-6">
-						<img src={Cart} alt="Cart" className="w-8 sm:w-10" />
-						<p>Cart</p>
+						<img src={Cart} alt="Cart" className="w-6 sm:w-8 md:w-10" />
+						{expanded && (
+							<p className="text-sm sm:text-md md:text-lg lg:text-base">Cart</p>
+						)}
 					</ShoppingButton>
-					<p className="text-xs sm:text-sm text-lime-500">
+					<p
+						className={`fractor text-xs sm:text-sm md:text-base text-lime-500 ${
+							expanded ? "opacity-100" : "opacity-0"
+						}`}
+					>
 						Laangol 2024. All rights reserved.
 					</p>
 				</div>
