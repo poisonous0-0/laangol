@@ -1,8 +1,8 @@
-import Login_page from "./pages/Authentication/Login_page";
+import Bot from "../src/pages/Chatbot/Bot";
 const App = () => {
 	return (
 		<div>
-			<Login_page />
+			<Bot />
 		</div>
 	);
 };

@@ -13,11 +13,12 @@ import Labor_list from "../pages/Labor/Labor_list";
 import Labor_profile from "../pages/Labor/Labor_profile";
 import Store_list from "../pages/StoreHouse/Store_house_list";
 import Store_rental from "../pages/StoreHouse/Store_rental";
+import App from "../App";
 
 const router = createBrowserRouter([
 	{
 		path: "/", // Default route is login
-		element: <Login_page />,
+		element: <App />,
 	},
 	{
 		path: "/dashboard", // Dashboard route
@@ -74,10 +75,10 @@ const router = createBrowserRouter([
 			},
 		],
 	},
-	{
-		path: "*", // Wildcard for unknown routes
-		element: <div>404 Not Found</div>,
-	},
+	// {
+	// 	path: "*", // Wildcard for unknown routes
+	// 	element: <div>404 Not Found</div>,
+	// },
 ]);
 
 export default router;
