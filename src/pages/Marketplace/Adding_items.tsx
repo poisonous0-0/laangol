@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 const Adding_items = () => {
 	return (
 		<>
-			<div className="heading text-2xl sm:text-3xl md:text-4xl font-semibold text-lime-900 text-start">
+			<div className="heading flex items-center justify-between  text-2xl sm:text-3xl md:text-4xl font-semibold text-lime-900 text-start">
 				<h1>Marketplace</h1>
+				<Link to="inventory" className="text-base">
+					<Button className="">Seller Profile</Button>
+				</Link>
 			</div>
 
 			<div className="form_part flex flex-col items-center md:items-start space-y-4 md:space-y-0 md:space-x-4 mt-4">
