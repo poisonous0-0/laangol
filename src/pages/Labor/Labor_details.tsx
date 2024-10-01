@@ -1,6 +1,7 @@
 import Button from "../../components/Button/Button";
 import user from "../../assets/user.png";
 import Short_card_2 from "../../components/Short_card_2/Short_card_2";
+import { Link } from "react-router-dom";
 
 const Labor_details = () => {
 	return (
@@ -79,26 +80,13 @@ const Labor_details = () => {
 						<div className="more_details">
 							<h1>Find more Labor</h1>
 							<div className="more_details_card flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
-								<Short_card_2
-									imageSrc={user}
-									name="Dipto Mahdud Sultan"
-									rate="250\Hr BDT"
-								/>
-								<Short_card_2
-									imageSrc={user}
-									name="Dipto Mahdud Sultan"
-									rate="250\Hr BDT"
-								/>
-								<Short_card_2
-									imageSrc={user}
-									name="Dipto Mahdud Sultan"
-									rate="250\Hr BDT"
-								/>
-								<Short_card_2
-									imageSrc={user}
-									name="Dipto Mahdud Sultan"
-									rate="250\Hr BDT"
-								/>
+								<Link to="labor_details">
+									<Short_card_2
+										imageSrc={user}
+										name="Dipto Mahdud Sultan"
+										rate="250\Hr BDT"
+									/>
+								</Link>
 							</div>
 						</div>
 					</div>

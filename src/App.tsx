@@ -1,8 +1,11 @@
-import Login_page from "./pages/Authentication/Login_page";
+import Inventory from "./components/Inventory/Inventory";
+import Admin_dashboard from "./pages/Admin/Admin_dashboard";
+import Labor_details from "./pages/Labor/Labor_details";
+import Labor_profile from "./pages/Labor/Labor_profile";
 const App = () => {
 	return (
 		<div>
-			<Login_page />
+			<Labor_details />
 		</div>
 	);
 };
