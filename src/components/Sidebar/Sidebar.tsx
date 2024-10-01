@@ -15,7 +15,7 @@ const menuItems = [
 	{ img: Crop, text: "Crop Maintenance", path: "crop_maintenance" },
 	{ img: Labor, text: "Labor Management", path: "labor" },
 	{ img: Storehouse, text: "Storehouse Rental", path: "storehouse" },
-	{ img: Helpline, text: "Crop Suggestions", path: "helpline" },
+	{ img: Helpline, text: "AgroAegis", path: "agroaegis" },
 ];
 
 // Sidebar Component
@@ -60,20 +60,27 @@ const Sidebar = () => {
 			{/* Bottom Part */}
 			<div className="bottom-part mb-4 text-lime-900">
 				<div className="flex flex-col gap-y-6">
-					<ShoppingButton className="flex items-center gap-x-3 sm:gap-x-6">
-						<img src={Chat} alt="Chat" className="w-6 sm:w-8 md:w-10" />
-						{expanded && (
-							<p className="text-sm sm:text-md md:text-base lg:text-base">
-								Chat
-							</p>
-						)}
-					</ShoppingButton>
-					<ShoppingButton className="flex items-center gap-x-3 sm:gap-x-6">
-						<img src={Cart} alt="Cart" className="w-6 sm:w-8 md:w-10" />
-						{expanded && (
-							<p className="text-sm sm:text-md md:text-lg lg:text-base">Cart</p>
-						)}
-					</ShoppingButton>
+					<Link to="cart">
+						<ShoppingButton className="flex items-center gap-x-3 sm:gap-x-6">
+							<img src={Cart} alt="Chat" className="w-6 sm:w-8 md:w-10" />
+							{expanded && (
+								<p className="text-sm sm:text-md md:text-base lg:text-base">
+									Cart
+								</p>
+							)}
+						</ShoppingButton>
+					</Link>
+
+					<Link to="">
+						<ShoppingButton className="flex items-center gap-x-3 sm:gap-x-6">
+							<img src={Chat} alt="Chat" className="w-6 sm:w-8 md:w-10" />
+							{expanded && (
+								<p className="text-sm sm:text-md md:text-base lg:text-base">
+									chat
+								</p>
+							)}
+						</ShoppingButton>
+					</Link>
 					<p
 						className={`fractor text-xs sm:text-sm md:text-base text-lime-500 ${
 							expanded ? "opacity-100" : "opacity-0"

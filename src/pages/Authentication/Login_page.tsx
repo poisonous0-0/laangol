@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bg from "../../assets/login_and_signup_banner.png";
 import Navbar from "../../components/Navbar/Navbar";
 import Authentication_Input from "../../components/Authentication_Input/Authentication_Input";
@@ -48,6 +48,14 @@ const Login_page = () => {
 									Login
 								</button>
 							</div>
+							<p>
+								Dont have account?{" "}
+								<Link to="/signup">
+									<a href="" className="text-lime-900">
+										Sign up
+									</a>
+								</Link>
+							</p>
 						</form>
 					</div>
 				</div>

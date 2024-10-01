@@ -71,13 +71,6 @@ const Signup_page = () => {
 										onChange={handleRadioChange}
 									/>
 									<RadioButton
-										label="Admin"
-										value="admin"
-										name="options"
-										checked={selectedValue === "admin"}
-										onChange={handleRadioChange}
-									/>
-									<RadioButton
 										label="Consumer"
 										value="consumer"
 										name="options"
