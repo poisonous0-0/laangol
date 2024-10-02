@@ -1,15 +1,49 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
+import { useState } from "react"; 
 import bg from "../../assets/login_and_signup_banner.png";
 import Navbar from "../../components/Navbar/Navbar";
 import Authentication_Input from "../../components/Authentication_Input/Authentication_Input";
 
 const Login_page = () => {
-	const navigate = useNavigate(); // Use the navigate hook
+	const navigate = useNavigate(); 
+	const [email, setEmail] = useState(""); 
+	const [password, setPassword] = useState(""); 
 
-	const handleLogin = (event: React.FormEvent) => {
+	const handleLogin = async (event: React.FormEvent) => {
 		event.preventDefault();
-		console.log("Login attempt"); // Debugging line
-		navigate("/dashboard");
+		console.log("Login attempt", { email, password }); 
+
+		const payload = {
+			email,
+			password,
+		};
+
+		try {
+			const response = await fetch("http://127.0.0.1:8000/login/", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(payload),
+			});
+
+			if (!response.ok) {
+				const errorData = await response.json();
+				console.error("Login failed:", errorData); 
+				alert("Login failed. Please check your credentials.");
+				return;
+			}
+
+			const data = await response.json();
+			console.log("Login successful:", data); 
+
+			localStorage.setItem("token", data.token);
+
+			navigate("/dashboard");
+		} catch (error) {
+			console.error("Error during login:", error);
+			alert("An error occurred during login. Please try again later.");
+		}
 	};
 
 	return (
@@ -31,6 +65,8 @@ const Login_page = () => {
 								name="email"
 								placeholder="Email"
 								required
+								value={email} 
+								onChange={(e) => setEmail(e.target.value)} 
 								className="w-full"
 							/>
 							<Authentication_Input
@@ -38,6 +74,8 @@ const Login_page = () => {
 								name="password"
 								placeholder="Password"
 								required
+								value={password} 
+								onChange={(e) => setPassword(e.target.value)} 
 								className="w-full"
 							/>
 							<div className="signup_button">
@@ -49,11 +87,9 @@ const Login_page = () => {
 								</button>
 							</div>
 							<p>
-								Dont have account?{" "}
+								Dont have an account?{" "}
 								<Link to="/signup">
-									<a href="" className="text-lime-900">
-										Sign up
-									</a>
+									<span className="text-lime-900">Sign up</span>
 								</Link>
 							</p>
 						</form>
