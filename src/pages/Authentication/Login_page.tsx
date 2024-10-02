@@ -19,7 +19,7 @@ const Login_page = () => {
 					<Navbar />
 				</nav>
 			</header>
-			<div className="login_page bg-lime-50 flex items-center justify-between">
+			<div className="login_page bg-lime-50 flex items-center justify-between ">
 				<div className="login_content pl-40 flex flex-col items-baseline gap-y-10 font-medium">
 					<div className="heading text-5xl">
 						<h1>Login</h1>
