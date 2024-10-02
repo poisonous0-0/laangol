@@ -46,13 +46,14 @@ const Signup_page = () => {
 	const payload = {
 	  name: formData.name,
 	  email: formData.email,
-	  number: formData.phone, 
+	  number: formData.phone,
 	  region_id: null, 
 	  active: 1, 
 	  password: formData.password,
+	  type: selectedValue, 
 	};
   
-	console.log("Payload:", JSON.stringify(payload, null, 2)); // Log the payload for verification
+	console.log("Payload:", JSON.stringify(payload, null, 2));
   
 	try {
 	  const response = await fetch("http://127.0.0.1:8000/signup/", {
@@ -77,6 +78,7 @@ const Signup_page = () => {
 	  alert("An error occurred during signup. Please try again later.");
 	}
   };
+  
   
   return (
     <>
