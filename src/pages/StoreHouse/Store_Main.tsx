@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import search from "../../assets/search.png";
 import getHired from "../../assets/getHired.png";
 import storeHouse from "../../assets/warehouse.png";

@@ -6,11 +6,11 @@ const Store_details = () => {
 	return (
 		<>
 			<div className="store_details container ">
-				<div className="heading text-2xl sm:text-3xl font-semibold text-lime-900">
+				<div className="heading text-2xl sm:text-3xl font-semibold text-lime-200">
 					<h1>Store Management</h1>
 				</div>
 
-				<div className="content mt-11 flex flex-col space-y-8 text-lime-900">
+				<div className="content mt-11 flex flex-col space-y-8 text-lime-200">
 					<div className="store_details">
 						<div className="store_title flex items-center justify-center text-xl sm:text-2xl">
 							<h1 className="bg-lime-800 px-10 sm:px-20 py-2 rounded-md">
@@ -25,7 +25,7 @@ const Store_details = () => {
 									<img
 										src={store}
 										alt="User"
-										className="w-full sm:w-60 md:w-80 bg-lime-200 p-2 rounded-lg border border-lime-500"
+										className="w-full sm:w-60 md:w-80 bg-lime-100 p-2 rounded-lg border border-lime-200"
 									/>
 								</div>
 
@@ -37,13 +37,13 @@ const Store_details = () => {
 
 									{/* Taglines */}
 									<div className="taglines flex flex-col md:flex-row items-center justify-center md:justify-normal space-y-2 md:space-y-0 md:space-x-3">
-										<div className="tag px-2 py-1 bg-lime-100 rounded-md border border-lime-800 text-sm">
+										<div className="tag px-2 py-1 bg-lime-100 bg-opacity-10 rounded-md border border-lime-200 text-sm">
 											<p>1160 Sqft</p>
 										</div>
-										<div className="tag px-2 py-1 bg-lime-100 rounded-md border border-lime-800 text-sm">
+										<div className="tag px-2 py-1 bg-lime-100 bg-opacity-10 rounded-md border border-lime-200 text-sm">
 											<p>Lalpur Upazila, Pabna</p>
 										</div>
-										<div className="tag px-2 py-1 bg-lime-100 rounded-md border border-lime-800 text-sm">
+										<div className="tag px-2 py-1 bg-lime-100 bg-opacity-10 rounded-md border border-lime-200 text-sm">
 											<p>+8801712345678</p>
 										</div>
 									</div>
@@ -61,13 +61,9 @@ const Store_details = () => {
 										</p>
 
 										<div className="connection flex flex-col md:flex-row items-center w-full space-y-5 md:space-y-0 md:space-x-7">
-											<Button className="w-full md:w-auto">250\Hr BDT</Button>
-											<Button className="w-full md:w-auto">
-												Chat with Owner
-											</Button>
-											<Button className="w-full md:w-auto">
-												Contact Area Consultant
-											</Button>
+											<Button text="250\Hr BDT" />
+											<Button text="Chat With Owner" />
+											<Button text="Contact Area Consultant" />
 										</div>
 									</div>
 								</div>
