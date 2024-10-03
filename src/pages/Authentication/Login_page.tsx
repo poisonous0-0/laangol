@@ -4,11 +4,12 @@ import bg from "../../assets/login_and_signup_banner.png";
 import Navbar from "../../components/Navbar/Navbar";
 import Authentication_Input from "../../components/Authentication_Input/Authentication_Input";
 import Button from "../../components/Button/Button";
-
+import Warning from "../../components/Popup/Warning";
 const Login_page = () => {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [isWarningOpen, setIsWarningOpen] = useState(false); // State for Warning popup
 
 	const handleLogin = async (event: React.FormEvent) => {
 		event.preventDefault();
@@ -31,18 +32,17 @@ const Login_page = () => {
 			if (!response.ok) {
 				const errorData = await response.json();
 				console.error("Login failed:", errorData);
-				alert("Login failed. Please check your credentials.");
+				setIsWarningOpen(true); // Show Warning popup when login fails
 				return;
 			}
 
 			const data = await response.json();
-
 			localStorage.setItem("token", data.token);
 			localStorage.setItem("image", data.user.image);
 			navigate("/dashboard");
 		} catch (error) {
 			console.error("Error during login:", error);
-			alert("An error occurred during login. Please try again later.");
+			setIsWarningOpen(true); // Show Warning popup on error
 		}
 	};
 
@@ -92,6 +92,12 @@ const Login_page = () => {
 					</div>
 				</div>
 				<img src={bg} className="" alt="Background" />
+
+				{/* Warning Popup Component */}
+				<Warning
+					isOpen={isWarningOpen}
+					onClose={() => setIsWarningOpen(false)}
+				/>
 			</div>
 		</div>
 	);

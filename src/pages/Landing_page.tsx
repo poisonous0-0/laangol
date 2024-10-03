@@ -215,7 +215,7 @@ const Landing_page = () => {
 											href=""
 											className="transition duration-300 ease-in-out transform hover:text-lime-100"
 										>
-											Terms and Services
+											Terms and Conditions
 										</a>
 										<a
 											href=""

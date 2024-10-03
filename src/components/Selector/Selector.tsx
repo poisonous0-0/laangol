@@ -28,17 +28,17 @@ const Selector: React.FC<QuantitySelectorProps> = ({
 	return (
 		<div className="flex items-center space-x-4">
 			<button
-				className="px-4 py-2 bg-lime-800 hover:bg-lime-900 text-white rounded"
+				className="px-4 py-2 bg-lime-100 transition duration-200 ease-in-out transform hover:bg-lime-200 text-white rounded"
 				onClick={decrease}
 				disabled={quantity <= min}
 			>
 				-
 			</button>
 
-			<div className="text-2xl text-lime-900">{quantity}</div>
+			<div className="text-2xl text-lime-200">{quantity}</div>
 
 			<button
-				className="px-4 py-2 bg-lime-800 hover:bg-lime-900 text-white rounded"
+				className="px-4 py-2 bg-lime-100 transition duration-200 ease-in-out transform hover:bg-lime-200 text-white rounded"
 				onClick={increase}
 				disabled={quantity >= max}
 			>

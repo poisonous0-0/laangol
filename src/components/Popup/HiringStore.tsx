@@ -8,7 +8,7 @@ interface PopupProps {
 	onClose: () => void;
 }
 
-const Hiring: React.FC<PopupProps> = ({ isOpen, onClose }) => {
+const HiringStore: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 	const [userInfo, setUserInfo] = useState({
 		hiringName: "",
 		startingTime: "",
@@ -47,6 +47,14 @@ const Hiring: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 							onChange={handleInputChange}
 							widthClass="w-full"
 						/>
+						<Input_text
+							type="number"
+							label="Enter the sqft"
+							name="startingTime"
+							value={userInfo.startingTime}
+							onChange={handleInputChange}
+							widthClass="w-full"
+						/>
 					</div>
 					<Button text="Request for Hire" onClick={onClose} />
 				</div>
@@ -55,4 +63,4 @@ const Hiring: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 	);
 };
 
-export default Hiring;
+export default HiringStore;
