@@ -58,8 +58,8 @@ const Chatbot: React.FC = () => {
 	}, [messages]);
 
 	return (
-		<div className="newBot h-full flex flex-col justify-between bg-lime-100 overflow-hidden">
-			<div className="heading text-2xl sm:text-3xl font-semibold text-lime-900 p-4">
+		<div className="newBot h-full flex flex-col justify-between  overflow-hidden">
+			<div className="heading text-2xl sm:text-3xl font-semibold text-lime-200 p-4">
 				<h1>AgroAegis</h1>
 			</div>
 
@@ -80,8 +80,8 @@ const Chatbot: React.FC = () => {
 							<div
 								className={`max-w-[70%] p-2 sm:p-3 rounded-lg ${
 									msg.sender === "user"
-										? "bg-lime-900 text-right text-lime-50"
-										: "bg-lime-800 text-left text-lime-950"
+										? "bg-lime-200 text-right text-lime-50"
+										: "bg-lime-100 text-left text-lime-200"
 								}`}
 							>
 								{msg.text}
@@ -102,11 +102,11 @@ const Chatbot: React.FC = () => {
 							setInput(e.target.value)
 						}
 						placeholder="Type a message..."
-						className="flex-grow p-1 sm:p-2 border border-lime-500 bg-lime-50 rounded-md focus:outline-none focus:border-lime-500 text-sm sm:text-base"
+						className="flex-grow p-1 sm:p-2 border border-lime-100 bg-lime-100 bg-opacity-10 placeholder:text-lime-200 rounded-md focus:outline-none focus:border-lime-500 text-sm sm:text-base"
 					/>
 					<button
 						type="submit"
-						className="ml-2 px-2 sm:px-4 py-1 sm:py-2 bg-lime-800 text-white rounded-md hover:bg-lime-800 transition text-sm sm:text-base"
+						className="ml-2 px-2 sm:px-4 py-1 sm:py-2 bg-lime-100 text-lime-200 rounded-md transition duration-300 ease-in-out transform hover:bg-lime-200 hover:text-lime-50 "
 					>
 						Send
 					</button>

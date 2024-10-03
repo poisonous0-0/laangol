@@ -10,7 +10,7 @@ const Admin_Main = () => {
 				{/* Main section */}
 
 				<div className="top_section flex items-center justify-between">
-					<h1 className="heading text-3xl md:text-4xl text-lime-900 font-semibold text-left">
+					<h1 className="heading text-3xl md:text-4xl text-lime-200 font-semibold text-left">
 						Admin Control Center
 					</h1>
 				</div>
@@ -22,7 +22,7 @@ const Admin_Main = () => {
 						<div className="box_container flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-16">
 							<Link
 								to="user_management"
-								className="box bg-lime-50 w-full md:w-auto py-16 px-12 md:px-20 border border-lime-500 rounded-lg flex flex-col items-center justify-center space-y-4 text-xl md:text-2xl text-lime-900"
+								className="box bg-lime-100 bg-opacity-10 w-full md:w-auto py-16 px-12 md:px-20 border border-lime-100 rounded-lg flex flex-col items-center justify-center space-y-4 text-xl md:text-2xl text-lime-200 transition duration-300 ease-in-out transform hover:bg-lime-100 hover:scale-105"
 							>
 								{/* Update link to navigate correctly */}
 								<img src={userManagement} alt="User Management" />
@@ -30,7 +30,7 @@ const Admin_Main = () => {
 							</Link>
 							<Link
 								to="product_management"
-								className="box bg-lime-50 w-full md:w-auto py-16 px-12 md:px-20 border border-lime-500 rounded-lg flex flex-col items-center justify-center space-y-4 text-xl md:text-2xl text-lime-900"
+								className="box bg-lime-100 bg-opacity-10 w-full md:w-auto py-16 px-12 md:px-20 border border-lime-100 rounded-lg flex flex-col items-center justify-center space-y-4 text-xl md:text-2xl text-lime-200 transition duration-300 ease-in-out transform hover:bg-lime-100 hover:scale-105"
 							>
 								<img src={productManagement} alt="Product Management" />
 								<p>Product Management</p>

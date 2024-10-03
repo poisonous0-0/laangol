@@ -19,7 +19,7 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options, onChange }) => {
 			</label>
 			<select
 				id="dropdown"
-				className="bg-lime-300  text-lime-900 text-sm rounded-md block w-full p-2.5"
+				className="bg-lime-100 bg-opacity-10 border border-lime-100  text-lime-900 text-sm rounded-md block w-full p-2.5"
 				onChange={onChange}
 			>
 				<option value="" disabled>

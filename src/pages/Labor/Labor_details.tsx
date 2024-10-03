@@ -62,13 +62,9 @@ const Labor_details = () => {
 										</p>
 
 										<div className="connection flex flex-col md:flex-row items-center w-full space-y-5 md:space-y-0 md:space-x-7">
-											<Button className="w-full md:w-auto">250\Hr BDT</Button>
-											<Button className="w-full md:w-auto">
-												Chat with Labor
-											</Button>
-											<Button className="w-full md:w-auto">
-												Contact Area Consultant
-											</Button>
+											<Button text="250\Hr BDT"></Button>
+											<Button text="Chat with labor" />
+											<Button text="Contact Area Consultant" />
 										</div>
 									</div>
 								</div>

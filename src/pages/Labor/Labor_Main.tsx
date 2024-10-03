@@ -57,7 +57,7 @@ const Labor_Main = () => {
 	return (
 		<>
 			<div className="labor_main p-4 md:p-8">
-				<div className="heading mb-10 md:mb-20 text-3xl md:text-4xl text-lime-900 font-semibold text-left">
+				<div className="heading mb-10 md:mb-20 text-3xl md:text-4xl text-lime-200 font-semibold text-left">
 					<h1>Labor Management</h1>
 				</div>
 
@@ -66,7 +66,7 @@ const Labor_Main = () => {
 					<div className="box_container flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-16">
 						{/* Hire a Labor box */}
 						<Link to="labor_list">
-							<div className="box bg-lime-50 w-full md:w-auto py-6 px-10 md:px-20 border border-lime-500 rounded-lg flex flex-col items-center justify-center space-y-4 text-xl md:text-2xl text-lime-900">
+							<div className="box bg-lime-100 bg-opacity-10 w-full md:w-auto py-6 px-10 md:px-20 border border-lime-100 rounded-lg flex flex-col items-center justify-center space-y-4 text-xl md:text-2xl text-lime-200 transition duration-300 ease-in-out transform hover:bg-lime-100 hover:scale-105">
 								<img src={search} alt="Hire a labor" className="w-12 md:w-16" />
 								<p>Hire a labor</p>
 							</div>
@@ -74,7 +74,7 @@ const Labor_Main = () => {
 
 						{/* Get Hired box */}
 						<Link to="labor_profile">
-							<div className="box bg-lime-50 w-full md:w-auto py-6 px-10 md:px-20 border border-lime-500 rounded-lg flex flex-col items-center justify-center space-y-4 text-xl md:text-2xl text-lime-900">
+							<div className="box bg-lime-100 bg-opacity-10 w-full md:w-auto py-6 px-10 md:px-20 border border-lime-100 rounded-lg flex flex-col items-center justify-center space-y-4 text-xl md:text-2xl text-lime-200 transition duration-300 ease-in-out transform hover:bg-lime-100 hover:scale-105">
 								<img src={getHired} alt="Get Hired" className="w-12 md:w-16" />
 								<p>Get Hired</p>
 							</div>
@@ -104,13 +104,13 @@ const Labor_Main = () => {
 
 									{/* Taglines */}
 									<div className="taglines flex flex-col md:flex-row items-center justify-center md:justify-normal space-y-2 md:space-y-0 md:space-x-3">
-										<div className="tag px-2 py-1 bg-lime-100 rounded-md border border-lime-800 text-sm">
+										<div className="tag px-2 py-1 bg-lime-100 bg-opacity-10 rounded-md border border-lime-800 text-sm">
 											<p>{profileData.experience}+ years Experience</p>
 										</div>
-										<div className="tag px-2 py-1 bg-lime-100 rounded-md border border-lime-800 text-sm">
+										<div className="tag px-2 py-1 bg-lime-100 bg-opacity-10 rounded-md border border-lime-800 text-sm">
 											<p>{profileData.region}</p>
 										</div>
-										<div className="tag px-2 py-1 bg-lime-100 rounded-md border border-lime-800 text-sm">
+										<div className="tag px-2 py-1 bg-lime-100 bg-opacity-10 rounded-md border border-lime-800 text-sm">
 											<p>{profileData.phone_number}</p>
 										</div>
 									</div>
