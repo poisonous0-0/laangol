@@ -28,7 +28,7 @@ const Marketplace_1 = () => {
 
 			{/* Discount Banner */}
 			<div className="discount_banner my-16 py-5 bg-lime-50 flex items-center justify-center">
-				<p className="p-4 w-max bg-lime-400 text-3xl tracking-wider rounded-md text-lime-700">
+				<p className="p-4 w-max bg-lime-100 text-3xl tracking-wider rounded-md text-lime-200">
 					On sale for 40%
 				</p>
 			</div>

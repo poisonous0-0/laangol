@@ -8,13 +8,13 @@ const Adding_items = () => {
 			<div className="heading flex items-center justify-between  text-2xl sm:text-3xl md:text-4xl font-semibold text-lime-900 text-start">
 				<h1>Marketplace</h1>
 				<Link to="inventory" className="text-base">
-					<Button className="">Seller Profile</Button>
+					<Button text="Seller Profile" px="px-4" />
 				</Link>
 			</div>
 
 			<div className="form_part flex flex-col items-center md:items-start space-y-4 md:space-y-0 md:space-x-4 mt-4">
 				<div className="subheading flex items-center justify-center w-full">
-					<h2 className="p-2 rounded-md w-max bg-lime-800 text-lime-900 text-2xl md:text-3xl font-normal">
+					<h2 className="p-2 rounded-md w-max bg-lime-100 text-lime-200 text-2xl md:text-3xl font-normal">
 						Product Management
 					</h2>
 				</div>
@@ -27,10 +27,10 @@ const Adding_items = () => {
 					<Input_text label="Product Description" />
 					<Input_text label="Product Quantity" />
 					<Input_text label="Product Price" />
-					<label className="text-lime-900">Upload your image</label>
+					<label className="text-lime-200">Upload your image</label>
 					<label
 						htmlFor="file-input"
-						className="cursor-pointer px-4 py-2 bg-lime-800 text-black rounded-md hover:bg-lime-700"
+						className="cursor-pointer px-4 py-2 bg-lime-100 text-black rounded-md hover:bg-lime-700"
 					>
 						Choose File
 					</label>
@@ -48,26 +48,22 @@ const Adding_items = () => {
 					Preferred/ Best price:
 				</h2>
 				<div className="btn_items flex flex-wrap items-center justify-start space-x-4 md:space-x-6">
-					<Button className="py-2 px-4 md:py-3 md:px-5">40 KG/BDT</Button>
-					<Button className="py-2 px-4 md:py-3 md:px-5">50 KG/BDT</Button>
+					<Button text="50KG/BDT" />
+					<Button text="50KG/BDT" />
 				</div>
 			</div>
 
-			<p className="mt-4 p-2 w-full sm:w-max bg-lime-100 border border-lime-400 rounded-md text-lime-900 text-sm md:text-base">
+			<p className="mt-4 p-2 w-full sm:w-max bg-lime-100 bg-opacity-10 border border-lime-400 rounded-md text-lime-900 text-sm md:text-base">
 				The best price is based on market value as well as the determined
 				government price.
 			</p>
 
 			<div className="mt-4 submission flex flex-col items-center space-y-5 w-full">
 				<Link to="/product_info">
-					<Button className="w-full md:w-auto bg-lime-800 text-lime-900 px-4 py-2">
-						Add your Product
-					</Button>
+					<Button text="Add your Product" />
 				</Link>
-				<Link to="/marketplace2">
-					<Button className="w-full md:w-auto bg-lime-800 text-lime-900 px-4 py-2">
-						Visit Marketplace
-					</Button>
+				<Link to="/dashboard/marketplace/marketplace2">
+					<Button text="Visit Marketplace" />
 				</Link>
 			</div>
 		</>

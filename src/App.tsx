@@ -1,11 +1,16 @@
-import Inventory from "./components/Inventory/Inventory";
-import Admin_dashboard from "./pages/Admin/Admin_dashboard";
-import Labor_details from "./pages/Labor/Labor_details";
-import Labor_profile from "./pages/Labor/Labor_profile";
+import userImg from "../src/assets/user.png";
+import Button_with_img from "./components/Button_with_img/Button_with_img";
+
 const App = () => {
 	return (
 		<div>
-			<Labor_details />
+			<Button_with_img
+				imgSrc={userImg}
+				expanded={true}
+				altText="User"
+				buttonText="User"
+				onClick={() => alert("Button Clicked!")}
+			/>
 		</div>
 	);
 };

@@ -13,14 +13,14 @@ const Dropdown: React.FC<DropdownProps> = ({ title, children }) => {
 	};
 
 	return (
-		<div className="w-96 border-lime-700 rounded-lg border-2">
+		<div className="w-96 border-lime-200 rounded-lg border-2">
 			<div
 				className="flex justify-between items-center p-3 cursor-pointer border-b"
 				onClick={toggleDropdown}
 			>
-				<span className="text-lg">{title}</span>
-				<div className="w-6 h-6 flex justify-center items-center bg-green-700 rounded-full">
-					<button className="text-lime-200 text-lg font-bold">
+				<span className="text-2xl font-medium">{title}</span>
+				<div className="w-6 h-6 flex justify-center items-center bg-lime-200 rounded-full">
+					<button className="text-white text-lg font-bold">
 						{isOpen ? "-" : "+"}
 					</button>
 				</div>

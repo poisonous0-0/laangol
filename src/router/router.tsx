@@ -26,11 +26,12 @@ import Cart from "../pages/Marketplace/Cart";
 import Inventory from "../pages/Marketplace/Inventory";
 import Labor_details from "../pages/Labor/Labor_details";
 import Store_details from "../pages/StoreHouse/Store_details";
+import App from "../App";
 
 const router = createBrowserRouter([
 	{
 		path: "/", // Default route is login
-		element: <Landing_page />,
+		element: <App />,
 	},
 	{
 		path: "/signup", // Signup route

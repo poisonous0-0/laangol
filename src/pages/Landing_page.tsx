@@ -14,6 +14,7 @@ import Customer from "../assets/customer.jpg";
 import Farmer from "../assets/farmer.jpg";
 import Investor from "../assets/admin.jpg";
 import Logo from "../assets/laangol.png";
+import rightArow from "../assets/rightArrow.svg";
 
 const Landing_page = () => {
 	return (
@@ -26,20 +27,20 @@ const Landing_page = () => {
 					<div className="banner_content ">
 						<div className="none mx-12 flex items-center justify-between py-12">
 							<div className="banner_text flex flex-col items-baseline leading-none text-nowrap">
-								<h1 className="text-xl font-bold text-lime-500 z-30">
+								<h1 className="text-xl font-bold text-lime-100 z-30">
 									Make your harvesting
 								</h1>
-								<h1 className="text-xl font-bold text-lime-700">hassle free</h1>
-								<p className="mt-5 font-normal text-lg text-lime-800">
+								<h1 className="text-xl font-bold text-lime-200">hassle free</h1>
+								<p className="mt-5 font-normal text-lg text-lime-200">
 									Struggling with Irrigation, labor force & finance? Laangol got
 									you!
 								</p>
 								<p className="mt-2 font-normal text-lg text-lime-800">
 									With an easy to use application, solve your own problem!
 								</p>
-								<button className="mt-5 p-2 bg-lime-400 rounded-3xl scale-110 flex items-center gap-x-4  ">
+								<button className="mt-5 py-3 pr-5 pl-3 bg-lime-100 rounded-3xl flex items-center gap-x-4 transition duration-300 ease-in-out transform hover:bg-lime-200 hover:text-white  ">
 									<p>Get an advisor for free </p>
-									<img src={arrow} alt="" className=" w-4 h-4" />
+									<img src={arrow} alt="" className=" w-4 h-4 " />
 								</button>
 							</div>
 							<div className="banner_images flex items-end relative justify-end">
@@ -53,7 +54,7 @@ const Landing_page = () => {
 				<div className="branding_content mt-10  bg-lime-50">
 					<div className="none flex flex-col gap-y-12 items-center justify-center">
 						<div className="branding_heading mt-9">
-							<h1 className="text-5xl font-bold text-lime-500">
+							<h1 className="text-5xl font-bold text-lime-100">
 								Making your success with our collaborators
 							</h1>
 						</div>
@@ -69,14 +70,14 @@ const Landing_page = () => {
 					<div className="none my-10">
 						<div className="headings flex flex-col gap-y-5 items-center justify-center leading-none">
 							<div className="main_heading flex flex-col items-center">
-								<h1 className="text-xl font-bold text-lime-500">
+								<h1 className="text-xl font-bold text-lime-100">
 									Accessibility
 								</h1>
-								<h2 className="text-7xl font-bold text-lime-700">
+								<h2 className="text-7xl font-bold text-lime-200">
 									for everyone
 								</h2>
 							</div>
-							<div className="sub_heading flex flex-col items-center text-lg text-lime-700 leading-8">
+							<div className="sub_heading flex flex-col items-center text-lg text-lime-200 leading-8">
 								<p>
 									Struggling with Irrigation, labor force & finance? Laangol got
 									you!
@@ -94,7 +95,7 @@ const Landing_page = () => {
 				<div className="review_content">
 					<div className="my-32">
 						<div className="heading_part">
-							<h1 className="flex items-center justify-center text-xl font-bold text-lime-700">
+							<h1 className="flex items-center justify-center text-xl font-bold text-lime-200">
 								Trusted by your fellow!
 							</h1>
 						</div>
@@ -104,11 +105,11 @@ const Landing_page = () => {
 				<div className="faq_content">
 					<div className="my-36">
 						<div className="heading">
-							<h1 className="flex items-center justify-center text-xl font-bold text-lime-700">
+							<h1 className="flex items-center justify-center text-xl font-bold text-lime-200">
 								Frequently Asked Questions
 							</h1>
 						</div>
-						<div className="mt-20 content_section flex flex-col gap-y-5 items-center justify-center text-lime-700 text-2xl font-medium">
+						<div className="mt-20 content_section flex flex-col gap-y-5 items-center justify-center text-lime-200 text-2xl font-medium">
 							<Dropdown title="What is Laangol">
 								<p className="text-base font-normal">
 									Laangol is platform for different kind of users such for the
@@ -149,10 +150,10 @@ const Landing_page = () => {
 					</div>
 				</div>
 				<div className="contact_content">
-					<div className="content mx-28 pb-32 bg-slate-50 rounded-2xl">
+					<div className="content mx-28 pb-32 bg-lime-50 rounded-2xl">
 						<div className="contact_heading pt-12 pl-12">
-							<h1 className="text-6xl text-lime-500 font-bold">Not sure? </h1>
-							<h2 className="text-2xl text-lime-700 font-bold">
+							<h1 className="text-6xl text-lime-100 font-bold">Not sure? </h1>
+							<h2 className="text-2xl text-lime-200 font-bold">
 								How about you give us your number and we will contact you{" "}
 							</h2>
 						</div>
@@ -163,9 +164,9 @@ const Landing_page = () => {
 									placeholder="Enter your number"
 									className="py-5 pl-8 w-80"
 								/>
-								<Button className="bg-lime-500 py-5 px-9 scale-100 rounded-2xl text-base font-semibold text-lime-700">
-									Contact us
-								</Button>
+								<button className="px-1 py-4 bg-lime-100 rounded-xl text-lime-200 font-semibold transition duration-300 ease-in-out transform hover:bg-lime-200 hover:text-lime-50">
+									We'll Contact you
+								</button>
 							</form>
 						</div>
 					</div>
@@ -179,29 +180,54 @@ const Landing_page = () => {
 							<div className="content_part flex justify-center gap-x-32">
 								<div className="links_part flex flex-col gap-y-6">
 									<div className="headings">
-										<h1 className="headings text-sm font-normal leading-4 text-lime-200">
+										<h1 className="headings text-sm font-medium leading-4 text-black">
 											LINKS
 										</h1>
 									</div>
-									<div className="links flex flex-col gap-y-2 text-base font-medium text-lime-700">
-										<a href="">Features</a>
-										<a href="">Blog</a>
-										<a href="">FAQ</a>
-										<a href="">About us</a>
+									<div className="links flex flex-col gap-y-2 text-base font-semibold text-lime-200 transition duration-300 ease-in-out transform ">
+										<a
+											href=""
+											className="transition duration-300 ease-in-out transform hover:text-lime-100"
+										>
+											Features
+										</a>
+
+										<a
+											href=""
+											className="transition duration-300 ease-in-out transform hover:text-lime-100"
+										>
+											FAQ
+										</a>
+										<a
+											href=""
+											className="transition duration-300 ease-in-out transform hover:text-lime-100"
+										>
+											About us
+										</a>
 									</div>
 								</div>
 								<div className="external_part flex flex-col gap-y-6">
-									<div className="headings text-sm font-normal leading-4  text-lime-200">
+									<div className="headings text-sm font-medium leading-4  text-black">
 										<h1>EXTERNAL</h1>
 									</div>
-									<div className="external flex flex-col gap-y-2 text-base font-medium text-lime-700">
-										<a href="">Terms and Services</a>
-										<a href="">Legal poilicy</a>
+									<div className="external flex flex-col gap-y-2 text-base font-semibold text-lime-200">
+										<a
+											href=""
+											className="transition duration-300 ease-in-out transform hover:text-lime-100"
+										>
+											Terms and Services
+										</a>
+										<a
+											href=""
+											className="transition duration-300 ease-in-out transform hover:text-lime-100"
+										>
+											Legal Policies
+										</a>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div className="copyright mt-14 pl-28 pb-40 text-base text-lime-600">
+						<div className="copyright mt-14 pl-28 pb-40 text-base text-lime-200">
 							<p>Copyright © 2024 Team SAD gpt. All rights reserved.</p>
 						</div>
 					</div>

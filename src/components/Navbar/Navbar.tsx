@@ -3,14 +3,14 @@ import Laangol from "../../assets/laangol.png";
 import Button from "../Button/Button";
 
 const Navbar = () => {
-	const items = ["Features", "Dashboard", "Blog", "FAQ", "About us"];
+	const items = ["Features", "Dashboard", "FAQ", "About us"];
 	return (
 		<div>
 			<nav className="p-7 flex items-center justify-between bg-lime-50">
 				<div className="logo-panel">
-					<a href="/">
+					<Link to="/">
 						<img src={Laangol} alt="Laangol Logo" className="w-60" />
-					</a>
+					</Link>
 				</div>
 				<div className="max-w-full">
 					<ul className="flex flex-row items-center gap-16">
@@ -26,9 +26,7 @@ const Navbar = () => {
 				</div>
 				<div className="mr-28">
 					<Link to="/login">
-						<Button className=" hover:bg-lime-700 hover:text-white">
-							Sign in
-						</Button>
+						<Button text="Sign in" px="px-8" width="w-auto" />
 					</Link>
 				</div>
 			</nav>
