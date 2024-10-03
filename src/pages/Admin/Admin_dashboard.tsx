@@ -29,7 +29,7 @@ const Admin_dashboard = () => {
 					</div>
 					<div className="display_part mx-5 mb-5 flex flex-grow space-x-4 overflow-hidden">
 						{/* Main Content */}
-						<div className="main flex-grow bg-lime-100 border border-lime-400 rounded-md p-4 overflow-y-auto">
+						<div className="main flex-grow bg-lime-100 bg-opacity-10 border border-lime-100 rounded-md p-4 overflow-y-auto">
 							<Outlet />
 						</div>
 					</div>

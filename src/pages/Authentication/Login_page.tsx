@@ -1,17 +1,18 @@
-import { Link, useNavigate } from "react-router-dom"; 
-import { useState } from "react"; 
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import bg from "../../assets/login_and_signup_banner.png";
 import Navbar from "../../components/Navbar/Navbar";
 import Authentication_Input from "../../components/Authentication_Input/Authentication_Input";
+import Button from "../../components/Button/Button";
 
 const Login_page = () => {
-	const navigate = useNavigate(); 
-	const [email, setEmail] = useState(""); 
-	const [password, setPassword] = useState(""); 
+	const navigate = useNavigate();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	const handleLogin = async (event: React.FormEvent) => {
 		event.preventDefault();
-		console.log("Login attempt", { email, password }); 
+		console.log("Login attempt", { email, password });
 
 		const payload = {
 			email,
@@ -29,7 +30,7 @@ const Login_page = () => {
 
 			if (!response.ok) {
 				const errorData = await response.json();
-				console.error("Login failed:", errorData); 
+				console.error("Login failed:", errorData);
 				alert("Login failed. Please check your credentials.");
 				return;
 			}
@@ -52,7 +53,7 @@ const Login_page = () => {
 					<Navbar />
 				</nav>
 			</header>
-			<div className="login_page bg-lime-50 flex items-center justify-between">
+			<div className="login_page bg-lime-50 flex items-center justify-between ">
 				<div className="login_content pl-40 flex flex-col items-baseline gap-y-10 font-medium">
 					<div className="heading text-5xl">
 						<h1>Login</h1>
@@ -64,8 +65,8 @@ const Login_page = () => {
 								name="email"
 								placeholder="Email"
 								required
-								value={email} 
-								onChange={(e) => setEmail(e.target.value)} 
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
 								className="w-full"
 							/>
 							<Authentication_Input
@@ -73,18 +74,14 @@ const Login_page = () => {
 								name="password"
 								placeholder="Password"
 								required
-								value={password} 
-								onChange={(e) => setPassword(e.target.value)} 
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
 								className="w-full"
 							/>
-							<div className="signup_button">
-								<button
-									type="submit"
-									className="w-81 bg-lime-500 py-5 px-9 scale-100 rounded-lg text-base font-semibold"
-								>
-									Login
-								</button>
-							</div>
+							<Button text="Login" px="px-8" width="w-auto" />
+							<a className="text-lime-200 transition duration-300 ease-in-out transform hover:text-lime-100">
+								Forgot Password?
+							</a>
 							<p>
 								Dont have an account?{" "}
 								<Link to="/signup">

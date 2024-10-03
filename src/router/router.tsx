@@ -16,7 +16,6 @@ import Login_page from "../pages/Authentication/Login_page";
 import Chatbot from "../pages/Chatbot/Chatbot";
 import Landing_page from "../pages/Landing_page";
 import Signup_page from "../pages/Authentication/Signup_page";
-import App from "../App";
 import Admin_Main from "../pages/Admin/Admin_Main";
 import User_Management from "../pages/Admin/User_Management";
 import Admin_dashboard from "../pages/Admin/Admin_dashboard";
@@ -27,11 +26,12 @@ import Cart from "../pages/Marketplace/Cart";
 import Inventory from "../pages/Marketplace/Inventory";
 import Labor_details from "../pages/Labor/Labor_details";
 import Store_details from "../pages/StoreHouse/Store_details";
+import App from "../App";
 
 const router = createBrowserRouter([
 	{
 		path: "/", // Default route is login
-		element: <Landing_page />,
+		element: <App />,
 	},
 	{
 		path: "/signup", // Signup route

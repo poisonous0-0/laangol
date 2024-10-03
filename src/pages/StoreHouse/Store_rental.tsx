@@ -12,7 +12,7 @@ const Store_rental = () => {
 		location: "",
 		size: "",
 		rent_per_sq: "",
-		descriptions:"",
+		descriptions: "",
 		status: false, // This reflects the boolean value for availability
 	});
 	const [isToggled, setIsToggled] = useState(false);
@@ -60,10 +60,10 @@ const Store_rental = () => {
 					name: storehouseData.name,
 					temperature_range: storehouseData.temperature_range,
 					location: storehouseData.location,
-					total_size: storehouseData.size, 
-					descriptions:storehouseData.descriptions,
+					total_size: storehouseData.size,
+					descriptions: storehouseData.descriptions,
 					rent_per_sq: parseFloat(storehouseData.rent_per_sq),
-					active: storehouseData.status ? 1 : 0, 
+					active: storehouseData.status ? 1 : 0,
 				}),
 			});
 
@@ -96,9 +96,10 @@ const Store_rental = () => {
 							<img src={edit} alt="" className="w-8" />
 						</div>
 						<div className="button_section">
-							<Button className="" onClick={handleUpdate}>
-								Update Storehouse Information
-							</Button>
+							<Button
+								text="Update Storehouse Information"
+								onClick={handleUpdate}
+							/>
 						</div>
 					</div>
 					<div className="bottom_info">
@@ -116,7 +117,10 @@ const Store_rental = () => {
 								name="descriptions"
 								value={storehouseData.descriptions}
 								onChange={(e) =>
-									setStorehouseData({ ...storehouseData, descriptions: e.target.value })
+									setStorehouseData({
+										...storehouseData,
+										descriptions: e.target.value,
+									})
 								}
 							/>
 							<Input_text

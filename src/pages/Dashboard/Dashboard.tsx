@@ -35,7 +35,7 @@ const Dashboard = () => {
 						</div>
 
 						{/* Main Content */}
-						<div className="main flex-grow bg-lime-100 border border-lime-400 rounded-md p-4 overflow-y-auto">
+						<div className="main flex-grow bg-lime-100 bg-opacity-10 border border-lime-400 rounded-md p-4 overflow-y-auto">
 							<Outlet />
 						</div>
 					</div>

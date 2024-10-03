@@ -41,8 +41,8 @@ const User_Profile = () => {
 						</p>
 
 						<div className="btn_panel flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6">
-							<Button>Ban</Button>
-							<Button>Delete User</Button>
+							<Button text="Ban" />
+							<Button text="Delete User" />
 						</div>
 					</div>
 				</div>

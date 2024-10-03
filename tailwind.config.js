@@ -23,8 +23,9 @@ export default {
         'primary': '#647233',
         'secondary': '#B0D52B',
         'lime': {
-        800: '#B0D52B',
-        900: '#647233',
+          50:'#F7F5ED',
+          100:'#B0D52B',
+          200: '#647233',
         }
       },
       fontFamily: {

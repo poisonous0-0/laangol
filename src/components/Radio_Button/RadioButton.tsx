@@ -23,7 +23,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
 				value={value}
 				checked={checked}
 				onChange={() => onChange(value)}
-				className="form-radio h-5 w-5 text-lime-700 transition duration-150 ease-in-out accent-lime-700"
+				className="form-radio h-5 w-5 text-lime-700 transition duration-150 ease-in-out accent-lime-200"
 			/>
 			<span className="ml-2">{label}</span>
 		</label>
