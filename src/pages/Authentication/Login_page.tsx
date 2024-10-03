@@ -36,10 +36,9 @@ const Login_page = () => {
 			}
 
 			const data = await response.json();
-			console.log("Login successful:", data);
 
 			localStorage.setItem("token", data.token);
-
+			localStorage.setItem("image", data.user.image);
 			navigate("/dashboard");
 		} catch (error) {
 			console.error("Error during login:", error);
