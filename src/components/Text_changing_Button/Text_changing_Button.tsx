@@ -15,7 +15,7 @@ const HoverButton: React.FC<ButtonProps> = ({
 
 	return (
 		<button
-			className={` mt-2 px-4 py-2 bg-lime-600 text-white rounded transition duration-300 ease-in-out transform hover:bg-lime-700 hover:scale-105 hover:shadow-lg`}
+			className={` mt-2 px-4 py-2 bg-lime-100 text-lime-200 rounded transition duration-200 ease-in-out transform hover:bg-lime-200 hover:text-white hover:scale-105 hover:shadow-lg`}
 			onMouseEnter={() => setLabel(hoverLabel)}
 			onMouseLeave={() => setLabel(initialLabel)}
 			onClick={onClick}

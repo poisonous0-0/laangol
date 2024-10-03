@@ -3,9 +3,10 @@ import React from "react";
 interface InputBoxProps {
 	label: string;
 	type?: string;
-	name: string; // Add name prop
-	value: string | number; // Add value prop, can be string or number
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // Add onChange prop
+	name: string;
+	value: string | number;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	widthClass?: string; // Add widthClass prop to control width
 }
 
 const Input_text: React.FC<InputBoxProps> = ({
@@ -14,15 +15,16 @@ const Input_text: React.FC<InputBoxProps> = ({
 	name,
 	value,
 	onChange,
+	widthClass = "w-full md:w-1/2 lg:w-1/3", // Default width classes
 }) => {
 	return (
-		<div className="flex flex-col mb-4 w-full md:w-1/2 lg:w-1/3">
+		<div className={`flex flex-col mb-4 ${widthClass}`}>
 			<label className="mb-2 text-lime-200">{label}</label>
 			<input
 				type={type}
-				name={name} // Bind name to the input
-				value={value} // Bind value to the input
-				onChange={onChange} // Bind onChange to the input
+				name={name}
+				value={value}
+				onChange={onChange}
 				className="px-4 py-2 border border-lime-100 bg-lime-100 bg-opacity-10 rounded-md focus:outline-none"
 			/>
 		</div>

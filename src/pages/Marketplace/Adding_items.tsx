@@ -70,7 +70,7 @@ const Adding_items = () => {
 					<label className="text-lime-200">Upload your image</label>
 					<label
 						htmlFor="file-input"
-						className="cursor-pointer px-4 py-2 bg-lime-100 text-black rounded-md hover:bg-lime-700"
+						className="cursor-pointer px-4 py-2 bg-lime-100 text-lime-200 rounded-md transition duration-200 ease-in-out transform hover:bg-lime-200 hover:text-white"
 					>
 						Choose File
 					</label>

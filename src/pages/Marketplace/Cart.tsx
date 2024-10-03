@@ -125,7 +125,7 @@ const Cart = () => {
 						</div>
 					</div>
 					<div className="button">
-						<Button className="text-lime-900">Checkout</Button>
+						<Button text="Checkout" />
 					</div>
 				</div>
 			</div>

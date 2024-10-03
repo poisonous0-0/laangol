@@ -10,7 +10,7 @@ const Product_description = () => {
 				<h1>Marketplace</h1>
 			</div>
 			<div className="product_content mt-8 md:mt-10 lg:mt-12">
-				<h2 className="p-2 rounded-md w-max bg-lime-800 text-lime-900 text-xl md:text-2xl lg:text-3xl font-normal">
+				<h2 className="p-2 rounded-md w-max bg-lime-100 text-lime-200 text-xl md:text-2xl lg:text-3xl font-normal">
 					Product Page
 				</h2>
 				<div className="product_description mt-5 md:mt-7 flex flex-col lg:flex-row items-start space-y-6 lg:space-y-0 lg:space-x-6">
@@ -25,21 +25,21 @@ const Product_description = () => {
 						<h3 className="title text-2xl md:text-3xl font-semibold text-lime-900">
 							Tomato
 						</h3>
-						<p className="price w-max p-2 md:p-3 rounded-md bg-lime-800 text-lime-900">
+						<p className="price w-max p-2 md:p-3 rounded-md bg-lime-100 text-lime-200">
 							40/KG BDT
 						</p>
 						<div className="category flex flex-wrap items-start space-x-2">
-							<p className="p-1 bg-lime-200 border border-lime-400 rounded-md text-lime-900">
+							<p className="p-1 bg-lime-100 bg-opacity-10 border border-lime-100 rounded-md text-lime-200">
 								tomato
 							</p>
-							<p className="p-1 bg-lime-200 border border-lime-400 rounded-md text-lime-900">
+							<p className="p-1 bg-lime-100 bg-opacity-10 border border-lime-100 rounded-md text-lime-200">
 								Vegetables
 							</p>
-							<p className="p-1 bg-lime-200 border border-lime-400 rounded-md text-lime-900">
+							<p className="p-1 bg-lime-100 bg-opacity-10 border border-lime-100 rounded-md text-lime-200">
 								213 products
 							</p>
 						</div>
-						<p className="description text-base md:text-lg text-lime-900">
+						<p className="description text-base md:text-lg text-lime-200">
 							The tomato is made using artificial intelligence method. It is
 							enriched with all the vitamins you can get. It is completely
 							fresh. For more detailed process of vegetation feel free to
@@ -48,15 +48,15 @@ const Product_description = () => {
 						<div className="seller_info">
 							<a href="#" className="flex items-center space-x-4">
 								<img src={crops} alt="" className="w-8 md:w-10 rounded-lg" />
-								<p className="text-base md:text-lg text-lime-900">
+								<p className="text-base md:text-lg text-lime-200">
 									Nurul Islam Mitul
 								</p>
 							</a>
 						</div>
 						<div className="btn_panel flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6">
 							<Selector initialQuantity={1} min={0} max={10} />
-							<Button>Add to cart</Button>
-							<Button>Chat with Seller</Button>
+							<Button text="Add to cart" />
+							<Button text="Chat with Seller" />
 						</div>
 					</div>
 				</div>

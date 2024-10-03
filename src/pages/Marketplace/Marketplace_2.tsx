@@ -8,7 +8,7 @@ const Marketplace_2 = () => {
 		<>
 			<Marketplace_top />
 			<div className="marketplace_items flex flex-col items-center justify-center">
-				<div className="items_banner mt-5 w-max p-2 bg-lime-800 text-2xl text-lime-900 rounded-md">
+				<div className="items_banner mt-5 w-max p-2 bg-lime-100 text-2xl text-lime-200 rounded-md">
 					<h1>Vegetables</h1>
 				</div>
 

@@ -10,7 +10,6 @@ interface ToggleSwitchProps {
 const Toggle_Button: React.FC<ToggleSwitchProps> = ({
 	checked,
 	onChange,
-	label = "Toggle me",
 	className = "",
 }) => {
 	const handleToggle = () => {
