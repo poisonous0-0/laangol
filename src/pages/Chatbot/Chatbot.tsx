@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import axios from "axios";
 
-// Define a type for a message
 interface Message {
 	sender: "user" | "bot";
 	text: string;
@@ -18,44 +17,87 @@ const Chatbot: React.FC = () => {
 	const [input, setInput] = useState("");
 	const chatWindowRef = useRef<HTMLDivElement>(null);
 
-	// Handle sending a message
+
 	const handleSend = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
+	
 		if (input.trim() === "") return;
-
+	
 		// Add user's message to the messages array
 		const newMessages = [...messages, { sender: "user", text: input }];
 		setMessages(newMessages);
 		setInput("");
-
+	
 		try {
 			// Make API call to get the bot's response
 			const response = await axios.post("http://localhost:5000/api/ask", {
 				question: input,
 			});
-			const botReply = response.data.answer;
-
+			let botReply = response.data.answer;
+	
+			// Replace formatting markers with new lines
+			botReply = botReply.replace(/(\*\s*\*\*|\*\*\*|\*\*|\*\s\*|\*|\*\*\*\*|\*\s\*\*)/g, "\n\n");
+	
 			// Add bot's response to messages
 			setMessages((prevMessages) => [
 				...prevMessages,
 				{ sender: "bot", text: botReply },
 			]);
+	
+			// Send the user question and bot reply to the new API
+			await axios.post(
+				"http://127.0.0.1:8005/chatbot/",
+				{
+					question: input,
+					response: botReply,
+				},
+				{
+					headers: {
+						Authorization: `Token ${localStorage.getItem("token")}`,
+						"Content-Type": "application/json",
+					},
+				}
+			);
 		} catch (error) {
-			console.error("Error fetching the response:", error);
+			console.error("Error fetching the response or sending data:", error);
 			setMessages((prevMessages) => [
 				...prevMessages,
 				{ sender: "bot", text: "Sorry, I couldn't get a response." },
 			]);
 		}
 	};
+	
+	
+useEffect(() => {
+	const fetchChatHistory = async () => {
+		try {
+			const token = localStorage.getItem("token");
+			const response = await axios.get("http://127.0.0.1:8005/chat-history/", {
+				headers: {
+					Authorization: `Token ${token}`,
+					"Content-Type": "application/json",
+				},
+			});
 
-	// Automatically scroll to the bottom when a new message is added
-	useEffect(() => {
-		if (chatWindowRef.current) {
-			chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+			const chatHistory = response.data.map((chat: any) => [
+				{ sender: "user", text: chat.question },
+				{ sender: "bot", text: chat.response.replace(/(\*\s*\*\*|\*\*\*|\*\*|\*\s\*|\*|\*\*\*\*|\*\s\*\*)/g, "\n\n") }, // format response
+			]).flat();
+
+			setMessages(chatHistory);
+		} catch (error) {
+			console.error("Error fetching chat history:", error);
 		}
-	}, [messages]);
+	};
+
+	fetchChatHistory();
+
+	// Auto scroll to bottom
+	if (chatWindowRef.current) {
+		chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+	}
+}, []);
+
 
 	return (
 		<div className="newBot h-full flex flex-col justify-between  overflow-hidden">

@@ -51,7 +51,7 @@ const Labor_list = () => {
 									className="labor flex items-center justify-between"
 								>
 									<Link
-										to={`dashboard/labor/labor_list/labor_details/${laborer.labour_id}`}
+										to={`dashboard/labor/labor_list/dashboard/labor/labor_list/labor_details/${laborer.labour_id}`}
 									>
 										<div className="labor_info w-4/5 flex items-center space-x-5">
 											{/* Profile Image */}
@@ -99,7 +99,7 @@ const Labor_list = () => {
 									</Link>
 
 									<div className="connection flex flex-col items-center justify-between space-y-4">
-										<Button text={`${laborer.demand_fees} BDT/Hour`} />
+										<Button text={`${laborer.demand_fees}   /hr`} />
 										<Button text="Connect" />
 									</div>
 								</div>
