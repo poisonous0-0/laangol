@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "../Button/Button";
-import plus from "../../assets/addItems.png";
 import Input_text from "../Input_Text/Input_text";
 
 interface PopupProps {
@@ -8,11 +7,11 @@ interface PopupProps {
 	onClose: () => void;
 }
 
-const Hiring: React.FC<PopupProps> = ({ isOpen, onClose }) => {
+const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 	const [userInfo, setUserInfo] = useState({
-		hiringName: "",
-		startingTime: "",
-		finishingTime: "",
+		finishingDate: "",
+		startingDate: "",
+		sqft: "",
 	});
 
 	// Handle input change
@@ -24,26 +23,36 @@ const Hiring: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 		}));
 	};
 
+	// Close popup if clicked outside the content
+	const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+		if (e.target === e.currentTarget) {
+			onClose();
+		}
+	};
+
 	if (!isOpen) return null;
 
 	return (
-		<div className="fixed inset-0 flex items-center justify-center bg-lime-100 bg-opacity-10">
-			<div className="bg-white p-6 rounded-lg shadow-xl">
+		<div
+			className="fixed inset-0 flex items-center justify-center bg-lime-100 bg-opacity-10"
+			onClick={handleOverlayClick}
+		>
+			<div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
 				<div className="content flex flex-col items-center space-y-5">
-					<div className="input_form">
+					<div className="input_form w-full space-y-4">
 						<Input_text
 							type="date"
 							label="Starting Date"
-							name="hiringDate"
-							value={userInfo.hiringName}
+							name="startingDate"
+							value={userInfo.startingDate}
 							onChange={handleInputChange}
 							widthClass="w-full"
 						/>
 						<Input_text
 							type="date"
 							label="Finishing Date"
-							name="startingTime"
-							value={userInfo.startingTime}
+							name="finishingDate"
+							value={userInfo.finishingDate}
 							onChange={handleInputChange}
 							widthClass="w-full"
 						/>
@@ -55,4 +64,4 @@ const Hiring: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 	);
 };
 
-export default Hiring;
+export default HiringLabor;

@@ -27,11 +27,14 @@ import Inventory from "../pages/Marketplace/Inventory";
 import Labor_details from "../pages/Labor/Labor_details";
 import Store_details from "../pages/StoreHouse/Store_details";
 import App from "../App";
+import Requests from "../pages/Labor/Requests_labor";
+import Requests_labor from "../pages/Labor/Requests_labor";
+import Requests_storehouse from "../pages/StoreHouse/Requests_storehouse";
 
 const router = createBrowserRouter([
 	{
 		path: "/", // Default route is login
-		element: <Landing_page />,
+		element: <App />,
 	},
 	{
 		path: "/signup", // Signup route
@@ -84,6 +87,10 @@ const router = createBrowserRouter([
 				element: <Labor_list />,
 			},
 			{
+				path: "labor/labor_requests",
+				element: <Requests_labor />,
+			},
+			{
 				path: "labor/labor_list/labor_details",
 				element: <Labor_details />,
 			},
@@ -94,6 +101,10 @@ const router = createBrowserRouter([
 			{
 				path: "storehouse", // Will be accessible at /dashboard/storehouse
 				element: <Store_main />,
+			},
+			{
+				path: "storehouse/store_requests", // Will be accessible at /dashboard/store_list
+				element: <Requests_storehouse />,
 			},
 			{
 				path: "storehouse/store_list", // Will be accessible at /dashboard/store_list
