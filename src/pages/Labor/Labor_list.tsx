@@ -16,22 +16,37 @@ interface Laborer {
 	image_url: string | null;
 }
 
-const Labor_list = () => {
+const LaborList = () => {
 	const [laborers, setLaborers] = useState<Laborer[]>([]);
 	const [selectedLaborer, setSelectedLaborer] = useState<Laborer | null>(null);
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true); // Loading state
+	const [error, setError] = useState<string | null>(null); // Error state
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
+		setIsLoading(true); // Set loading state to true
 		fetch("http://127.0.0.1:8002/laborers/by-region/", {
 			method: "GET",
 			headers: {
 				Authorization: `Token ${token}`,
 			},
 		})
-			.then((response) => response.json())
-			.then((data) => setLaborers(data))
-			.catch((error) => console.error("Error fetching laborers:", error));
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
+				}
+				return response.json();
+			})
+			.then((data) => {
+				setLaborers(data);
+				setIsLoading(false); // Set loading to false when data is fetched
+			})
+			.catch((error) => {
+				console.error("Error fetching laborers:", error);
+				setError("Failed to load laborers. Please try again.");
+				setIsLoading(false); // Ensure loading is set to false on error
+			});
 	}, []);
 
 	const handleConnectClick = (laborer: Laborer) => {
@@ -56,6 +71,10 @@ const Labor_list = () => {
 					<div className="heading text-3xl px-3 py-2 bg-lime-100 rounded-md border border-lime-200 text-lime-200">
 						<h1>Hire a Labor</h1>
 					</div>
+
+					{/* Loading and Error Handling */}
+					{isLoading && <p>Loading laborers...</p>}
+					{error && <p className="text-red-500">{error}</p>}
 
 					<div className="labor_list flex flex-col items-center justify-center space-y-7 text-lime-200">
 						{laborers.length > 0 ? (
@@ -105,8 +124,8 @@ const Labor_list = () => {
 									</div>
 
 									{/* Connect Button */}
-									<div className="connection flex flex-col i justify-between space-y-4">
-										<Button text={`${laborer.demand_fees}   /hr`} />
+									<div className="connection flex flex-col justify-between space-y-4">
+										<Button text={`${laborer.demand_fees} /hr`} />
 										<Button
 											text="Connect"
 											onClick={() => handleConnectClick(laborer)}
@@ -114,9 +133,9 @@ const Labor_list = () => {
 									</div>
 								</div>
 							))
-						) : (
+						) : !isLoading ? (
 							<p>No laborers available.</p>
-						)}
+						) : null}
 					</div>
 				</div>
 
@@ -131,4 +150,4 @@ const Labor_list = () => {
 	);
 };
 
-export default Labor_list;
+export default LaborList;
