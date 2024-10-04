@@ -17,7 +17,7 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({
 	imageSrc,
 	menuItems,
-	buttonClassName = "p-4 bg-lime-100 rounded-full transition duration-300 ease-in-out transform hover:bg-lime-100 hover:scale-105", // Default styles
+	buttonClassName = "bg-lime-100 rounded-full transition duration-300 ease-in-out transform hover:bg-lime-100 hover:scale-105", // Default styles
 	dropdownClassName = "w-48 bg-white shadow-lg rounded-lg py-2", // Default styles
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +63,11 @@ const Profile: React.FC<ProfileProps> = ({
 				onClick={toggleDropdown}
 				className={`flex items-center ${buttonClassName}`}
 			>
-				<img src={imageSrc} alt="profile button" className="w-5" />
+				<img
+					src={imageSrc}
+					alt="profile button"
+					className="w-12 h-12 min-w-12 min-h-12 object-cover rounded-full border border-lime-200"
+				/>
 			</button>
 
 			{/* Dropdown Menu */}

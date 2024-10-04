@@ -107,7 +107,7 @@ const Labor_list = () => {
 									</div>
 
 									{/* Connect Button */}
-									<div className="connection flex flex-col items-center justify-between space-y-4">
+									<div className="connection flex flex-col i justify-between space-y-4">
 										<Button text={`${laborer.demand_fees}   /hr`} />
 										<Button
 											text="Connect"

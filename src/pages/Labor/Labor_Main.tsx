@@ -98,7 +98,7 @@ const Labor_Main = () => {
 									<img
 										src={profileData.image}
 										alt="User"
-										className="w-36 md:w-48 bg-lime-200 p-2 rounded-lg border border-lime-500"
+										className="w-40 h-40 min-w-40 min-h-40 object-cover rounded-full border border-lime-200"
 									/>
 								</div>
 

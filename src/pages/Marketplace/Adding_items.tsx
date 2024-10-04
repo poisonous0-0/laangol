@@ -39,6 +39,7 @@ const Adding_items = () => {
 
 				<form className="flex flex-col items-center w-full md:items-start space-y-4 md:space-y-2">
 					{/* Input fields with state */}
+
 					<Input_text
 						label="Product Name"
 						name="productName"
@@ -83,14 +84,11 @@ const Adding_items = () => {
 				</form>
 			</div>
 
-			<div className="suggested_price flex flex-col items-start space-y-3 mt-6 w-full">
+			<div className="suggested_price flex items-center space-x-3 mt-6 w-full">
 				<h2 className="text-lime-900 text-lg md:text-2xl">
 					Preferred/ Best price:
 				</h2>
-				<div className="btn_items flex flex-wrap items-center justify-start space-x-4 md:space-x-6">
-					<Button text="50KG/BDT" />
-					<Button text="50KG/BDT" />
-				</div>
+				<Button text="Apply Smart price Prediction" />
 			</div>
 
 			<p className="mt-4 p-2 w-full sm:w-max bg-lime-100 bg-opacity-10 border border-lime-400 rounded-md text-lime-900 text-sm md:text-base">
