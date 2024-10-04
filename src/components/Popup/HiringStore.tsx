@@ -92,8 +92,8 @@ const HiringStore: React.FC<PopupProps> = ({
 			<div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
 				<div className="content flex flex-col items-center space-y-5">
 					{/* Displaying storehouse info */}
-					<h2 className="text-xl font-semibold">
-						Hiring: {selectedStorehouse?.storehouse_name}
+					<h2 className="text-2xl font-semibold">
+						 {selectedStorehouse?.storehouse_name}
 					</h2>
 					<p className="text-sm">Location: {selectedStorehouse?.location}</p>
 					<p className="text-sm">
