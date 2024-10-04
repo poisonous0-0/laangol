@@ -1,11 +1,12 @@
+import React, { useEffect, useRef, useState } from "react";
 import user from "../../assets/user.png";
 import edit from "../../assets/edit.png";
 import Button from "../../components/Button/Button";
 import Input_text from "../../components/Input_Text/Input_text";
 import Toggle_Button from "../../components/Toggle_Button/Toggle_Button";
-import { useState, useEffect } from "react";
+import Availability from "../../components/Popup/Available_labor";
 
-const Labor_profile = () => {
+const Labor_profile: React.FC = () => {
 	const [profileData, setProfileData] = useState({
 		specialates: "",
 		demand_fees: 0,
@@ -15,6 +16,8 @@ const Labor_profile = () => {
 
 	const [isToggled, setIsToggled] = useState(false);
 	const [userImage, setUserImage] = useState("");
+	const [isPopupOpen, setIsPopupOpen] = useState(false);
+	const popupRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		const fetchLaborInfo = async () => {
@@ -33,13 +36,10 @@ const Labor_profile = () => {
 				);
 
 				if (!response.ok) {
-					throw new Error("Failed to fetch labor info1.");
+					throw new Error("Failed to fetch labor info.");
 				}
 
 				const data = await response.json();
-				console.log("Fetched labor info:", data);
-
-				// Set profile data
 				setProfileData({
 					specialates: data.specialates || "",
 					status: data.status || "Unavailable",
@@ -47,31 +47,22 @@ const Labor_profile = () => {
 					experience: (data.experience || 0).toString(),
 				});
 
-				// Set toggle status
 				setIsToggled(data.status === "Available");
 
 				const image = localStorage.getItem("image");
-				console.log("img= :" + image);
 				if (image) {
 					const fullImageUrl = image.startsWith("http")
 						? image
 						: `http://127.0.0.1:8000${image}`;
 					localStorage.setItem("image", fullImageUrl);
 					setUserImage(fullImageUrl);
-					console.log(fullImageUrl);
 				}
 			} catch (error) {
 				console.error("Error fetching labor info:", error);
 			}
 		};
 
-		// Fetch labor info on mount
 		fetchLaborInfo();
-
-		const storedImage = localStorage.getItem("image");
-		if (storedImage) {
-			setUserImage(storedImage);
-		}
 	}, []);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,6 +79,20 @@ const Labor_profile = () => {
 			...prevData,
 			status: checked ? "Available" : "Unavailable",
 		}));
+
+		if (checked) {
+			setIsPopupOpen(true); // Open the popup when toggled to available
+		} else {
+			setIsPopupOpen(false); // Close the popup if toggled back to unavailable
+		}
+	};
+
+	const handleCloseToggle = () => {
+		setIsToggled(false); // Deactivate the toggle button
+		setProfileData((prevData) => ({
+			...prevData,
+			status: "Unavailable",
+		}));
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -96,7 +101,7 @@ const Labor_profile = () => {
 		const laborData = {
 			specialates: profileData.specialates,
 			status: isToggled ? "Available" : "Unavailable",
-			demand_fees: Number(profileData.demand_fees), // Ensure numerical values
+			demand_fees: Number(profileData.demand_fees),
 			experience: Number(profileData.experience),
 		};
 
@@ -111,7 +116,6 @@ const Labor_profile = () => {
 				body: JSON.stringify(laborData),
 			});
 
-			console.log("value :" + laborData);
 			if (!response.ok) {
 				throw new Error("Error in updating profile");
 			}
@@ -122,6 +126,22 @@ const Labor_profile = () => {
 			console.error("Error:", error);
 		}
 	};
+
+	// Close popup and set toggle to unavailable when clicking outside of it
+	const handleClickOutside = (event: MouseEvent) => {
+		if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+			setIsPopupOpen(false);
+			handleCloseToggle(); // Deactivate toggle
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
+
 	return (
 		<>
 			<div className="user_profile w-full">
@@ -132,7 +152,7 @@ const Labor_profile = () => {
 					<div className="top_info px-2 flex items-center justify-between">
 						<div className="image_section flex items-end">
 							<img
-								src={userImage || user} // If no user image, use the default placeholder
+								src={userImage || user}
 								alt="User"
 								className="w-32 bg-lime-200 p-2 rounded-full border border-lime-500"
 							/>
@@ -173,10 +193,19 @@ const Labor_profile = () => {
 							label="Enable Feature"
 							className="custom-toggle-class"
 						/>
-						<p>{isToggled ? "Available for hire." : "Unavailable for hire."}</p>
+						<p>
+							{isToggled ? "Available for hire till:" : "Unavailable for hire."}{" "}
+						</p>
 					</div>
 				</div>
 			</div>
+
+			<Availability
+				ref={popupRef}
+				isOpen={isPopupOpen}
+				onClose={() => setIsPopupOpen(false)}
+				onCloseToggle={handleCloseToggle} // Pass the toggle deactivation function
+			/>
 		</>
 	);
 };

@@ -3,6 +3,7 @@ import search from "../../assets/search.png";
 import getHired from "../../assets/getHired.png";
 import storeHouse from "../../assets/warehouse.png";
 import { Link } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
 interface StorehouseInfo {
 	owner_name: string;
@@ -42,8 +43,11 @@ const Store_main = () => {
 	return (
 		<>
 			<div className="labor_main p-4 md:p-8">
-				<div className="heading mb-10 md:mb-20 text-3xl md:text-4xl text-lime-200 font-semibold text-left">
+				<div className="heading mb-10 md:mb-20 text-3xl md:text-4xl text-lime-200 font-semibold text-left flex  items-center justify-between">
 					<h1>Storehouse Management</h1>
+					<Link to="store_requests" className="text-2xl">
+						<Button text="Requests" px="px-4" />
+					</Link>
 				</div>
 
 				<div className="contents">

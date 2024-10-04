@@ -94,7 +94,7 @@ const StorehouseCard: React.FC<StorehouseCardProps> = ({
 	onConnectClick,
 }) => {
 	return (
-		<div className="storehouse-card flex flex-col md:flex-row items-center md:justify-between p-4 bg-white rounded-lg shadow-md w-full">
+		<div className="storehouse-card flex flex-col md:flex-row items-center p-4 rounded-lg w-full">
 			<Link
 				to="storehouse_details"
 				className="store_info w-full md:w-4/5 flex flex-col md:flex-row items-center space-x-5 mb-4 md:mb-0"
