@@ -7,6 +7,7 @@ import Button from "../../components/Button/Button";
 
 interface StorehouseInfo {
 	owner_name: string;
+	name:string;
 	size: number;
 	region_name: string;
 	available_size: string;
@@ -55,7 +56,7 @@ const Store_main = () => {
 						<Link to="store_list">
 							<div className="box bg-lime-100 bg-opacity-10 w-full md:w-auto py-6 px-10 md:px-20 border border-lime-500 rounded-lg flex flex-col items-center justify-center space-y-4 text-xl md:text-2xl text-lime-200 transition duration-300 ease-in-out transform hover:bg-lime-100">
 								<img src={search} alt="Hire a labor" className="w-12 md:w-16" />
-								<p>Hire a storehouse</p>
+								<p>Rent a storehouse</p>
 							</div>
 						</Link>
 
@@ -85,7 +86,7 @@ const Store_main = () => {
 								{storehouseInfo ? (
 									<>
 										<p className="text-xl md:text-2xl">
-											{storehouseInfo.owner_name} Storehouse
+											{storehouseInfo.name}
 										</p>
 
 										<div className="taglines flex flex-col md:flex-row items-center justify-center md:justify-normal space-y-2 md:space-y-0 md:space-x-3">

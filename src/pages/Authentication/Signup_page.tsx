@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation after signup
 import Navbar from "../../components/Navbar/Navbar";
 import bg from "../../assets/login_and_signup_banner.png";
 import Authentication_Input from "../../components/Authentication_Input/Authentication_Input";
@@ -6,7 +7,7 @@ import RadioButton from "../../components/Radio_Button/RadioButton";
 import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 
-// Define the form data structure
+
 interface FormData {
 	name: string;
 	email: string;
@@ -16,7 +17,6 @@ interface FormData {
 }
 
 const Signup_page = () => {
-	// State to manage form data
 	const [formData, setFormData] = useState<FormData>({
 		name: "",
 		email: "",
@@ -33,7 +33,6 @@ const Signup_page = () => {
 		setSelectedValue(value);
 	};
 
-	// Handler for input field changes
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setFormData({
@@ -41,6 +40,9 @@ const Signup_page = () => {
 			[name]: value,
 		});
 	};
+
+	// Use useNavigate to handle redirection
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -75,6 +77,9 @@ const Signup_page = () => {
 
 			const data = await response.json();
 			console.log("Signup successful", data);
+
+			// Redirect to login page after successful signup
+			navigate("/login");
 		} catch (error) {
 			console.error("Error during signup", error);
 			alert("An error occurred during signup. Please try again later.");
@@ -181,9 +186,7 @@ const Signup_page = () => {
 								</label>
 							</div>
 							<div className="signup_button">
-								<Link to="/login">
-									<Button text="Signup" px="px-8" width="w-full" />
-								</Link>
+								<Button text="Signup" px="px-8" width="w-full" />
 							</div>
 							<p className="text-lime-200">
 								Already have account?{" "}
