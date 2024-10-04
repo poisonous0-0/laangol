@@ -34,7 +34,7 @@ import Requests_storehouse from "../pages/StoreHouse/Requests_storehouse";
 const router = createBrowserRouter([
 	{
 		path: "/", // Default route is login
-		element: <App />,
+		element: <Landing_page />,
 	},
 	{
 		path: "/signup", // Signup route
