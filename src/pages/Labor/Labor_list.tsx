@@ -21,7 +21,6 @@ const Labor_list = () => {
 	const [selectedLaborer, setSelectedLaborer] = useState<Laborer | null>(null);
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-	// Fetch laborers
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		fetch("http://127.0.0.1:8002/laborers/by-region/", {
@@ -35,7 +34,6 @@ const Labor_list = () => {
 			.catch((error) => console.error("Error fetching laborers:", error));
 	}, []);
 
-	// Handle "Connect" button click
 	const handleConnectClick = (laborer: Laborer) => {
 		setSelectedLaborer(laborer); // Store the selected laborer
 		setIsPopupOpen(true); // Open the popup
