@@ -5,7 +5,7 @@ interface DropdownProps {
 	children: React.ReactNode;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ title, children }) => {
+const FAQ: React.FC<DropdownProps> = ({ title, children }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggleDropdown = () => {
@@ -39,4 +39,4 @@ const Dropdown: React.FC<DropdownProps> = ({ title, children }) => {
 	);
 };
 
-export default Dropdown;
+export default FAQ;

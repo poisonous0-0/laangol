@@ -17,17 +17,22 @@ interface Laborer {
 interface PopupProps {
 	isOpen: boolean;
 	onClose: () => void;
-	laborer: Laborer | null; 
-	token: string; 
+	laborer: Laborer | null;
+	token: string;
 }
 
-const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer, token }) => {
+const HiringLabor: React.FC<PopupProps> = ({
+	isOpen,
+	onClose,
+	laborer,
+	token,
+}) => {
 	const [userInfo, setUserInfo] = useState({
 		finishingDate: "",
 		startingDate: "",
 		sqft: "",
 	});
-	const [isLoading, setIsLoading] = useState(false); 
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -123,10 +128,10 @@ const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer, token }) 
 							widthClass="w-full"
 						/>
 					</div>
-					<Button 
-						text={isLoading ? "Requesting..." : "Request for Hire"} 
+					<Button
+						text={isLoading ? "Requesting..." : "Request for Hire"}
 						onClick={handleHireRequest}
-						disabled={isLoading} 
+						disabled={isLoading}
 					/>
 				</div>
 			</div>

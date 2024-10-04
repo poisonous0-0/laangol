@@ -6,7 +6,7 @@ interface ButtonProps {
 	onClick?: () => void;
 }
 
-const HoverButton: React.FC<ButtonProps> = ({
+const Dynamic_button: React.FC<ButtonProps> = ({
 	initialLabel,
 	hoverLabel,
 	onClick,
@@ -25,4 +25,4 @@ const HoverButton: React.FC<ButtonProps> = ({
 	);
 };
 
-export default HoverButton;
+export default Dynamic_button;

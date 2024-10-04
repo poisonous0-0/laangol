@@ -1,7 +1,7 @@
 import crops from "../../assets/crop.png";
-import Selector from "../../components/Selector/Selector";
+import Selector from "../../components/Button/Selector";
 import Button from "../../components/Button/Button";
-import ProductCard from "../../components/Product_Card/Product_card";
+import ProductCard from "../../components/Dynamic_card/Product_card";
 
 const Product_description = () => {
 	return (

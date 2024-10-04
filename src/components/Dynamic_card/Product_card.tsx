@@ -1,5 +1,5 @@
 import React from "react";
-import Text_changing_Button from "../Text_changing_Button/Text_changing_Button";
+import Dynamic_button from "../Button/Dynamic_button";
 
 interface ProductCardProps {
 	imageSrc: string;
@@ -8,7 +8,7 @@ interface ProductCardProps {
 	price: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
+const Product_card: React.FC<ProductCardProps> = ({
 	imageSrc,
 	productName,
 	sellerName,
@@ -26,7 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 			<div className="product_card_content flex flex-col items-center text-lime-700">
 				<h1>{productName}</h1>
 				<p>Seller: {sellerName}</p>
-				<Text_changing_Button
+				<Dynamic_button
 					initialLabel={price.toString() + "/KG BDT "}
 					hoverLabel="Add to cart"
 				/>
@@ -35,4 +35,4 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	);
 };
 
-export default ProductCard;
+export default Product_card;

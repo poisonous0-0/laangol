@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "../../components/Button/Button";
 import Input_text from "../../components/Input_Text/Input_text";
+import Dropdown from "../../components/Dropdown/DropDownTwo";
 import { Link } from "react-router-dom";
 
 const Adding_items = () => {
@@ -20,6 +21,18 @@ const Adding_items = () => {
 			[name]: value, // Update the correct field dynamically
 		});
 	};
+	// Example 2: Dropdown with number options
+	const [selectedNumber, setSelectedNumber] = useState<number | null>(null);
+
+	const handleNumberChange = (selectedValue: number) => {
+		setSelectedNumber(selectedValue);
+	};
+
+	const numberOptions = [
+		{ value: 1, label: "Vegetables" },
+		{ value: 2, label: "Fertilizers" },
+		{ value: 3, label: "Accessories" },
+	];
 
 	return (
 		<>
@@ -39,6 +52,16 @@ const Adding_items = () => {
 
 				<form className="flex flex-col items-center w-full md:items-start space-y-4 md:space-y-2">
 					{/* Input fields with state */}
+					<div className="Select_category">
+						{/* Dropdown with number options */}
+						<Dropdown
+							label="Click to select Catagory"
+							options={numberOptions}
+							onChange={handleNumberChange}
+							placeholder="Select a catagory"
+							className="min-w-fit text-lime-200"
+						/>
+					</div>
 
 					<Input_text
 						label="Product Name"

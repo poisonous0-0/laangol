@@ -1,6 +1,6 @@
 import Button from "../../components/Button/Button";
 import store from "../../assets/warehouse.png";
-import Short_card_2 from "../../components/Short_card_2/Short_card_2";
+import Short_card_2 from "../../components/Dynamic_card/Labor_and_Store";
 
 const Store_details = () => {
 	return (

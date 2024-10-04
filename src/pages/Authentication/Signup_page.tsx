@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate for naviga
 import Navbar from "../../components/Navbar/Navbar";
 import bg from "../../assets/login_and_signup_banner.png";
 import Authentication_Input from "../../components/Authentication_Input/Authentication_Input";
-import RadioButton from "../../components/Radio_Button/RadioButton";
+import RadioButton from "../../components/Button/RadioButton";
 import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
-
 
 interface FormData {
 	name: string;
