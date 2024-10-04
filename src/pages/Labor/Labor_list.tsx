@@ -67,7 +67,7 @@ const Labor_list = () => {
 									/>
 									{/* Profile Info */}
 									<div className="info_section flex flex-col space-y-2">
-										<p className="text-xl">{laborer.laborer_name}</p>
+										<p className="text-2xl">{laborer.laborer_name}</p>
 										{/* Add more labor info here */}
 									</div>
 								</div>

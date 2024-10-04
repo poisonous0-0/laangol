@@ -32,7 +32,7 @@ const Login_page = () => {
 			if (!response.ok) {
 				const errorData = await response.json();
 				console.error("Login failed:", errorData);
-				setIsWarningOpen(true); // Show Warning popup when login fails
+				setIsWarningOpen(true); 
 				return;
 			}
 
