@@ -54,7 +54,7 @@ const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer }) => {
 			<div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
 				{/* Laborer Info */}
 				<div className="mb-4 text-center">
-					<h2 className="text-xl font-semibold">
+					<h2 className="text-2xl font-semibold">
 						Request to Hire {laborer.laborer_name}
 					</h2>
 					<p>{laborer.specialties}</p>
