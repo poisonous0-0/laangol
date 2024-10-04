@@ -87,8 +87,8 @@ const Labor_Main = () => {
 
 					{/* Responsive profile section */}
 					{isProfileDataAvailable && (
-						<div className="profile_container mt-10 md:mt-20 flex flex-col items-center justify-center space-y-8 md:space-y-12 text-lime-900">
-							<div className="heading bg-lime-800 px-8 md:px-12 py-2 md:py-3 rounded-md text-xl md:text-2xl">
+						<div className="profile_container mt-10 md:mt-20 flex flex-col items-center justify-center space-y-8 md:space-y-12 text-lime-200">
+							<div className="heading bg-lime-100 px-8 md:px-12 py-2 md:py-3 rounded-md text-xl md:text-2xl">
 								<h1>Your Profile</h1>
 							</div>
 
@@ -98,7 +98,7 @@ const Labor_Main = () => {
 									<img
 										src={profileData.image}
 										alt="User"
-										className="w-36 md:w-48 bg-lime-200 p-2 rounded-lg border border-lime-500"
+										className="w-40 h-40 min-w-40 min-h-40 object-cover rounded-full border border-lime-200"
 									/>
 								</div>
 

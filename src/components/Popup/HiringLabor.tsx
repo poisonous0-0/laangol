@@ -2,12 +2,25 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 import Input_text from "../Input_Text/Input_text";
 
+interface Laborer {
+	laborer_name: string;
+	region_name: string;
+	experience: number;
+	specialties: string;
+	demand_fees: number;
+	status: string;
+	labour_id: number;
+	current_hire_end_date: string | null;
+	image_url: string | null;
+}
+
 interface PopupProps {
 	isOpen: boolean;
 	onClose: () => void;
+	laborer: Laborer | null; // Accept laborer prop
 }
 
-const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose }) => {
+const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer }) => {
 	const [userInfo, setUserInfo] = useState({
 		finishingDate: "",
 		startingDate: "",
@@ -30,7 +43,8 @@ const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 		}
 	};
 
-	if (!isOpen) return null;
+	// If the popup is not open, return null
+	if (!isOpen || !laborer) return null;
 
 	return (
 		<div
@@ -38,7 +52,17 @@ const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 			onClick={handleOverlayClick}
 		>
 			<div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
+				{/* Laborer Info */}
+				<div className="mb-4 text-center">
+					<h2 className="text-xl font-semibold">
+						Request to Hire {laborer.laborer_name}
+					</h2>
+					<p>{laborer.specialties}</p>
+					<p>{laborer.region_name}</p>
+				</div>
+
 				<div className="content flex flex-col items-center space-y-5">
+					{/* Input Form */}
 					<div className="input_form w-full space-y-4">
 						<Input_text
 							type="date"

@@ -145,7 +145,7 @@ const Labor_profile: React.FC = () => {
 	return (
 		<>
 			<div className="user_profile w-full">
-				<div className="heading text-3xl font-semibold text-lime-900">
+				<div className="heading text-3xl font-semibold text-lime-200">
 					<h1>Labor Profile</h1>
 				</div>
 				<div className="content mt-9 flex flex-col space-y-11">
@@ -154,7 +154,7 @@ const Labor_profile: React.FC = () => {
 							<img
 								src={userImage || user}
 								alt="User"
-								className="w-32 bg-lime-200 p-2 rounded-full border border-lime-500"
+								className="w-40 h-40 min-w-40 min-h-40 object-cover rounded-full border border-lime-200"
 							/>
 							<img src={edit} alt="" className="w-8" />
 						</div>
