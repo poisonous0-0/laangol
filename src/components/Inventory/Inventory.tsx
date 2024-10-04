@@ -14,7 +14,7 @@ const Inventory: React.FC<ProductCardProps> = ({
 	onEdit,
 }) => {
 	return (
-		<div className=" w-52 p-4 rounded-md text-center relative">
+		<div className="w-52 p-4 rounded-md text-center relative">
 			<div className="relative w-full pt-[100%] bg-gray-200">
 				{imageUrl ? (
 					<img
