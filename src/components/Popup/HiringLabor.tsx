@@ -17,17 +17,18 @@ interface Laborer {
 interface PopupProps {
 	isOpen: boolean;
 	onClose: () => void;
-	laborer: Laborer | null; // Accept laborer prop
+	laborer: Laborer | null; 
+	token: string; 
 }
 
-const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer }) => {
+const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer, token }) => {
 	const [userInfo, setUserInfo] = useState({
 		finishingDate: "",
 		startingDate: "",
 		sqft: "",
 	});
+	const [isLoading, setIsLoading] = useState(false); 
 
-	// Handle input change
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setUserInfo((prevInfo) => ({
@@ -36,10 +37,51 @@ const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer }) => {
 		}));
 	};
 
-	// Close popup if clicked outside the content
 	const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		if (e.target === e.currentTarget) {
 			onClose();
+		}
+	};
+
+	// Function to handle the hire request
+	const handleHireRequest = async () => {
+		const payload = {
+			labour_id: laborer?.labour_id,
+			start_date: userInfo.startingDate,
+			end_date: userInfo.finishingDate,
+		};
+
+		setIsLoading(true); // Set loading state to true
+
+		try {
+			const token2 = localStorage.getItem("token");
+			const response = await fetch("http://127.0.0.1:8002/api/labour/hire/", {
+				method: "POST",
+				headers: {
+					Authorization: `Token ${token2}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(payload),
+			});
+
+			if (!response.ok) {
+				const errorData = await response.json();
+				console.error("Error during hire request:", errorData);
+				alert("Failed to hire laborer. Please try again.");
+				return;
+			}
+
+			const data = await response.json();
+			console.log("Hire request successful", data);
+			alert("Laborer hired successfully!");
+
+			// Optionally close the popup after success
+			onClose();
+		} catch (error) {
+			console.error("Error during hire request", error);
+			alert("An error occurred. Please try again later.");
+		} finally {
+			setIsLoading(false); // Set loading state to false
 		}
 	};
 
@@ -81,7 +123,11 @@ const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer }) => {
 							widthClass="w-full"
 						/>
 					</div>
-					<Button text="Request for Hire" onClick={onClose} />
+					<Button 
+						text={isLoading ? "Requesting..." : "Request for Hire"} 
+						onClick={handleHireRequest}
+						disabled={isLoading} 
+					/>
 				</div>
 			</div>
 		</div>

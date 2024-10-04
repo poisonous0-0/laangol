@@ -13,7 +13,6 @@ const Login_page = () => {
 
 	const handleLogin = async (event: React.FormEvent) => {
 		event.preventDefault();
-		console.log("Login attempt", { email, password });
 
 		const payload = {
 			email,
