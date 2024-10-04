@@ -2,8 +2,8 @@ import ShortCard from "../../components/Dynamic_card/Feature_card";
 import accessories from "../../assets/accessories.png";
 import vegetables from "../../assets/vegetables.png";
 import fertilizers from "../../assets/fertilizers.png";
-import ProductCard from "../../components/Dynamic_card/Product_card";
 import Marketplace_top from "../../components/Marketplace_top/Marketplace_top";
+import ProductCard from "../../components/Dynamic_card/Product_card";
 import { Link } from "react-router-dom";
 
 const Marketplace_1 = () => {
@@ -13,16 +13,14 @@ const Marketplace_1 = () => {
 
 			{/* Categories Section */}
 			<div className="categories mt-16 flex items-center justify-center space-x-16">
-				<Link to="marketplace2">
-					<ShortCard imageSrc={accessories} heading="Accessories" />
-				</Link>
-				<Link to="marketplace2">
+				<Link to="marketplace2/Vegetables">
 					<ShortCard imageSrc={vegetables} heading="Vegetables" />
 				</Link>
-				<Link to="marketplace2">
-					<a href="">
-						<ShortCard imageSrc={fertilizers} heading="Fertilizers" />
-					</a>
+				<Link to="marketplace2/Fertilizers">
+					<ShortCard imageSrc={fertilizers} heading="Fertilizers" />
+				</Link>
+				<Link to="marketplace2/Accessories">
+					<ShortCard imageSrc={accessories} heading="Accessories" />
 				</Link>
 			</div>
 

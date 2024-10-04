@@ -53,7 +53,7 @@ const router = createBrowserRouter([
 				element: <Marketplace_1 />, // Will be accessible at /dashboard/marketplace
 			},
 			{
-				path: "marketplace/marketplace2", // Will be accessible at /dashboard/marketplace2
+				path: "marketplace/marketplace2/:category", // Added :category parameter
 				element: <Marketplace_2 />,
 			},
 			{
