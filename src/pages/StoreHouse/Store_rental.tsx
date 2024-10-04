@@ -3,7 +3,7 @@ import user from "../../assets/user.png";
 import edit from "../../assets/edit.png";
 import Button from "../../components/Button/Button";
 import Input_text from "../../components/Input_Text/Input_text";
-import Toggle_Button from "../../components/Toggle_Button/Toggle_Button";
+import Toggle_Button from "../../components/Button/Toggle_Button";
 
 const Store_rental = () => {
 	const [storehouseData, setStorehouseData] = useState({

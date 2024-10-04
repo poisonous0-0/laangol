@@ -1,5 +1,5 @@
 import Marketplace_top from "../../components/Marketplace_top/Marketplace_top";
-import ProductCard from "../../components/Product_Card/Product_card";
+import ProductCard from "../../components/Dynamic_card/Product_card";
 import fertilizers from "../../assets/fertilizers.png";
 import { Link } from "react-router-dom";
 

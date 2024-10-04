@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar/Navbar";
 import Button from "../components/Button/Button";
 import Card from "../components/Card/Card";
-import Dropdown from "../components/Dropdown/Dropdown";
+import Dropdown from "../components/Dropdown/FAQ";
 
 import BannerImg from "../assets/banner.png";
 import Leaf from "../assets/leaf.png";

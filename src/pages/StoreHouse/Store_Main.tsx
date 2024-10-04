@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import search from "../../assets/search.png";
 import getHired from "../../assets/getHired.png";
 import storeHouse from "../../assets/warehouse.png";
@@ -7,7 +7,7 @@ import Button from "../../components/Button/Button";
 
 interface StorehouseInfo {
 	owner_name: string;
-	name:string;
+	name: string;
 	size: number;
 	region_name: string;
 	available_size: string;
@@ -85,9 +85,7 @@ const Store_main = () => {
 							<div className="info_section flex flex-col space-y-2 text-center md:text-left">
 								{storehouseInfo ? (
 									<>
-										<p className="text-xl md:text-2xl">
-											{storehouseInfo.name}
-										</p>
+										<p className="text-xl md:text-2xl">{storehouseInfo.name}</p>
 
 										<div className="taglines flex flex-col md:flex-row items-center justify-center md:justify-normal space-y-2 md:space-y-0 md:space-x-3">
 											<div className="tag px-2 py-1 bg-lime-100 bg-opacity-10 rounded-md border border-lime-100 text-sm">

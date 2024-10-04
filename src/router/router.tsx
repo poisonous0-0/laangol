@@ -27,14 +27,13 @@ import Inventory from "../pages/Marketplace/Inventory";
 import Labor_details from "../pages/Labor/Labor_details";
 import Store_details from "../pages/StoreHouse/Store_details";
 import App from "../App";
-import Requests from "../pages/Labor/Requests_labor";
 import Requests_labor from "../pages/Labor/Requests_labor";
 import Requests_storehouse from "../pages/StoreHouse/Requests_storehouse";
 
 const router = createBrowserRouter([
 	{
 		path: "/", // Default route is login
-		element: <Landing_page />,
+		element: <App />,
 	},
 	{
 		path: "/signup", // Signup route

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../../components/Button/Button";
-import Dropdown from "../../components/DropDownTwo/DropDownTwo";
+import Dropdown from "../../components/Dropdown/DropDownTwo";
 import Input_text from "../../components/Input_Text/Input_text";
 import crops from "../../assets/crop.png";
 

@@ -1,8 +1,8 @@
-import ShortCard from "../../components/Short_card/Short_card";
+import ShortCard from "../../components/Dynamic_card/Feature_card";
 import accessories from "../../assets/accessories.png";
 import vegetables from "../../assets/vegetables.png";
 import fertilizers from "../../assets/fertilizers.png";
-import ProductCard from "../../components/Product_Card/Product_card";
+import ProductCard from "../../components/Dynamic_card/Product_card";
 import Marketplace_top from "../../components/Marketplace_top/Marketplace_top";
 import { Link } from "react-router-dom";
 
