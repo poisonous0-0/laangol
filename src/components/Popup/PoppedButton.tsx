@@ -1,6 +1,7 @@
 import { useState } from "react";
 import HiringStore from "./HiringStore";
-import Warning from "./Warning";
+import HiringLabor from "./HiringLabor";
+
 const PoppedButton: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -16,7 +17,7 @@ const PoppedButton: React.FC = () => {
 			>
 				{isOpen ? "Hide Popup" : "Show Popup"}
 			</button>
-			<HiringStore isOpen={isOpen} onClose={togglePopup} />
+			<HiringLabor isOpen={isOpen} onClose={togglePopup} />
 		</div>
 	);
 };

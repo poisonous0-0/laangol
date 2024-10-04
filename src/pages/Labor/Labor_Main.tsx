@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import search from "../../assets/search.png";
 import getHired from "../../assets/getHired.png";
 import { Link } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
 const Labor_Main = () => {
 	const [profileData, setProfileData] = useState({
@@ -57,8 +58,11 @@ const Labor_Main = () => {
 	return (
 		<>
 			<div className="labor_main p-4 md:p-8">
-				<div className="heading mb-10 md:mb-20 text-3xl md:text-4xl text-lime-200 font-semibold text-left">
+				<div className="heading mb-10 md:mb-20 text-3xl md:text-4xl text-lime-200 flex items-center justify-between font-semibold text-left">
 					<h1>Labor Management</h1>
+					<Link to="labor_requests" className="text-2xl">
+						<Button text="Requests" px="px-4" />
+					</Link>
 				</div>
 
 				<div className="contents">
