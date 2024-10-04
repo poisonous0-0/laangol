@@ -20,6 +20,8 @@ interface Storehouse {
 
 const StoreList = () => {
 	const [storehouses, setStorehouses] = useState<Storehouse[]>([]);
+	const [selectedStorehouse, setSelectedStorehouse] =
+		useState<Storehouse | null>(null);
 	const [isHiringPopupOpen, setIsHiringPopupOpen] = useState(false);
 	const token = localStorage.getItem("token");
 
@@ -50,12 +52,14 @@ const StoreList = () => {
 		fetchStorehouses();
 	}, [token]);
 
-	const handleConnectClick = () => {
-		setIsHiringPopupOpen(true);
+	const handleConnectClick = (storehouse: Storehouse) => {
+		setSelectedStorehouse(storehouse); // Set the selected storehouse
+		setIsHiringPopupOpen(true); // Open popup
 	};
 
 	const handleClosePopup = () => {
 		setIsHiringPopupOpen(false);
+		setSelectedStorehouse(null); // Clear selection after closing
 	};
 
 	return (
@@ -67,19 +71,28 @@ const StoreList = () => {
 				<div className="heading text-3xl px-3 py-2 bg-lime-100 rounded-md border border-lime-100 text-lime-200">
 					<h1>Hire a Storehouse</h1>
 				</div>
-				<div className="storehouses_list  flex flex-col items-start space-y-7 w-full">
-					{storehouses.map((storehouse) => (
-						<StorehouseCard
-							key={storehouse.storehouse_id}
-							storehouse={storehouse}
-							onConnectClick={handleConnectClick}
-						/>
-					))}
+				<div className="storehouses_list flex flex-col items-start space-y-7 w-full">
+					{storehouses.length > 0 ? (
+						storehouses.map((storehouse) => (
+							<StorehouseCard
+								key={storehouse.storehouse_id}
+								storehouse={storehouse}
+								onConnectClick={() => handleConnectClick(storehouse)} // Pass storehouse to popup
+							/>
+						))
+					) : (
+						<p>No storehouses available at the moment.</p>
+					)}
 				</div>
 			</div>
 
 			{/* HiringStore Popup */}
-			<HiringStore isOpen={isHiringPopupOpen} onClose={handleClosePopup} />
+			<HiringStore
+				isOpen={isHiringPopupOpen}
+				onClose={handleClosePopup}
+				selectedStorehouse={selectedStorehouse} // Pass selected storehouse to popup
+				token={token || ""}
+			/>
 		</div>
 	);
 };
@@ -94,7 +107,7 @@ const StorehouseCard: React.FC<StorehouseCardProps> = ({
 	onConnectClick,
 }) => {
 	return (
-		<div className="storehouse-card  flex md:flex-row items-center justify-between rounded-lg w-full">
+		<div className="storehouse-card flex md:flex-row items-center justify-between rounded-lg w-full">
 			<Link
 				to="storehouse_details"
 				className="store_info w-full md:w-4/5 flex flex-col md:flex-row items-center space-x-5 mb-4 md:mb-0"
@@ -110,7 +123,7 @@ const StorehouseCard: React.FC<StorehouseCardProps> = ({
 					<p className="text-xl md:text-2xl font-semibold text-lime-200">
 						{storehouse.storehouse_name}
 					</p>
-					<div className="taglines text-lime-200 flex flex-wrap items-center justify-center md:justify-start space-x-3">
+					<div className="taglines flex flex-wrap items-center justify-center md:justify-start space-x-3">
 						<Tag label={`${storehouse.total_size} Sqft`} />
 						<Tag label={`Available size: ${storehouse.available_size} Sqft`} />
 						<Tag label={storehouse.location} />

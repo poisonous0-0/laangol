@@ -18,21 +18,16 @@ interface PopupProps {
 	isOpen: boolean;
 	onClose: () => void;
 	laborer: Laborer | null;
-	token: string;
 }
 
-const HiringLabor: React.FC<PopupProps> = ({
-	isOpen,
-	onClose,
-	laborer,
-	token,
-}) => {
+const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer }) => {
 	const [userInfo, setUserInfo] = useState({
 		finishingDate: "",
 		startingDate: "",
 		sqft: "",
 	});
 	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState<string | null>(null); // Error state
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -57,13 +52,14 @@ const HiringLabor: React.FC<PopupProps> = ({
 		};
 
 		setIsLoading(true); // Set loading state to true
+		setError(null); // Reset error state
 
 		try {
-			const token2 = localStorage.getItem("token");
+			const token = localStorage.getItem("token");
 			const response = await fetch("http://127.0.0.1:8002/api/labour/hire/", {
 				method: "POST",
 				headers: {
-					Authorization: `Token ${token2}`,
+					Authorization: `Token ${token}`,
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(payload),
@@ -71,20 +67,19 @@ const HiringLabor: React.FC<PopupProps> = ({
 
 			if (!response.ok) {
 				const errorData = await response.json();
-				console.error("Error during hire request:", errorData);
-				alert("Failed to hire laborer. Please try again.");
+				setError(
+					errorData.message || "Failed to hire laborer. Please try again."
+				);
 				return;
 			}
 
 			const data = await response.json();
 			console.log("Hire request successful", data);
 			alert("Laborer hired successfully!");
-
-			// Optionally close the popup after success
 			onClose();
 		} catch (error) {
 			console.error("Error during hire request", error);
-			alert("An error occurred. Please try again later.");
+			setError("An error occurred. Please try again later.");
 		} finally {
 			setIsLoading(false); // Set loading state to false
 		}
@@ -107,6 +102,9 @@ const HiringLabor: React.FC<PopupProps> = ({
 					<p>{laborer.specialties}</p>
 					<p>{laborer.region_name}</p>
 				</div>
+
+				{/* Error Message */}
+				{error && <p className="text-red-500 text-center">{error}</p>}
 
 				<div className="content flex flex-col items-center space-y-5">
 					{/* Input Form */}

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 import Input_text from "../Input_Text/Input_text";
 
-
 interface Storehouse {
 	storehouse_name: string;
 	storehouse_id: number;
@@ -20,18 +19,22 @@ interface Storehouse {
 interface PopupProps {
 	isOpen: boolean;
 	onClose: () => void;
-	storehouseId: Storehouse | null; 
-	token: string; 
+	selectedStorehouse: Storehouse | null;
+	token: string;
 }
 
-const HiringStore: React.FC<PopupProps> = ({ isOpen, onClose, storehouseId, token }) => {
+const HiringStore: React.FC<PopupProps> = ({
+	isOpen,
+	onClose,
+	selectedStorehouse,
+	token,
+}) => {
 	const [userInfo, setUserInfo] = useState({
 		startingDate: "",
 		finishingDate: "",
 		sqft: "",
 	});
 	const [loading, setLoading] = useState(false);
-
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -40,6 +43,7 @@ const HiringStore: React.FC<PopupProps> = ({ isOpen, onClose, storehouseId, toke
 			[name]: value,
 		}));
 	};
+
 	const handleSubmit = async () => {
 		if (!userInfo.startingDate || !userInfo.finishingDate || !userInfo.sqft) {
 			alert("Please fill all fields.");
@@ -47,17 +51,16 @@ const HiringStore: React.FC<PopupProps> = ({ isOpen, onClose, storehouseId, toke
 		}
 
 		const requestBody = {
-			storehouse_id:storehouseId?.storehouse_id,
+			storehouse_id: selectedStorehouse?.storehouse_id,
 			start_date: userInfo.startingDate,
 			end_date: userInfo.finishingDate,
-			rental_size: parseInt(userInfo.sqft), 
-			active: 1, 
+			rental_size: parseInt(userInfo.sqft),
+			active: 1,
 		};
 
 		try {
 			setLoading(true);
 			const token2 = localStorage.getItem("token");
-			console.log("requestBody :"+ requestBody);
 			const response = await fetch("http://127.0.0.1:8003/storehouse/rent/", {
 				method: "POST",
 				headers: {
@@ -88,7 +91,14 @@ const HiringStore: React.FC<PopupProps> = ({ isOpen, onClose, storehouseId, toke
 		<div className="fixed inset-0 flex items-center justify-center bg-lime-100 bg-opacity-10">
 			<div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
 				<div className="content flex flex-col items-center space-y-5">
-					<p>storehouseId?.storehouse_id,</p>
+					{/* Displaying storehouse info */}
+					<h2 className="text-xl font-semibold">
+						Hiring: {selectedStorehouse?.storehouse_name}
+					</h2>
+					<p className="text-sm">Location: {selectedStorehouse?.location}</p>
+					<p className="text-sm">
+						Available Size: {selectedStorehouse?.available_size} Sqft
+					</p>
 					<div className="input_form w-full space-y-4">
 						<Input_text
 							type="date"
@@ -118,7 +128,7 @@ const HiringStore: React.FC<PopupProps> = ({ isOpen, onClose, storehouseId, toke
 					<Button
 						text={loading ? "Processing..." : "Request for Rent"}
 						onClick={handleSubmit}
-						disabled={loading} 
+						disabled={loading}
 					/>
 				</div>
 			</div>
