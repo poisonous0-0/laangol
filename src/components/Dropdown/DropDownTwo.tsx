@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from 'react'; // Ensure useState is imported
 
 interface Option<T> {
 	value: T;
@@ -9,6 +9,7 @@ interface DropdownProps<T> {
 	label: string;
 	options: Option<T>[];
 	onChange: (selectedValue: T) => void;
+	value: T; // Accept value prop here to hold the current selected value
 	placeholder?: string;
 	className?: string;
 }
@@ -17,17 +18,17 @@ const Dropdown = <T,>({
 	label,
 	options,
 	onChange,
+	value, // Accept value prop
 	placeholder = "Choose an option",
 	className = "",
 }: DropdownProps<T>) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectedValue, setSelectedValue] = useState<Option<T> | null>(null);
+	const selectedOption = options.find(option => option.value === value); // Find the selected option
 
 	const toggleDropdown = () => setIsOpen(!isOpen);
 
 	const handleOptionClick = (option: Option<T>) => {
-		setSelectedValue(option);
-		onChange(option.value);
+		onChange(option.value); // Pass selected value to parent
 		setIsOpen(false);
 	};
 
@@ -39,11 +40,11 @@ const Dropdown = <T,>({
 				className="bg-lime-100 bg-opacity-10 text-lime-200 border border-lime-100 rounded-md w-full p-2.5 text-left"
 				onClick={toggleDropdown}
 			>
-				{selectedValue ? selectedValue.label : placeholder}
+				{selectedOption ? selectedOption.label : placeholder} {/* Display selected label */}
 			</button>
 
 			{isOpen && (
-				<div className="absolute z-10 mt-2 w-full bg-lime-50  border border-lime-200 rounded-md">
+				<div className="absolute z-10 mt-2 w-full bg-lime-50 border border-lime-200 rounded-md">
 					{options.map((option, index) => (
 						<div
 							key={index}
