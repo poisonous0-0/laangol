@@ -1,11 +1,9 @@
+// src/App.tsx
 import React from "react";
-import PoppedButton from "./components/Popup/PoppedButton";
 
-const App = () => {
+const App: React.FC = () => {
 	return (
-		<div>
-			<PoppedButton />
-		</div>
+		<div className="bg-green-100 min-h-screen flex items-center justify-center"></div>
 	);
 };
 

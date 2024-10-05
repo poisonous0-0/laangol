@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "../Button/Button";
 import Input_text from "../Input_Text/Input_text";
+import Confirmation from "./Confirmation"; // Import the confirmation component
 
 interface Laborer {
 	laborer_name: string;
@@ -28,6 +29,7 @@ const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer }) => {
 	});
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null); // Error state
+	const [isConfirmationOpen, setIsConfirmationOpen] = useState(false); // State to control confirmation popup
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -73,10 +75,12 @@ const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer }) => {
 				return;
 			}
 
+			// If hire request is successful
 			const data = await response.json();
 			console.log("Hire request successful", data);
-			alert("Laborer hired successfully!");
-			onClose();
+
+			// Open confirmation popup
+			setIsConfirmationOpen(true);
 		} catch (error) {
 			console.error("Error during hire request", error);
 			setError("An error occurred. Please try again later.");
@@ -89,51 +93,59 @@ const HiringLabor: React.FC<PopupProps> = ({ isOpen, onClose, laborer }) => {
 	if (!isOpen || !laborer) return null;
 
 	return (
-		<div
-			className="fixed inset-0 flex items-center justify-center bg-lime-100 bg-opacity-10"
-			onClick={handleOverlayClick}
-		>
-			<div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
-				{/* Laborer Info */}
-				<div className="mb-4 text-center">
-					<h2 className="text-2xl font-semibold">
-						Request to Hire {laborer.laborer_name}
-					</h2>
-					<p>{laborer.specialties}</p>
-					<p>{laborer.region_name}</p>
-				</div>
+		<>
+			<div
+				className="fixed inset-0 flex items-center justify-center bg-lime-100 bg-opacity-10"
+				onClick={handleOverlayClick}
+			>
+				<div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
+					{/* Laborer Info */}
+					<div className="mb-4 text-center">
+						<h2 className="text-2xl font-semibold">
+							Request to Hire {laborer.laborer_name}
+						</h2>
+						<p>{laborer.specialties}</p>
+						<p>{laborer.region_name}</p>
+					</div>
 
-				{/* Error Message */}
-				{error && <p className="text-red-500 text-center">{error}</p>}
+					{/* Error Message */}
+					{error && <p className="text-red-500 text-center">{error}</p>}
 
-				<div className="content flex flex-col items-center space-y-5">
-					{/* Input Form */}
-					<div className="input_form w-full space-y-4">
-						<Input_text
-							type="date"
-							label="Starting Date"
-							name="startingDate"
-							value={userInfo.startingDate}
-							onChange={handleInputChange}
-							widthClass="w-full"
-						/>
-						<Input_text
-							type="date"
-							label="Finishing Date"
-							name="finishingDate"
-							value={userInfo.finishingDate}
-							onChange={handleInputChange}
-							widthClass="w-full"
+					<div className="content flex flex-col items-center space-y-5">
+						{/* Input Form */}
+						<div className="input_form w-full space-y-4">
+							<Input_text
+								type="date"
+								label="Starting Date"
+								name="startingDate"
+								value={userInfo.startingDate}
+								onChange={handleInputChange}
+								widthClass="w-full"
+							/>
+							<Input_text
+								type="date"
+								label="Finishing Date"
+								name="finishingDate"
+								value={userInfo.finishingDate}
+								onChange={handleInputChange}
+								widthClass="w-full"
+							/>
+						</div>
+						<Button
+							text={isLoading ? "Requesting..." : "Request for Hire"}
+							onClick={handleHireRequest}
+							disabled={isLoading}
 						/>
 					</div>
-					<Button
-						text={isLoading ? "Requesting..." : "Request for Hire"}
-						onClick={handleHireRequest}
-						disabled={isLoading}
-					/>
 				</div>
 			</div>
-		</div>
+
+			{/* Confirmation Popup */}
+			<Confirmation
+				isOpen={isConfirmationOpen}
+				onClose={() => setIsConfirmationOpen(false)}
+			/>
+		</>
 	);
 };
 
