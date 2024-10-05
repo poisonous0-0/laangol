@@ -10,13 +10,13 @@ type Product = {
     id: number;
     image: string;
     name: string;
-    seller: string; // Updated to match the API response
+    seller: string; 
     price: number;
 };
 
 const Marketplace_2 = () => {
-    const { category } = useParams(); // Get the category from URL parameters
-    const [products, setProducts] = useState<Product[]>([]); // State to hold the fetched products
+    const { category } = useParams();
+    const [products, setProducts] = useState<Product[]>([]); 
     const [loading, setLoading] = useState(true); // State to manage loading state
     const [error, setError] = useState<string | null>(null); // State to manage errors (string or null)
 
