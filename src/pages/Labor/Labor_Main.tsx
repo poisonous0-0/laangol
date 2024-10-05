@@ -7,6 +7,7 @@ import Button from "../../components/Button/Button";
 const Labor_Main = () => {
   const [loading, setLoading] = useState(true);
   const [profileData, setProfileData] = useState({
+    labour_id:"",
     image: "",
     name: "",
     region: "",
@@ -48,6 +49,7 @@ const Labor_Main = () => {
 
         const data = await response.json();
         setProfileData({
+          labour_id:data.labour_id||"",
           image: data.user_image || "", 
           name: data.user_name || "",
           region: data.region_name || "",
@@ -67,7 +69,7 @@ const Labor_Main = () => {
     fetchLaborInfo();
   }, []);
   const isProfileDataAvailable =
-    profileData.name && profileData.region && profileData.phone_number;
+    profileData.labour_id && profileData.region && profileData.phone_number;
 
   return (
     <div className="labor_main p-4 md:p-8">
@@ -148,7 +150,11 @@ const Labor_Main = () => {
             </div>
           </div>
         ) : (
-          <p>No profile data available.</p>
+          
+          <div className="tag px-2 py-1 bg-lime-100 bg-opacity-10 rounded-md border border-lime-800 text-sm">
+                   <p>No profile data available.</p>
+                  </div>
+          
         )}
       </div>
     </div>
