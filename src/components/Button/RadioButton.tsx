@@ -22,7 +22,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
 				name={name}
 				value={value}
 				checked={checked}
-				onChange={() => onChange(value)}
+				onChange={() => onChange(value)} // Triggering the parent handler
 				className="form-radio h-5 w-5 text-lime-700 transition duration-150 ease-in-out accent-lime-200"
 			/>
 			<span className="ml-2">{label}</span>

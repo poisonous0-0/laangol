@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface Option<T> {
 	value: T;
@@ -33,7 +33,7 @@ const Dropdown = <T,>({
 
 	return (
 		<div className={`relative inline-block ${className}`}>
-			<label className="block mb-2 text-sm font-medium">{label}</label>
+			<label className="block mb-2 text-base font-medium">{label}</label>
 			<button
 				type="button"
 				className="bg-lime-100 bg-opacity-10 text-lime-200 border border-lime-100 rounded-md w-full p-2.5 text-left"
