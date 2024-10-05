@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
 import user from "../../assets/user.png";
-import Are_You_Sure from "../../components/Popup/Are_You_Sure"; // Import Are_You_Sure popup component
+import AreYouSure from "../../components/Popup/Are_You_Sure"; // Import the popup
+import Confirmed from "../../components/Popup/Confirmed"; // Import the confirmed popup
 
 interface PendingRequest {
 	hire_id: number;
@@ -16,11 +17,12 @@ interface PendingRequest {
 
 const Requests_labor = () => {
 	const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]);
-	const [selectedRequestId, setSelectedRequestId] = useState<number | null>(
+	const [token] = useState(localStorage.getItem("token"));
+	const [isPopupOpen, setIsPopupOpen] = useState(false);
+	const [isConfirmedOpen, setIsConfirmedOpen] = useState(false);
+	const [selectedRequest, setSelectedRequest] = useState<PendingRequest | null>(
 		null
-	); // Track selected request
-	const [isPopupOpen, setIsPopupOpen] = useState(false); // Popup visibility state
-	const token = localStorage.getItem("token");
+	); // State for the selected request
 
 	useEffect(() => {
 		const fetchPendingRequests = async () => {
@@ -49,11 +51,7 @@ const Requests_labor = () => {
 		fetchPendingRequests();
 	}, [token]);
 
-	// Function to update hire status (accept/reject)
-	const updateHireStatus = async (
-		hireId: number,
-		status: "Accept" | "Reject"
-	) => {
+	const updateHireStatus = async (hireId: number) => {
 		try {
 			const response = await fetch(
 				"http://127.0.0.1:8002/api/update-hire-status/",
@@ -63,7 +61,7 @@ const Requests_labor = () => {
 						Authorization: `Token ${token}`,
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify({ hire_id: hireId, status }),
+					body: JSON.stringify({ hire_id: hireId, status: "Accept" }),
 				}
 			);
 
@@ -81,25 +79,17 @@ const Requests_labor = () => {
 		}
 	};
 
-	// Handle Accept button click
-	const handleAcceptClick = (hireId: number) => {
-		setSelectedRequestId(hireId); // Set the selected hire request ID
-		setIsPopupOpen(true); // Open the confirmation popup
+	const handleAcceptClick = (request: PendingRequest) => {
+		setSelectedRequest(request); // Set the selected request
+		setIsPopupOpen(true); // Open the "Are You Sure?" popup
 	};
 
-	// Handle Yes click in the confirmation popup
-	const handleConfirmAccept = () => {
-		if (selectedRequestId !== null) {
-			updateHireStatus(selectedRequestId, "Accept"); // Accept the request
+	const handleConfirm = () => {
+		if (selectedRequest) {
+			updateHireStatus(selectedRequest.hire_id); // Call the update function
+			setIsConfirmedOpen(true); // Open the confirmed popup
 		}
-		setIsPopupOpen(false); // Close the popup
-		setSelectedRequestId(null); // Reset selected request ID
-	};
-
-	// Handle No click in the confirmation popup
-	const handleCancel = () => {
-		setIsPopupOpen(false); // Close the popup without accepting
-		setSelectedRequestId(null); // Reset selected request ID
+		setIsPopupOpen(false); // Close the "Are You Sure?" popup
 	};
 
 	return (
@@ -128,13 +118,11 @@ const Requests_labor = () => {
 									<div className="connection flex items-center space-x-5">
 										<Button
 											text="Accept"
-											onClick={() => handleAcceptClick(request.hire_id)} // Trigger the popup
+											onClick={() => handleAcceptClick(request)} // Call handleAcceptClick with the request
 										/>
 										<Button
 											text="Reject"
-											onClick={() =>
-												updateHireStatus(request.hire_id, "Reject")
-											}
+											onClick={() => updateHireStatus(request.hire_id)}
 										/>
 									</div>
 								</div>
@@ -144,31 +132,19 @@ const Requests_labor = () => {
 				</div>
 			</div>
 
-			{/* Are You Sure Popup */}
-			<Are_You_Sure
+			{/* "Are You Sure?" Popup */}
+			<AreYouSure
 				isOpen={isPopupOpen}
-				onClose={handleCancel} // Close the popup if No is clicked
+				onClose={() => setIsPopupOpen(false)}
+				onConfirm={handleConfirm} // Pass the confirm handler
 			/>
 
-			{isPopupOpen && (
-				<div className="fixed inset-0 flex items-center justify-center bg-lime-100 bg-opacity-10">
-					<div className="bg-white p-6 rounded-lg shadow-xl">
-						<div className="content flex flex-col items-center space-y-5">
-							<div className="text flex flex-col items-center space-y-2">
-								<h2 className="text-3xl font-semibold text-center text-lime-200">
-									Do you want to take this job?
-								</h2>
-							</div>
-							<div className="button_section space-x-4">
-								<Button text="Yes" onClick={handleConfirmAccept} />{" "}
-								{/* Confirm acceptance */}
-								<Button text="No" onClick={handleCancel} />{" "}
-								{/* Cancel the action */}
-							</div>
-						</div>
-					</div>
-				</div>
-			)}
+			{/* Confirmed Popup */}
+			<Confirmed
+				isOpen={isConfirmedOpen}
+				onClose={() => setIsConfirmedOpen(false)}
+				hirerName={selectedRequest?.hirer_name} // Pass the hirer name to the confirmed popup
+			/>
 		</>
 	);
 };

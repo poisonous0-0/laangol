@@ -4,9 +4,10 @@ import Button from "../Button/Button";
 interface PopupProps {
 	isOpen: boolean;
 	onClose: () => void;
+	onConfirm: () => void; // Add onConfirm prop
 }
 
-const Are_You_Sure: React.FC<PopupProps> = ({ isOpen, onClose }) => {
+const Are_You_Sure: React.FC<PopupProps> = ({ isOpen, onClose, onConfirm }) => {
 	if (!isOpen) return null;
 
 	return (
@@ -15,11 +16,11 @@ const Are_You_Sure: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 				<div className="content flex flex-col items-center space-y-5">
 					<div className="text flex flex-col items-center space-y-2">
 						<h2 className="text-3xl font-semibold text-center text-lime-200">
-							Do you want to take this job ?
+							Do you want to take this job?
 						</h2>
 					</div>
-					<div className="button_section flex items-center space-x-5">
-						<Button text="Yes" onClick={onClose} />
+					<div className="button_section">
+						<Button text="Yes" onClick={onConfirm} /> {/* Call onConfirm */}
 						<Button text="No" onClick={onClose} />
 					</div>
 				</div>

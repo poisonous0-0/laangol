@@ -29,7 +29,7 @@ import Store_details from "../pages/StoreHouse/Store_details";
 import App from "../App";
 import Requests_labor from "../pages/Labor/Requests_labor";
 import Requests_storehouse from "../pages/StoreHouse/Requests_storehouse";
-import Chat from "../pages/Chat/chat";
+import Chat from "../pages/Chat/Chat";
 const router = createBrowserRouter([
 	{
 		path: "/", // Default route is login
