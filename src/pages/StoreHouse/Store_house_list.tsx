@@ -109,7 +109,7 @@ const StorehouseCard: React.FC<StorehouseCardProps> = ({
 	return (
 		<div className="storehouse-card flex md:flex-row items-center justify-between rounded-lg w-full">
 			<Link
-				to="storehouse_details"
+				to={`storehouse_details/${storehouse.storehouse_id}`} // Pass storehouse_id as a route parameter
 				className="store_info w-full md:w-4/5 flex flex-col md:flex-row items-center space-x-5 mb-4 md:mb-0"
 			>
 				<div className="image_section">
