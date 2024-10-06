@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Ensure useState is imported
+import { useState } from "react"; // Ensure useState is imported
 
 interface Option<T> {
 	value: T;
@@ -9,7 +9,7 @@ interface DropdownProps<T> {
 	label: string;
 	options: Option<T>[];
 	onChange: (selectedValue: T) => void;
-	value: T; // Accept value prop here to hold the current selected value
+	value: T | null; // Accept value prop to handle null
 	placeholder?: string;
 	className?: string;
 }
@@ -23,7 +23,7 @@ const Dropdown = <T,>({
 	className = "",
 }: DropdownProps<T>) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const selectedOption = options.find(option => option.value === value); // Find the selected option
+	const selectedOption = options.find((option) => option.value === value); // Find the selected option
 
 	const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -40,7 +40,8 @@ const Dropdown = <T,>({
 				className="bg-lime-100 bg-opacity-10 text-lime-200 border border-lime-100 rounded-md w-full p-2.5 text-left"
 				onClick={toggleDropdown}
 			>
-				{selectedOption ? selectedOption.label : placeholder} {/* Display selected label */}
+				{selectedOption ? selectedOption.label : placeholder}{" "}
+				{/* Display selected label */}
 			</button>
 
 			{isOpen && (

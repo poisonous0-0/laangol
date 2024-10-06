@@ -1,9 +1,15 @@
-import crops from "../../assets/crop.png";
-import Selector from "../../components/Button/Selector";
-import Button from "../../components/Button/Button";
-import ProductCard from "../../components/Dynamic_card/Product_card";
+import { useLocation } from "react-router-dom"; // Import useLocation to receive state
+import Button from "../../components/Button/Button"; // Import Button component
 
 const Product_description = () => {
+	const location = useLocation();
+	const product = location.state?.product; // Access the product data from the state
+
+	// Fallback for when product data isn't available
+	if (!product) {
+		return <p>No product data available</p>;
+	}
+
 	return (
 		<>
 			<div className="heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-lime-900 text-start">
@@ -14,95 +20,47 @@ const Product_description = () => {
 					Product Page
 				</h2>
 				<div className="product_description mt-5 md:mt-7 flex flex-col lg:flex-row items-start space-y-6 lg:space-y-0 lg:space-x-6">
-					<div className="product_image w-full lg:w-1/2 h-64 md:h-80 bg-lime-300 flex items-center justify-center">
+					<div className="product_img">
 						<img
-							src={crops}
-							alt="Product"
-							className="object-contain w-full h-full"
+							src={product.image}
+							alt={product.name}
+							className="sm:w-60 md:w-60 h-w-60 min-w-60 min-h-60 object-cover rounded-full border border-lime-200 bg-lime-200 p-1 "
 						/>
 					</div>
 					<div className="product_details flex flex-col space-y-4 lg:w-1/2">
 						<h3 className="title text-2xl md:text-3xl font-semibold text-lime-900">
-							Tomato
+							{product.name}
 						</h3>
 						<p className="price w-max p-2 md:p-3 rounded-md bg-lime-100 text-lime-200">
-							40/KG BDT
+							{product.price}/KG BDT
 						</p>
 						<div className="category flex flex-wrap items-start space-x-2">
 							<p className="p-1 bg-lime-100 bg-opacity-10 border border-lime-100 rounded-md text-lime-200">
-								tomato
+								{product.category}
 							</p>
-							<p className="p-1 bg-lime-100 bg-opacity-10 border border-lime-100 rounded-md text-lime-200">
-								Vegetables
-							</p>
-							<p className="p-1 bg-lime-100 bg-opacity-10 border border-lime-100 rounded-md text-lime-200">
-								213 products
-							</p>
+							{/* More details */}
 						</div>
 						<p className="description text-base md:text-lg text-lime-200">
-							The tomato is made using artificial intelligence method. It is
-							enriched with all the vitamins you can get. It is completely
-							fresh. For more detailed process of vegetation feel free to
-							contact us.
+							{product.description}
 						</p>
+						{/* Seller info */}
 						<div className="seller_info">
 							<a href="#" className="flex items-center space-x-4">
-								<img src={crops} alt="" className="w-8 md:w-10 rounded-lg" />
+								<img
+									src={product.sellerImage}
+									alt=""
+									className="w-8 md:w-10 rounded-lg"
+								/>
 								<p className="text-base md:text-lg text-lime-200">
-									Nurul Islam Mitul
+									{product.seller}
 								</p>
 							</a>
 						</div>
 						<div className="btn_panel flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6">
-							<Selector initialQuantity={1} min={0} max={10} />
 							<Button text="Add to cart" />
 							<Button text="Chat with Seller" />
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<div className="more_products mt-8">
-				<div className="heading text-lg md:text-xl lg:text-2xl text-lime-900">
-					<h1>More Products</h1>
-				</div>
-				<div className="cards mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-					<ProductCard
-						imageSrc={crops}
-						productName="Tomato"
-						sellerName="Seller Name"
-						price={40}
-					/>
-					<ProductCard
-						imageSrc={crops}
-						productName="Tomato"
-						sellerName="Seller Name"
-						price={40}
-					/>
-					<ProductCard
-						imageSrc={crops}
-						productName="Tomato"
-						sellerName="Seller Name"
-						price={40}
-					/>
-					<ProductCard
-						imageSrc={crops}
-						productName="Tomato"
-						sellerName="Seller Name"
-						price={40}
-					/>
-					<ProductCard
-						imageSrc={crops}
-						productName="Tomato"
-						sellerName="Seller Name"
-						price={40}
-					/>
-					<ProductCard
-						imageSrc={crops}
-						productName="Tomato"
-						sellerName="Seller Name"
-						price={40}
-					/>
 				</div>
 			</div>
 		</>

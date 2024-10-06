@@ -1,18 +1,26 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 interface ProductCardProps {
 	productName: string;
 	productPrice: string;
 	imageUrl?: string;
-	onEdit?: () => void; // Callback when the edit icon is clicked
+	productId: number; // Add productId as a prop
 }
 
-const Inventory: React.FC<ProductCardProps> = ({
+const EditProduct: React.FC<ProductCardProps> = ({
 	productName,
 	productPrice,
 	imageUrl,
-	onEdit,
+	productId, // Receive productId
 }) => {
+	const navigate = useNavigate(); // Use navigate for redirection
+
+	const handleEditClick = () => {
+		// Navigate to the Adding_items page with productId as a URL param
+		navigate(`/dashboard/marketplace/add_items/${productId}`);
+	};
+
 	return (
 		<div className="w-52 p-4 rounded-md text-center relative">
 			<div className="relative w-full pt-[100%] bg-gray-200">
@@ -27,7 +35,7 @@ const Inventory: React.FC<ProductCardProps> = ({
 				)}
 				<div
 					className="absolute top-2 right-2 bg-white p-1 rounded-full cursor-pointer shadow-sm"
-					onClick={onEdit}
+					onClick={handleEditClick} // Trigger navigation on click
 				>
 					✏️
 				</div>
@@ -40,4 +48,4 @@ const Inventory: React.FC<ProductCardProps> = ({
 	);
 };
 
-export default Inventory;
+export default EditProduct;
