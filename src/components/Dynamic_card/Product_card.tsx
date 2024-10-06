@@ -8,7 +8,6 @@ interface ProductCardProps {
 	productName: string;
 	sellerName: string;
 	price: number;
-	sellerImage?: string; // Optional seller image
 }
 
 const Product_card: React.FC<ProductCardProps> = ({
@@ -16,7 +15,6 @@ const Product_card: React.FC<ProductCardProps> = ({
 	productName,
 	sellerName,
 	price,
-	sellerImage, // Include sellerImage prop
 }) => {
 	return (
 		<div className="product_card w-max flex flex-col space-y-5 items-center justify-between">
@@ -31,11 +29,6 @@ const Product_card: React.FC<ProductCardProps> = ({
 				<h1>{productName}</h1>
 				<p>Seller: {sellerName}</p>
 				{/* Display the seller's image if available, otherwise use the default image */}
-				<img
-					src={sellerImage || defaultSellerImage}
-					alt={sellerName}
-					className="w-12 h-12 object-cover rounded-full border border-gray-300 mt-2"
-				/>
 				<Dynamic_button
 					initialLabel={price.toString() + "/KG BDT "}
 					hoverLabel="Add to cart"
