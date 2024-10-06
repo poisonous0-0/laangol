@@ -12,6 +12,7 @@ type Product = {
     name: string;
     seller: string; 
     price: number;
+    description:string;
 };
 
 const Marketplace_2 = () => {

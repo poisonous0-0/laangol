@@ -22,7 +22,7 @@ const User_Management = () => {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+	const token = localStorage.getItem("token"); 
     axios
       .get("http://127.0.0.1:8004/user-count/", {
         headers: {
