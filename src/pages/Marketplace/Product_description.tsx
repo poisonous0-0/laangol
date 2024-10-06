@@ -38,23 +38,20 @@ const Product_description = () => {
 							<p className="p-1 bg-lime-100 bg-opacity-10 border border-lime-100 rounded-md text-lime-200">
 								{product.category}
 							</p>
-							{/* More details */}
 						</div>
 						<p className="description text-base md:text-lg text-lime-200">
 							{product.description}
 						</p>
 						{/* Seller info */}
-						<div className="seller_info">
-							<a href="#" className="flex items-center space-x-4">
-								<img
-									src={product.sellerImage}
-									alt=""
-									className="w-8 md:w-10 rounded-lg"
-								/>
-								<p className="text-base md:text-lg text-lime-200">
-									{product.seller}
-								</p>
-							</a>
+						<div className="seller_info flex items-center space-x-2">
+							<img
+								src={product.sellerImage}
+								alt="Seller"
+								className="w-8 md:w-10 rounded-lg"
+							/>
+							<p className="text-base md:text-lg text-lime-200">
+								{product.seller}
+							</p>
 						</div>
 						<div className="btn_panel flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6">
 							<Button text="Add to cart" />

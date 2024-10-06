@@ -12,6 +12,7 @@ type Product = {
     name: string;
     seller: string; 
     price: number;
+	sellerImage:string;
 };
 
 const Marketplace_2 = () => {
@@ -48,8 +49,6 @@ const Marketplace_2 = () => {
 
 		fetchProducts();
 	}, [category]);
-
-	// Function to handle product click and navigate to product description
 	const handleProductClick = (product: Product) => {
 		navigate(
 			`/dashboard/marketplace/marketplace2/product_details/${product.id}`,
