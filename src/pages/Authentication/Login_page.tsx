@@ -31,7 +31,7 @@ const Login_page = () => {
 			if (!response.ok) {
 				const errorData = await response.json();
 				console.error("Login failed:", errorData);
-				setIsWarningOpen(true); 
+				setIsWarningOpen(true);
 				return;
 			}
 
@@ -94,6 +94,7 @@ const Login_page = () => {
 
 				{/* Warning Popup Component */}
 				<Warning
+					message="Incorrect email or password. Please try again."
 					isOpen={isWarningOpen}
 					onClose={() => setIsWarningOpen(false)}
 				/>

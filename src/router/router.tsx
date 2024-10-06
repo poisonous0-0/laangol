@@ -26,7 +26,6 @@ import User_Profile from "../pages/Admin/User_Profile";
 import Admin_Profile from "../pages/Admin/Admin_Profile";
 import Cart from "../pages/Marketplace/Cart";
 import Labor_details from "../pages/Labor/Labor_details";
-import App from "../App";
 import Requests_labor from "../pages/Labor/Requests_labor";
 import Requests_storehouse from "../pages/StoreHouse/Requests_storehouse";
 import Chat from "../pages/Chat/Chat";

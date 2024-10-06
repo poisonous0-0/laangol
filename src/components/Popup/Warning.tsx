@@ -4,9 +4,18 @@ import Button from "../Button/Button";
 interface PopupProps {
 	isOpen: boolean;
 	onClose: () => void;
+	title?: string; // Optional title prop
+	message?: string; // Optional message prop
+	buttonText?: string; // Optional button text prop
 }
 
-const Warning: React.FC<PopupProps> = ({ isOpen, onClose }) => {
+const Warning: React.FC<PopupProps> = ({
+	isOpen,
+	onClose,
+	title = "Warning", // Default title
+	message = "An error occurred", // Default message
+	buttonText = "Try Again", // Default button text
+}) => {
 	if (!isOpen) return null;
 
 	return (
@@ -15,10 +24,12 @@ const Warning: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 				<div className="content flex flex-col items-center space-y-5">
 					<div className="text flex flex-col items-center space-y-2">
 						<h2 className="text-3xl font-semibold text-center text-lime-200">
-							Incorrect Email or Password
+							{title}
 						</h2>
+						<p className="text-center text-lime-100">{message}</p>{" "}
+						{/* Added message */}
 					</div>
-					<Button text="Try Again" onClick={onClose} />
+					<Button text={buttonText} onClick={onClose} />
 				</div>
 			</div>
 		</div>
