@@ -15,8 +15,6 @@ type Product = {
 	category?: string; // Optional, in case category is needed
 	description?: string; // Optional, in case description is needed
 	sellerImage?: string; // Optional, in case seller image is needed
-
-
 };
 
 const Marketplace_2 = () => {
@@ -81,9 +79,12 @@ const Marketplace_2 = () => {
 						<p>No products found for {category}</p>
 					) : (
 						products.map((product) => (
-							<div key={product.product_id} onClick={() => handleProductClick(product)}>
+							<div
+								key={product.product_id}
+								onClick={() => handleProductClick(product)}
+							>
 								<ProductCard
-								    product_id={product.product_id}
+									product_id={product.product_id}
 									imageSrc={product.image ? product.image : fertilizers}
 									productName={product.name}
 									sellerName={product.seller}

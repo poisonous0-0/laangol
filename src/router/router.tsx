@@ -11,7 +11,8 @@ import Store_main from "../pages/StoreHouse/Store_Main";
 import User from "../pages/User/User";
 import Labor_list from "../pages/Labor/Labor_list";
 import Labor_profile from "../pages/Labor/Labor_profile";
-import Store_list from "../pages/StoreHouse/Store_house_list";
+import StoreList from "../pages/StoreHouse/Store_house_list"; // Import StoreList
+import StoreDetails from "../pages/StoreHouse/Store_details"; // Import StoreDetails
 import Store_rental from "../pages/StoreHouse/Store_rental";
 import Login_page from "../pages/Authentication/Login_page";
 import Chatbot from "../pages/Chatbot/Chatbot";
@@ -25,8 +26,6 @@ import User_Profile from "../pages/Admin/User_Profile";
 import Admin_Profile from "../pages/Admin/Admin_Profile";
 import Cart from "../pages/Marketplace/Cart";
 import Labor_details from "../pages/Labor/Labor_details";
-import Store_details from "../pages/StoreHouse/Store_details";
-import App from "../App";
 import Requests_labor from "../pages/Labor/Requests_labor";
 import Requests_storehouse from "../pages/StoreHouse/Requests_storehouse";
 import Chat from "../pages/Chat/Chat";
@@ -62,17 +61,16 @@ const router = createBrowserRouter([
 				element: <Product_description />,
 			},
 			{
-				path: "marketplace/add_items", // Add :productId as a dynamic parameter
-				element: <Adding_items />,
-			},
-
-			{
-				path: "marketplace/add_items/:productId", // Add :productId as a dynamic parameter
+				path: "marketplace/add_items",
 				element: <Adding_items />,
 			},
 			{
-				path: "marketplace/add_items/inventory", // Correct route for Inventory page
-				element: <Inventory />, // This points to the Inventory component
+				path: "marketplace/add_items/:productId",
+				element: <Adding_items />,
+			},
+			{
+				path: "marketplace/add_items/inventory",
+				element: <Inventory />,
 			},
 			{
 				path: "crop_maintainance",
@@ -108,12 +106,13 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "storehouse/store_list",
-				element: <Store_list />,
+				element: <StoreList />, // Use StoreList for store list
 			},
 			{
-				path: "storehouse/store_list/storehouse_details",
-				element: <Store_details />,
+				path: "storehouse/store_list/storehouse_details", // Use :id as a route parameter
+				element: <StoreDetails />, // Use StoreDetails for storehouse details
 			},
+
 			{
 				path: "storehouse/store_rental",
 				element: <Store_rental />,
