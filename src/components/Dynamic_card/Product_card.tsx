@@ -30,7 +30,7 @@ const Product_card: React.FC<ProductCardProps> = ({
 				<h1>{productName}</h1>
 				<p>Seller: {sellerName}</p>
 				<Dynamic_button
-					initialLabel={price.toString() + "/KG BDT"}
+					initialLabel={price.toString() + "/KG BDT "}
 					hoverLabel="Add to cart"
 				/>
 			</div>

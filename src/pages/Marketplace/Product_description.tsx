@@ -56,19 +56,16 @@ const Product_description = () => {
 						<p className="text-base md:text-lg text-lime-700">
 							{product.description}
 						</p>
-
-						{/* Seller Information */}
-						<div className="seller_info">
-							<a href="#" className="flex items-center space-x-4">
-								<img
-									src={product.sellerImage}
-									alt={`Seller ${product.seller}`}
-									className="w-8 md:w-10 rounded-lg"
-								/>
-								<p className="text-base md:text-lg text-lime-700">
-									{product.seller}
-								</p>
-							</a>
+						{/* Seller info */}
+						<div className="seller_info flex items-center space-x-2">
+							<img
+								src={product.sellerImage}
+								alt="Seller"
+								className="w-8 md:w-10 rounded-lg"
+							/>
+							<p className="text-base md:text-lg text-lime-200">
+								{product.seller}
+							</p>
 						</div>
 
 						{/* Action Buttons */}

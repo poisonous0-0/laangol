@@ -7,14 +7,12 @@ import axios from "axios";
 
 // Define the Product type
 type Product = {
-	id: number;
-	image: string;
-	name: string;
-	seller: string;
-	price: number;
-	category?: string; // Optional, in case category is needed
-	description?: string; // Optional, in case description is needed
-	sellerImage?: string; // Optional, in case seller image is needed
+    id: number;
+    image: string;
+    name: string;
+    seller: string; 
+    price: number;
+	sellerImage:string;
 };
 
 const Marketplace_2 = () => {
@@ -51,8 +49,6 @@ const Marketplace_2 = () => {
 
 		fetchProducts();
 	}, [category]);
-
-	// Function to handle product click and navigate to product description
 	const handleProductClick = (product: Product) => {
 		navigate(
 			`/dashboard/marketplace/marketplace2/product_details/${product.id}`,

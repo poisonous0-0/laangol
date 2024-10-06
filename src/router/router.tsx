@@ -33,8 +33,8 @@ import Chat from "../pages/Chat/Chat";
 
 const router = createBrowserRouter([
 	{
-		path: "/",
-		element: <App />,
+		path: "/", // Default route is login
+		element: <Landing_page />,
 	},
 	{
 		path: "/signup",
