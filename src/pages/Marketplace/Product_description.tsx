@@ -1,19 +1,79 @@
 import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Button from "../../components/Button/Button";
 import Selector from "../../components/Button/Selector";
 import Product_card from "../../components/Dynamic_card/Product_card";
+import axios from "axios";
+
+// Define the Product interface
+interface Product {
+	product_id: number;
+	image: string;
+	name: string;
+	seller: string;
+	price: number;
+	seller_image: string;
+}
 
 const Product_description = () => {
 	const location = useLocation();
 	const product = location.state?.product;
+	console.log(product);
 
+	const token = localStorage.getItem("token");
 	// Fallback for when product data isn't available
 	if (!product) {
 		return <p>No product data available</p>;
 	}
 
-	// Mocking product cards with an array
-	const productCards = Array(5).fill(product);
+	// State to store additional products fetched from the API, typed as an array of Product
+	const [moreProducts, setMoreProducts] = useState<Product[]>([]);
+	const [quantity, setQuantity] = useState<number>(1); // State for quantity
+
+	// Fetch additional products from the API when the component loads
+	useEffect(() => {
+		const fetchMoreProducts = async () => {
+			try {
+				const response = await axios.get(
+					`http://127.0.0.1:8001/Moreproducts/${product.product_id}/`,
+					{
+						headers: {
+							Authorization: `Token ${token}`,
+							"Content-Type": "application/json",
+						},
+					}
+				);
+				setMoreProducts(response.data);
+			} catch (error) {
+				console.error("Error fetching more products:", error);
+			}
+		};
+
+		fetchMoreProducts();
+	}, [product.product_id]);
+
+	// Function to handle adding to cart
+	const handleAddToCart = async () => {
+		try {
+			const response = await axios.post(
+				"http://127.0.0.1:8001/Add-cart/",
+				{
+					product_id: product.product_id,
+					quantity: quantity,
+				},
+				{
+					headers: {
+						Authorization: `Token ${token}`,
+						"Content-Type": "application/json",
+					},
+				}
+			);
+			console.log("Product added to cart:", response.data);
+			// Optionally show a success message to the user here
+		} catch (error) {
+			console.error("Error adding product to cart:", error);
+		}
+	};
 
 	return (
 		<>
@@ -43,6 +103,7 @@ const Product_description = () => {
 						<h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-lime-900">
 							{product.name}
 						</h3>
+						
 						<p className="w-max p-2 md:p-3 rounded-md bg-lime-100 text-lime-900">
 							{product.price}/KG BDT
 						</p>
@@ -56,10 +117,12 @@ const Product_description = () => {
 						<p className="text-base md:text-lg text-lime-700">
 							{product.description}
 						</p>
+
 						{/* Seller info */}
 						<div className="seller_info flex items-center space-x-2">
 							<img
-								src={product.sellerImage}
+								src={product.sellerImage
+							}
 								alt="Seller"
 								className="w-8 md:w-10 rounded-lg"
 							/>
@@ -68,32 +131,46 @@ const Product_description = () => {
 							</p>
 						</div>
 
-						{/* Action Buttons */}
-						<div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-							<Selector />
-							<Button text="Add to cart" />
-							<Button text="Chat with Seller" />
+						{/* Quantity Selector */}
+						<div className="flex items-center space-x-2">
+							<Selector
+								initialQuantity={quantity}
+								min={1}
+								max={100} // Replace 100 with your max value
+								onQuantityChange={setQuantity} // Pass down the function to update quantity
+							/>
 						</div>
 
-						{/* More Products Section */}
+						{/* Action Buttons */}
+						<div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+							<Button text="Add to cart" onClick={handleAddToCart} /> {/* Add click handler */}
+							<Button text="Chat with Seller" />
+						</div>
 					</div>
 				</div>
+
+				{/* More Products Section */}
 				<div className="More_from_Seller my-3 text-center">
 					<h1 className="text-lime-200 px-3 py-2 text-2xl font-semibold">
 						More From similar Seller
 					</h1>
 				</div>
+
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 mt-6 bg-slate-100 p-4 rounded-lg">
-					{productCards.map((item, index) => (
-						<Product_card
-							key={index}
-							imageSrc={item.image}
-							productName={item.name}
-							sellerName={item.seller}
-							price={item.price}
-							sellerImage={item.sellerImage}
-						/>
-					))}
+					{moreProducts.length > 0 ? (
+						moreProducts.map((item) => (
+							<Product_card
+								key={item.product_id}
+								product_id={item.product_id}
+								imageSrc={item.image} 
+								productName={item.name}
+								sellerName={item.seller}
+								price={item.price}
+							/>
+						))
+					) : (
+						<p>No additional products available.</p>
+					)}
 				</div>
 			</div>
 		</>

@@ -4,24 +4,30 @@ interface QuantitySelectorProps {
 	initialQuantity?: number;
 	min?: number;
 	max?: number;
+	onQuantityChange: (quantity: number) => void; // Add this prop
 }
 
 const Selector: React.FC<QuantitySelectorProps> = ({
 	initialQuantity = 0,
 	min = 0,
 	max = 100,
+	onQuantityChange, // Accept this prop
 }) => {
 	const [quantity, setQuantity] = useState<number>(initialQuantity);
 
 	const increase = () => {
 		if (quantity < max) {
-			setQuantity(quantity + 1);
+			const newQuantity = quantity + 1;
+			setQuantity(newQuantity);
+			onQuantityChange(newQuantity); // Notify parent component
 		}
 	};
 
 	const decrease = () => {
 		if (quantity > min) {
-			setQuantity(quantity - 1);
+			const newQuantity = quantity - 1;
+			setQuantity(newQuantity);
+			onQuantityChange(newQuantity); // Notify parent component
 		}
 	};
 
