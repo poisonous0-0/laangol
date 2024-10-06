@@ -45,11 +45,13 @@ const HiringStore: React.FC<PopupProps> = ({
 	};
 
 	const handleSubmit = async () => {
+		// Ensure all input fields are filled
 		if (!userInfo.startingDate || !userInfo.finishingDate || !userInfo.sqft) {
 			alert("Please fill all fields.");
 			return;
 		}
 
+		// Prepare the request body
 		const requestBody = {
 			storehouse_id: selectedStorehouse?.storehouse_id,
 			start_date: userInfo.startingDate,
@@ -60,31 +62,38 @@ const HiringStore: React.FC<PopupProps> = ({
 
 		try {
 			setLoading(true);
-			const token2 = localStorage.getItem("token");
+			// Send the rent request
 			const response = await fetch("http://127.0.0.1:8003/storehouse/rent/", {
 				method: "POST",
 				headers: {
-					Authorization: `Token ${token2}`,
+					Authorization: `Token ${token}`,
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(requestBody),
 			});
 
+			// Check for response status
 			if (!response.ok) {
 				throw new Error("Failed to request rent");
 			}
 
+			// Parse the response
 			const data = await response.json();
 			alert("Rent request successful!");
-			onClose(); // Close the popup after success
+
+			// Close the popup on success
+			onClose();
 		} catch (error) {
+			// Handle error during API request
 			console.error("Error during rent request:", error);
 			alert("Error processing rent request.");
 		} finally {
+			// Stop loading
 			setLoading(false);
 		}
 	};
 
+	// Return null if the popup is closed
 	if (!isOpen) return null;
 
 	return (
@@ -93,12 +102,14 @@ const HiringStore: React.FC<PopupProps> = ({
 				<div className="content flex flex-col items-center space-y-5">
 					{/* Displaying storehouse info */}
 					<h2 className="text-2xl font-semibold">
-						 {selectedStorehouse?.storehouse_name}
+						{selectedStorehouse?.storehouse_name}
 					</h2>
 					<p className="text-sm">Location: {selectedStorehouse?.location}</p>
 					<p className="text-sm">
 						Available Size: {selectedStorehouse?.available_size} Sqft
 					</p>
+
+					{/* Input fields for rent request */}
 					<div className="input_form w-full space-y-4">
 						<Input_text
 							type="date"
@@ -125,6 +136,8 @@ const HiringStore: React.FC<PopupProps> = ({
 							widthClass="w-full"
 						/>
 					</div>
+
+					{/* Button to submit rent request */}
 					<Button
 						text={loading ? "Processing..." : "Request for Rent"}
 						onClick={handleSubmit}
