@@ -1,7 +1,7 @@
 import React from "react";
 
 interface InputBoxProps {
-	label?: string; // Make label optional
+	label?: string; // Optional label
 	type?: string;
 	name: string;
 	value: string | number;
@@ -21,8 +21,7 @@ const Input_text: React.FC<InputBoxProps> = ({
 }) => {
 	return (
 		<div className={`flex flex-col mb-4 ${widthClass}`}>
-			{label && <label className="mb-2 text-lime-200">{label}</label>}{" "}
-			{/* Render label if provided */}
+			{label && <label className="mb-2 text-lime-200">{label}</label>}
 			<input
 				type={type}
 				name={name}
