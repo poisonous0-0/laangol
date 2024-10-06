@@ -4,6 +4,7 @@ import Button from "../../components/Button/Button";
 import Selector from "../../components/Button/Selector";
 import Product_card from "../../components/Dynamic_card/Product_card";
 import axios from "axios";
+import AddItems from "../../components/Popup/AddItems"; // Import AddItems component
 
 // Define the Product interface
 interface Product {
@@ -18,9 +19,8 @@ interface Product {
 const Product_description = () => {
 	const location = useLocation();
 	const product = location.state?.product;
-	console.log(product);
-
 	const token = localStorage.getItem("token");
+
 	// Fallback for when product data isn't available
 	if (!product) {
 		return <p>No product data available</p>;
@@ -29,6 +29,7 @@ const Product_description = () => {
 	// State to store additional products fetched from the API, typed as an array of Product
 	const [moreProducts, setMoreProducts] = useState<Product[]>([]);
 	const [quantity, setQuantity] = useState<number>(1); // State for quantity
+	const [isAddItemsOpen, setIsAddItemsOpen] = useState(false); // State for controlling the AddItems popup
 
 	// Fetch additional products from the API when the component loads
 	useEffect(() => {
@@ -68,11 +69,21 @@ const Product_description = () => {
 					},
 				}
 			);
-			console.log("Product added to cart:", response.data);
-			// Optionally show a success message to the user here
+
+			// Check if the response indicates the product was successfully added
+			if (response.status === 200) {
+				console.log("Product added to cart:", response.data);
+				setIsAddItemsOpen(true); // Open AddItems popup after adding to cart
+			}
 		} catch (error) {
 			console.error("Error adding product to cart:", error);
+			// Optionally handle error feedback here (e.g., show an error message)
 		}
+	};
+
+	// Function to close the AddItems popup
+	const closeAddItemsPopup = () => {
+		setIsAddItemsOpen(false);
 	};
 
 	return (
@@ -103,7 +114,7 @@ const Product_description = () => {
 						<h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-lime-900">
 							{product.name}
 						</h3>
-						
+
 						<p className="w-max p-2 md:p-3 rounded-md bg-lime-100 text-lime-900">
 							{product.price}/KG BDT
 						</p>
@@ -121,8 +132,7 @@ const Product_description = () => {
 						{/* Seller info */}
 						<div className="seller_info flex items-center space-x-2">
 							<img
-								src={product.sellerImage
-							}
+								src={product.sellerImage}
 								alt="Seller"
 								className="w-8 md:w-10 rounded-lg"
 							/>
@@ -143,7 +153,8 @@ const Product_description = () => {
 
 						{/* Action Buttons */}
 						<div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-							<Button text="Add to cart" onClick={handleAddToCart} /> {/* Add click handler */}
+							<Button text="Add to cart" onClick={handleAddToCart} />{" "}
+							{/* Add click handler */}
 							<Button text="Chat with Seller" />
 						</div>
 					</div>
@@ -162,7 +173,7 @@ const Product_description = () => {
 							<Product_card
 								key={item.product_id}
 								product_id={item.product_id}
-								imageSrc={item.image} 
+								imageSrc={item.image}
 								productName={item.name}
 								sellerName={item.seller}
 								price={item.price}
@@ -173,6 +184,11 @@ const Product_description = () => {
 					)}
 				</div>
 			</div>
+
+			{/* The AddItems Popup */}
+			{isAddItemsOpen && (
+				<AddItems isOpen={isAddItemsOpen} onClose={closeAddItemsPopup} />
+			)}
 		</>
 	);
 };
