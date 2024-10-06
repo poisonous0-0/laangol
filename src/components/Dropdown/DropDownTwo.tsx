@@ -9,7 +9,7 @@ interface DropdownProps<T> {
 	label: string;
 	options: Option<T>[];
 	onChange: (selectedValue: T) => void;
-	value: T; // Accept value prop here to hold the current selected value
+	value: T | null; // Accept value prop to handle null
 	placeholder?: string;
 	className?: string;
 }

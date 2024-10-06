@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../components/Button/Button";
 import Input_text from "../../components/Input_Text/Input_text";
 import Dropdown from "../../components/Dropdown/DropDownTwo";
-import { Link } from "react-router-dom";
-import Warning from "../../components/Popup/Warning"; // Import your popup component
+import { Link, useParams } from "react-router-dom";
 import SmartPricePredict from "../../components/Popup/SmartPricePredict";
 
 const Adding_items = () => {
+	const { productId } = useParams<{ productId: string }>(); // Retrieve the productId from URL
 	const [formData, setFormData] = useState({
 		productName: "",
 		productDescription: "",
@@ -17,6 +17,48 @@ const Adding_items = () => {
 
 	const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 	const [isPopupOpen, setIsPopupOpen] = useState(false); // State for controlling the popup
+
+	// Fetch existing product details if productId is provided
+	useEffect(() => {
+		if (productId) {
+			const fetchProductDetails = async () => {
+				const token = localStorage.getItem("token");
+				try {
+					const response = await fetch(
+						`http://localhost:8001/api/products/${productId}/`,
+						{
+							method: "GET",
+							headers: {
+								Authorization: `Token ${token}`,
+							},
+						}
+					);
+
+					if (!response.ok) {
+						throw new Error("Failed to fetch product details");
+					}
+
+					const data = await response.json();
+					setFormData({
+						productName: data.name || "",
+						productDescription: data.description || "",
+						productQuantity: data.max_quantity?.toString() || "", // Ensure it's a string
+						productPrice: data.price?.toString() || "", // Ensure it's a string
+						image: null, // Handle image separately if needed
+					});
+					// Set selected category based on fetched data
+					const categoryIndex = categoryOptions.findIndex(
+						(option) => option.label === data.category
+					);
+					setSelectedCategory(categoryIndex !== -1 ? categoryIndex + 1 : null); // +1 to match the index with categoryOptions
+				} catch (error) {
+					console.error(error);
+				}
+			};
+
+			fetchProductDetails();
+		}
+	}, [productId]);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -69,8 +111,12 @@ const Adding_items = () => {
 
 		const token = localStorage.getItem("token");
 		try {
-			const response = await fetch("http://localhost:8001/api/products/", {
-				method: "POST",
+			const method = productId ? "PUT" : "POST"; // Use PUT if updating existing product
+			const url = productId
+				? `http://localhost:8001/api/products/${productId}/`
+				: "http://localhost:8001/api/products/";
+			const response = await fetch(url, {
+				method,
 				headers: {
 					Authorization: `Token ${token}`,
 				},
@@ -84,7 +130,7 @@ const Adding_items = () => {
 			const result = await response.json();
 			console.log(result);
 		} catch (error) {
-			console.error("Error adding product:", error);
+			console.error("Error adding/updating product:", error);
 		}
 	};
 
@@ -96,11 +142,13 @@ const Adding_items = () => {
 		<>
 			<div className="heading flex items-center justify-between text-2xl sm:text-3xl md:text-4xl font-semibold text-lime-900 text-start">
 				<h1>Marketplace</h1>
-				<Link to="inventory" className="text-base">
+				<Link
+					to="/dashboard/marketplace/add_items/inventory"
+					className="text-base"
+				>
 					<Button text="Seller Profile" px="px-4" />
 				</Link>
 			</div>
-
 			<div className="form_part flex flex-col items-center md:items-start space-y-4 md:space-y-0 md:space-x-4 mt-4">
 				<div className="subheading flex items-center justify-center w-full">
 					<h2 className="p-2 rounded-md w-max bg-lime-100 text-lime-200 text-2xl md:text-3xl font-normal">
@@ -117,6 +165,7 @@ const Adding_items = () => {
 							label="Click to select Category"
 							options={categoryOptions}
 							onChange={handleCategoryChange}
+							value={selectedCategory} // Pass selectedCategory as value
 							placeholder="Select a category"
 							className="min-w-fit text-lime-200"
 						/>
@@ -166,26 +215,22 @@ const Adding_items = () => {
 					</label>
 				</form>
 			</div>
-
 			<div className="suggested_price flex items-center space-x-3 mt-6 w-full">
 				<h2 className="text-lime-900 text-lg md:text-2xl">
 					Preferred/ Best price:
 				</h2>
 				<Button text="Apply Smart price Prediction" onClick={togglePopup} />
 			</div>
-
 			<p className="mt-4 px-2  w-full sm:w-max bg-lime-100 bg-opacity-10 border border-lime-400 rounded-md text-lime-900 text-sm md:text-base">
 				The best price is based on market value as well as the determined
 				government price.
 			</p>
-
 			<div className="mt-4 submission flex flex-col items-center space-y-5 w-full">
 				<Button text="Add your Product" onClick={handleSubmit} />
 				<Link to="/dashboard/marketplace/marketplace2">
 					<Button text="Visit Marketplace" />
 				</Link>
 			</div>
-
 			{/* The Popup */}
 			{isPopupOpen && (
 				<SmartPricePredict isOpen={isPopupOpen} onClose={togglePopup} />
