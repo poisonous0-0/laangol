@@ -4,6 +4,7 @@ import Marketplace_1 from "../pages/Marketplace/Marketplace_1";
 import Marketplace_2 from "../pages/Marketplace/Marketplace_2";
 import Product_description from "../pages/Marketplace/Product_description";
 import Adding_items from "../pages/Marketplace/Adding_items";
+import Inventory from "../pages/Marketplace/Inventory";
 import Crop_maintainance from "../pages/Crop_Maintainance/Crop_maintainance";
 import Labor_Main from "../pages/Labor/Labor_Main";
 import Store_main from "../pages/StoreHouse/Store_Main";
@@ -23,62 +24,62 @@ import Product_Management from "../pages/Admin/Product_Management";
 import User_Profile from "../pages/Admin/User_Profile";
 import Admin_Profile from "../pages/Admin/Admin_Profile";
 import Cart from "../pages/Marketplace/Cart";
-import Inventory from "../pages/Marketplace/Inventory";
 import Labor_details from "../pages/Labor/Labor_details";
 import Store_details from "../pages/StoreHouse/Store_details";
 import App from "../App";
 import Requests_labor from "../pages/Labor/Requests_labor";
 import Requests_storehouse from "../pages/StoreHouse/Requests_storehouse";
 import Chat from "../pages/Chat/Chat";
+
 const router = createBrowserRouter([
 	{
 		path: "/", // Default route is login
 		element: <Landing_page />,
 	},
 	{
-		path: "/signup", // Signup route
+		path: "/signup",
 		element: <Signup_page />,
 	},
 	{
-		path: "/login", // Login route
+		path: "/login",
 		element: <Login_page />,
 	},
 	// User Dashboard Routes
 	{
-		path: "/dashboard", // Dashboard route
-		element: <Dashboard />, // Dashboard component with Outlet for child routes
+		path: "/dashboard",
+		element: <Dashboard />,
 		children: [
 			{
 				path: "marketplace",
-				element: <Marketplace_1 />, // Will be accessible at /dashboard/marketplace
+				element: <Marketplace_1 />,
 			},
 			{
-				path: "marketplace/marketplace2/:category", // Added :category parameter
+				path: "marketplace/marketplace2/:category",
 				element: <Marketplace_2 />,
 			},
 			{
-				path: "marketplace/marketplace2/product_details", // Will be accessible at /dashboard/product_details
+				path: "marketplace/marketplace2/product_details/:id",
 				element: <Product_description />,
 			},
 			{
-				path: "marketplace/product_info", // Will be accessible at /dashboard/product_info
-				element: <Product_description />,
-			},
-			{
-				path: "marketplace/add_items", // Will be accessible at /dashboard/add_items
+				path: "marketplace/add_items", // Add :productId as a dynamic parameter
 				element: <Adding_items />,
-			},
-			{
-				path: "marketplace/add_items/inventory", // Will be accessible at /dashboard/add_items
-				element: <Inventory />,
 			},
 
 			{
-				path: "crop_maintainance", // Will be accessible at /dashboard/crop_maintainance
+				path: "marketplace/add_items/:productId", // Add :productId as a dynamic parameter
+				element: <Adding_items />,
+			},
+			{
+				path: "marketplace/add_items/inventory", // Correct route for Inventory page
+				element: <Inventory />, // This points to the Inventory component
+			},
+			{
+				path: "crop_maintainance",
 				element: <Crop_maintainance />,
 			},
 			{
-				path: "labor", // Will be accessible at /dashboard/labor
+				path: "labor",
 				element: <Labor_Main />,
 			},
 			{
@@ -98,27 +99,27 @@ const router = createBrowserRouter([
 				element: <Labor_profile />,
 			},
 			{
-				path: "storehouse", // Will be accessible at /dashboard/storehouse
+				path: "storehouse",
 				element: <Store_main />,
 			},
 			{
-				path: "storehouse/store_requests", // Will be accessible at /dashboard/store_list
+				path: "storehouse/store_requests",
 				element: <Requests_storehouse />,
 			},
 			{
-				path: "storehouse/store_list", // Will be accessible at /dashboard/store_list
+				path: "storehouse/store_list",
 				element: <Store_list />,
 			},
 			{
-				path: "storehouse/store_list/storehouse_details", // Will be accessible at /dashboard/storehouse_details
+				path: "storehouse/store_list/storehouse_details",
 				element: <Store_details />,
 			},
 			{
-				path: "storehouse/store_rental", // Will be accessible at /dashboard/store_rental
+				path: "storehouse/store_rental",
 				element: <Store_rental />,
 			},
 			{
-				path: "agroaegis", // Will be accessible at /dashboard/agroaegis
+				path: "agroaegis",
 				element: <Chatbot />,
 			},
 			{
@@ -126,7 +127,7 @@ const router = createBrowserRouter([
 				element: <Cart />,
 			},
 			{
-				path: "user", // Will be accessible at /dashboard/user
+				path: "user",
 				element: <User />,
 			},
 			{
@@ -137,40 +138,35 @@ const router = createBrowserRouter([
 	},
 	// Admin Panel Routes
 	{
-		path: "/admin", // Admin route
-		element: <Admin_dashboard />, // Main admin component
+		path: "/admin",
+		element: <Admin_dashboard />,
 		children: [
 			{
-				index: true, // Index route for admin
+				index: true,
 				element: <Admin_Main />,
 			},
 			{
-				path: "admin_home", // Will be accessible at /admin/user_management
+				path: "admin_home",
 				element: <Admin_Main />,
 			},
 			{
-				path: "user_management", // Will be accessible at /admin/user_management
+				path: "user_management",
 				element: <User_Management />,
 			},
 			{
-				path: "user_management/user_profile", // Will be accessible at /admin/user_profile
+				path: "user_management/user_profile",
 				element: <User_Profile />,
 			},
 			{
-				path: "product_management", // Will be accessible at /admin/product_management
+				path: "product_management",
 				element: <Product_Management />,
 			},
 			{
-				path: "admin_profile", // Will be accessible at /admin/product_info
+				path: "admin_profile",
 				element: <Admin_Profile />,
 			},
-			// Add more admin routes here as needed
 		],
 	},
-	// {
-	// 	path: "*", // Wildcard for unknown routes
-	// 	element: <div>404 Not Found</div>,
-	// },
 ]);
 
 export default router;

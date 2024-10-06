@@ -1,10 +1,9 @@
 // src/App.tsx
 import React from "react";
+import Product_Management from "./pages/Admin/Product_Management";
 
 const App: React.FC = () => {
-	return (
-		<div className="bg-green-100 min-h-screen flex items-center justify-center"></div>
-	);
+	return <Product_Management />;
 };
 
 export default App;

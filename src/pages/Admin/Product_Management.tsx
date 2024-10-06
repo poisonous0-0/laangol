@@ -1,19 +1,45 @@
 import { useState } from "react";
-import Button from "../../components/Button/Button";
-import Dropdown from "../../components/Dropdown/DropDownTwo";
-import Input_text from "../../components/Input_Text/Input_text";
-import crops from "../../assets/crop.png";
+import Dropdown from "../../components/Dropdown/DropDownTwo"; // Imported Dropdown
+import Input_text from "../../components/Input_Text/Input_text"; // Imported Input Text
+import Button from "../../components/Button/Button"; // Assuming you may need it for submission
+import crop from "../../assets/crop.png";
+
+const monthOptions = [
+	{ value: "January", label: "January" },
+	{ value: "February", label: "February" },
+	{ value: "March", label: "March" },
+	{ value: "April", label: "April" },
+	{ value: "May", label: "May" },
+	{ value: "June", label: "June" },
+	{ value: "July", label: "July" },
+	{ value: "August", label: "August" },
+	{ value: "September", label: "September" },
+	{ value: "October", label: "October" },
+	{ value: "November", label: "November" },
+	{ value: "December", label: "December" },
+];
+
+const weatherOptions = [
+	{ value: "Sunny", label: "Sunny" },
+	{ value: "Rainy", label: "Rainy" },
+	{ value: "Cloudy", label: "Cloudy" },
+];
 
 const Product_Management = () => {
 	const [formData, setFormData] = useState({
 		crop: "",
 		soil: "",
 		area: "",
-		discountPercentage: "",
-		startDate: "",
-		endDate: "",
+		discountPercentage: "", // Field to track discount percentage
+		discountStartDate: "", // Field for discount start date
+		discountEndDate: "", // Field for discount end date
+		product: "",
+		month: "", // For month selection
+		weather: "", // For weather selection
+		productPrice: "", // For product price input
 	});
 
+	// Handle input changes for dropdowns and text input
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
@@ -22,100 +48,131 @@ const Product_Management = () => {
 		}));
 	};
 
+	// Handle dropdown selection
+	const handleMonthChange = (selectedMonth: string) => {
+		setFormData((prevData) => ({
+			...prevData,
+			month: selectedMonth,
+		}));
+	};
+
+	const handleWeatherChange = (selectedWeather: string) => {
+		setFormData((prevData) => ({
+			...prevData,
+			weather: selectedWeather,
+		}));
+	};
+
 	return (
 		<>
 			<div className="product_management text-lime-200">
 				<div className="top_part">
-					<div className="heading text-4xl font-semibold">
+					<div className="heading text-4xl font-semibold mb-6">
 						<h2>Product Management</h2>
 					</div>
 				</div>
-				<div className="display_portion mt-5 flex items-center space-x-96">
-					<div className="left_portion  w-1/2 ">
-						<div className="product_selection">
-							<Dropdown
-								label="Select Product"
-								options={[
-									{ value: "product1", label: "Product 1" },
-									{ value: "product2", label: "Product 2" },
-									{ value: "product3", label: "Product 3" },
-									{ value: "product4", label: "Product 4" },
-								]}
-								onChange={(e) => console.log(e)}
+				<div className="category_and_product_selection"></div>
+				<div className="display_portion flex items-start justify-between space-x-5">
+					{/* Adding Product Price Section */}
+					<div className="adding_product_price w-full lg:w-1/3 flex flex-col items-start space-y-4">
+						<h1 className="text-2xl mb-4">Adding Product Price</h1>
+
+						{/* Select Month Dropdown */}
+						<Dropdown
+							label="Select Month"
+							options={monthOptions}
+							onChange={handleMonthChange}
+							value={formData.month}
+							placeholder="Choose a month"
+							className="w-full"
+						/>
+
+						{/* Select Weather Condition Dropdown */}
+						<Dropdown
+							label="Select Weather Condition"
+							options={weatherOptions}
+							onChange={handleWeatherChange}
+							value={formData.weather}
+							placeholder="Choose a weather condition"
+							className="w-full"
+						/>
+
+						{/* Input Text for product price */}
+						<Input_text
+							type="number"
+							label="Estimated Price"
+							name="productPrice"
+							value={formData.productPrice} // Ensure it's a string
+							onChange={handleInputChange}
+							widthClass="w-full"
+						/>
+
+						<Button
+							text="Add Product Price"
+							onClick={() => console.log(formData)}
+						/>
+					</div>
+
+					{/* Adding Product Discount Section */}
+					<div className="adding_product_discount w-full lg:w-1/3 flex flex-col space-y-4">
+						<h1 className="text-2xl mb-4">Adding Product Discount</h1>
+
+						{/* Input for Discount Percentage */}
+						<div className="input_box">
+							<Input_text
+								type="number"
+								label="Discount Percentage"
+								name="discountPercentage"
+								value={formData.discountPercentage} // Ensure it's a string
+								onChange={handleInputChange}
+								widthClass="w-full"
+							/>
+
+							{/* Input for Discount Start Date */}
+							<Input_text
+								type="date"
+								label="Discount Start Date"
+								name="discountStartDate"
+								value={formData.discountStartDate}
+								onChange={handleInputChange}
+								widthClass="w-full"
+							/>
+
+							{/* Input for Discount End Date */}
+							<Input_text
+								type="date"
+								label="Discount End Date"
+								name="discountEndDate"
+								value={formData.discountEndDate}
+								onChange={handleInputChange}
+								widthClass="w-full"
+							/>
+
+							<Button
+								text="Add Product Discount"
+								onClick={() => console.log(formData)}
 							/>
 						</div>
-						<div className="align"></div>
-						<div className="product_selection mt-5 flex flex-col  space-y-2">
-							<div className="price_headline p-2 bg-lime-100 w-max rounded-md font-semibold">
-								<p>Price Prediction</p>
-							</div>
-							<div className="input_box">
-								<Input_text
-									label="Enter Crop"
-									name="crop"
-									value={formData.crop}
-									onChange={handleInputChange}
-								/>
-								<Input_text
-									label="Enter Soil"
-									name="soil"
-									value={formData.soil}
-									onChange={handleInputChange}
-								/>
-								<Input_text
-									label="Enter Area"
-									name="area"
-									value={formData.area}
-									onChange={handleInputChange}
-								/>
-								<div className="price_prediction flex items-center space-x-10">
-									<Button text="Predict price" />
-									<p>420 BDT</p>
-								</div>
-							</div>
-						</div>
-						<div className="product_selection mt-5 flex flex-col  space-y-2">
-							<div className="discount_headline p-2 bg-lime-100 w-max rounded-md border border-lime-100 font-semibold">
-								<p>Add discount</p>
-							</div>
-							<div className="input_box">
-								<Input_text
-									label="Enter percentage of Discount"
-									name="discountPercentage"
-									value={formData.discountPercentage}
-									onChange={handleInputChange}
-								/>
-								<Input_text
-									label="Enter starting date"
-									type="date"
-									name="startDate"
-									value={formData.startDate}
-									onChange={handleInputChange}
-								/>
-								<Input_text
-									label="Enter last date"
-									type="date"
-									name="endDate"
-									value={formData.endDate}
-									onChange={handleInputChange}
-								/>
-								<div className="price_prediction flex items-center space-x-10">
-									<Button text="Add discount" />
-									<p>420 BDT</p>
-								</div>
-							</div>
-						</div>
 					</div>
-					<div className="right_portion flex flex-col items-center justify-center text-lime-900">
-						<div className="product_headline w-max p-2 bg-lime-300 border border-lime-900 rounded-md">
-							<h2>Product List</h2>
-						</div>
-						<div className="product_info flex flex-col items-center justify-center">
-							<img src={crops} className="w-60" alt="Crop" />
-							<p>Tomato</p>
-							<p>Vegetables</p>
-							<p>Predicted price: 420 BDT</p>
-							<p>Discounted Price: N/A</p>
+
+					{/* Product Display Section */}
+					<div className="product_display_section w-full lg:w-1/3 flex flex-col items-center">
+						<h1 className="text-2xl mb-4">Product Display</h1>
+
+						<div className="product_display flex flex-col items-center">
+							<div className="product_img mb-4">
+								<img
+									src={crop}
+									alt="Product"
+									className="w-40 h-40 object-cover"
+								/>
+							</div>
+
+							<div className="product_description flex flex-col items-center">
+								<p>Dendi</p>
+								<p>Real Price: 500BDT</p>
+								<p>Discounted Price: 420BDT</p>
+							</div>
 						</div>
 					</div>
 				</div>
