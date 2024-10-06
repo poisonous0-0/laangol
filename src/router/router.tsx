@@ -109,7 +109,7 @@ const router = createBrowserRouter([
 				element: <StoreList />, // Use StoreList for store list
 			},
 			{
-				path: "storehouse/store_list/storehouse_details", // Use :id as a route parameter
+				path: "storehouse/store_list/storehouse_details/:storehouseId", // Use :storehouseId as a dynamic route parameter
 				element: <StoreDetails />, // Use StoreDetails for storehouse details
 			},
 
