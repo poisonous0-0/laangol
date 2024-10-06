@@ -5,7 +5,7 @@ import store from "../../assets/warehouse.png";
 import Short_card_2 from "../../components/Dynamic_card/Labor_and_Store";
 
 interface StorehouseDetails {
-	storehouse_name: string;
+	name: string;
 	temperature_range: string;
 	location: string;
 	rent_per_sq: number;
@@ -46,6 +46,7 @@ const StoreDetails = () => {
 
 				const data: StorehouseDetails = await response.json();
 				setStorehouse(data);
+				console.log(data);
 			} catch (error) {
 				console.error("Error fetching storehouse details:", error);
 				setError("Failed to fetch storehouse details.");
@@ -97,7 +98,7 @@ const StoreDetails = () => {
 							{/* Profile Info */}
 							<div className="info_section flex flex-col space-y-2 items-start">
 								<p className="text-lg sm:text-xl md:text-2xl">
-									{storehouse.storehouse_name}
+									{storehouse.name}
 								</p>
 
 								{/* Taglines */}
