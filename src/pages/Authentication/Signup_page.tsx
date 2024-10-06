@@ -7,6 +7,7 @@ import RadioButton from "../../components/Button/RadioButton";
 import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 import Warning from "../../components/Popup/Warning";
+import TermsAndCondition from "../../components/Popup/TermsAndCondition";
 
 // Define the form data type
 interface FormData {
@@ -33,6 +34,9 @@ const Signup_page = () => {
 	// State for handling the popup visibility and messages
 	const [isWarningOpen, setIsWarningOpen] = useState<boolean>(false);
 	const [warningMessage, setWarningMessage] = useState<string>("");
+
+	// State for controlling the Terms and Conditions popup
+	const [isTermsOpen, setIsTermsOpen] = useState<boolean>(false);
 
 	const navigate = useNavigate();
 
@@ -192,6 +196,10 @@ const Signup_page = () => {
 								<a
 									href="#"
 									className="text-lime-200 transition duration-400 ease-in-out hover:underline"
+									onClick={(e) => {
+										e.preventDefault(); // Prevent page jump
+										setIsTermsOpen(true); // Open the terms popup
+									}}
 								>
 									terms and conditions
 								</a>
@@ -221,6 +229,12 @@ const Signup_page = () => {
 				onClose={() => setIsWarningOpen(false)}
 				title="Signup Status"
 				message="Back to login"
+			/>
+
+			{/* Terms and Conditions Popup */}
+			<TermsAndCondition
+				isOpen={isTermsOpen}
+				onClose={() => setIsTermsOpen(false)} // Close the popup when OK is clicked
 			/>
 		</>
 	);

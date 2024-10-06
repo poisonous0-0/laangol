@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import sending from "../../assets/sending.png";
 import { io } from "socket.io-client";
 
+// User interface
 interface User {
 	id: number;
 	name: string;
@@ -10,6 +11,7 @@ interface User {
 	avatar: string;
 }
 
+// Sample user data
 const usersData: User[] = [
 	{
 		id: 1,
@@ -27,9 +29,13 @@ const usersData: User[] = [
 	},
 ];
 
+// Connect to the socket server
 const socket = io("http://localhost:3000"); // Replace with your server URL
 
 const Chat: React.FC = () => {
+	// Assuming the user ID is available (replace it with actual user ID logic)
+	const loggedInUserId = 1; // Replace this with the actual logged-in user's ID from context or props
+
 	const [selectedUser, setSelectedUser] = useState<User | null>(usersData[0]);
 	const [message, setMessage] = useState("");
 	const [messages, setMessages] = useState<
@@ -37,8 +43,10 @@ const Chat: React.FC = () => {
 	>([]);
 
 	useEffect(() => {
+		// Emit the user ID to the server upon connection
 		socket.on("connect", () => {
 			console.log("Connected to server");
+			socket.emit("connected", loggedInUserId); // Send the actual user ID to the server
 		});
 
 		// Listen for incoming messages
@@ -54,29 +62,35 @@ const Chat: React.FC = () => {
 			socket.off("connect");
 			socket.off("messageReceived");
 		};
-	}, []);
+	}, [loggedInUserId]);
 
+	// User selection function
 	const selectUser = (user: User) => {
 		setSelectedUser(user);
 		setMessages([]); // Clear messages when a new user is selected
 	};
 
+	// Sending message function
 	const sendMessage = () => {
 		if (message.trim() === "" || !selectedUser) return;
 
 		const messageData = {
-			myId: 1, // Replace with the actual sender's ID
+			myId: loggedInUserId, // Use the actual logged-in user's ID
 			userId: selectedUser.id,
 			message: message,
 		};
 
-		// Emit the sendEvent event
+		// Emit the sendEvent event to the server
 		socket.emit("sendEvent", messageData);
+
+		// Add sent message to the chat
 		setMessages((prevMessages) => [
 			...prevMessages,
 			{ sender: "You", message },
-		]); // Add sent message to chat
-		setMessage(""); // Clear input
+		]);
+
+		// Clear the message input
+		setMessage("");
 	};
 
 	return (
