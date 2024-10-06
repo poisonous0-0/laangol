@@ -84,6 +84,46 @@ const Cart = () => {
 		}
 	};
 
+	const handleDeleteItem = async (product_id: number) => {
+		if (!cartData) return;
+
+		const deleteData = {
+			cart_id: cartData.cart_id,
+			product_id,
+		};
+
+		try {
+			const response = await fetch("http://127.0.0.1:8001/RemoveCartItem/", {
+				method: "DELETE",
+				headers: {
+					Authorization: `Token ${token}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(deleteData),
+			});
+
+			if (response.ok) {
+				// Remove the deleted item from the cart data
+				const updatedItems = cartData.items.filter(
+					(item) => item.product_id !== product_id
+				);
+				setCartData({
+					...cartData,
+					items: updatedItems,
+					total_amount: updatedItems.reduce(
+						(acc, item) => acc + item.total_price,
+						0
+					),
+				});
+				console.log("Item deleted successfully");
+			} else {
+				console.error("Failed to delete item");
+			}
+		} catch (error) {
+			console.error("Error during item deletion:", error);
+		}
+	};
+
 	return (
 		<div className="Cart">
 			<div className="headings w-max text-lime-900">
@@ -171,7 +211,9 @@ const Cart = () => {
 										<td>{item.unit_price} BDT</td>
 										<td>{item.total_price} BDT</td>
 										<td>
-											<button>
+											<button
+												onClick={() => handleDeleteItem(item.product_id)}
+											>
 												<img src={del} alt="" className="w-4 h-4" />
 											</button>
 										</td>
@@ -216,9 +258,9 @@ const Cart = () => {
 							className="w-4 h-4 accent-lime-800 bg-gray-100 dark:bg-white"
 						/>
 						<label htmlFor="privacy-policy" className="ms-2 text-lime-900">
-							I have read and agree to the{" "}
+							I have read and accept the{" "}
 							<a href="#" className="text-lime-600">
-								Privacy Policy of Laangol
+								Privacy Policy
 							</a>
 						</label>
 					</div>
