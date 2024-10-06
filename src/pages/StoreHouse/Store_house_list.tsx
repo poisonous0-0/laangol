@@ -108,8 +108,9 @@ const StorehouseCard: React.FC<StorehouseCardProps> = ({
 }) => {
 	return (
 		<div className="storehouse-card flex md:flex-row items-center justify-between rounded-lg w-full">
+			{/* Modify the Link to include the storehouse_id */}
 			<Link
-				to="storehouse_details"
+				to={`/dashboard/storehouse/store_list/storehouse_details/${storehouse.storehouse_id}`} // Include storehouse_id in the URL
 				className="store_info w-full md:w-4/5 flex flex-col md:flex-row items-center space-x-5 mb-4 md:mb-0"
 			>
 				<div className="image_section">
@@ -134,6 +135,7 @@ const StorehouseCard: React.FC<StorehouseCardProps> = ({
 					</p>
 				</div>
 			</Link>
+
 			<div className="connections flex flex-col space-y-10 md:space-y-5 md:ml-4">
 				<Button text={`${storehouse.rent_per_sq} BDT/Day`} />
 				<Button text="Connect" onClick={onConnectClick} />
