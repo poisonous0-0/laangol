@@ -15,9 +15,9 @@ const PrivacyPolicy: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 				<div className="content flex flex-col items-center space-y-5">
 					<div className="text flex flex-col items-start space-y-2">
 						<h2 className="text-3xl font-semibold text-center text-lime-200">
-							Terms and Conditions
+							Privacy Policy
 						</h2>
-						<p className="text-center text-lime-200">
+						<p className="text-center ">
 							1. Laangol is committed to protecting your privacy. We collect and
 							use your personal information only for the purpose of providing
 							you with our services.
@@ -45,7 +45,7 @@ const PrivacyPolicy: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 							platform, including but not limited to the loss of data, profits,
 							or business opportunities.
 						</p>
-						<p>
+						<p className="text-lime-200">
 							6. These policies are governed by the laws of Bangladesh, and any
 							disputes arising from these terms shall be subject to the
 							exclusive jurisdiction of the courts in Bangladesh.
