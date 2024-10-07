@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import Button from "../../components/Button/Button";
 import Input_text from "../../components/Input_Text/Input_text";
 import del from "../../assets/delete.png";
+import CompletePurchase from "../../components/Popup/CompletePurchase";
+import WarningPopup from "../../components/Popup/Warning";
+import PrivacyPolicy from "../../components/Popup/PrivacyPolicy";
+import TermsAndCondition from "../../components/Popup/TermsAndCondition";
 
 interface CartItem {
 	product_id: number;
@@ -23,8 +27,12 @@ const Cart = () => {
 	});
 
 	const [cartData, setCartData] = useState<CartData | null>(null);
-	const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery"); // Default to Cash on Delivery
+	const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery");
 	const token = localStorage.getItem("token");
+	const [isCompletePopupOpen, setCompletePopupOpen] = useState(false);
+	const [isWarningPopupOpen, setWarningPopupOpen] = useState(false);
+	const [isPrivacyPopupOpen, setPrivacyPopupOpen] = useState(false);
+	const [isTermsPopupOpen, setTermsPopupOpen] = useState(false);
 
 	useEffect(() => {
 		const fetchCartData = async () => {
@@ -43,7 +51,7 @@ const Cart = () => {
 		};
 
 		fetchCartData();
-	}, []);
+	}, [token]);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -55,6 +63,18 @@ const Cart = () => {
 
 	const handleCheckout = async () => {
 		if (!cartData) return;
+
+		const termsChecked = document.getElementById(
+			"terms-conditions"
+		) as HTMLInputElement;
+		const privacyChecked = document.getElementById(
+			"privacy-policy"
+		) as HTMLInputElement;
+
+		if (!formData.address || !termsChecked.checked || !privacyChecked.checked) {
+			setWarningPopupOpen(true);
+			return;
+		}
 
 		const checkoutData = {
 			cart_id: cartData.cart_id,
@@ -75,7 +95,7 @@ const Cart = () => {
 			if (response.ok) {
 				const result = await response.json();
 				console.log("Checkout successful:", result);
-				// Handle successful checkout (e.g., navigate to confirmation page)
+				setCompletePopupOpen(true);
 			} else {
 				console.error("Checkout failed");
 			}
@@ -211,9 +231,7 @@ const Cart = () => {
 										<td>{item.unit_price} BDT</td>
 										<td>{item.total_price} BDT</td>
 										<td>
-											<button
-												onClick={() => handleDeleteItem(item.product_id)}
-											>
+											<button onClick={() => handleDeleteItem(item.product_id)}>
 												<img src={del} alt="" className="w-4 h-4" />
 											</button>
 										</td>
@@ -243,8 +261,12 @@ const Cart = () => {
 							value=""
 							className="w-4 h-4 accent-lime-800 bg-gray-100 dark:bg-white"
 						/>
-						<label htmlFor="terms-conditions" className="ms-2 text-lime-900">
-							I agree to the terms and conditions{" "}
+						<label
+							htmlFor="terms-conditions"
+							className="ms-2 text-lime-900"
+							onClick={() => setTermsPopupOpen(true)}
+						>
+							I agree to the{" "}
 							<a href="#" className="text-lime-600">
 								Terms and Conditions
 							</a>
@@ -257,8 +279,12 @@ const Cart = () => {
 							value=""
 							className="w-4 h-4 accent-lime-800 bg-gray-100 dark:bg-white"
 						/>
-						<label htmlFor="privacy-policy" className="ms-2 text-lime-900">
-							I have read and accept the{" "}
+						<label
+							htmlFor="privacy-policy"
+							className="ms-2 text-lime-900"
+							onClick={() => setPrivacyPopupOpen(true)}
+						>
+							I have read and agree to the{" "}
 							<a href="#" className="text-lime-600">
 								Privacy Policy
 							</a>
@@ -269,6 +295,32 @@ const Cart = () => {
 					<Button text="Checkout" onClick={handleCheckout} />
 				</div>
 			</div>
+
+			{/* Popups */}
+			{isCompletePopupOpen && (
+				<CompletePurchase
+					isOpen={isCompletePopupOpen}
+					onClose={() => setCompletePopupOpen(false)}
+				/>
+			)}
+			{isWarningPopupOpen && (
+				<WarningPopup
+					isOpen={isWarningPopupOpen}
+					onClose={() => setWarningPopupOpen(false)}
+				/>
+			)}
+			{isPrivacyPopupOpen && (
+				<PrivacyPolicy
+					isOpen={isPrivacyPopupOpen}
+					onClose={() => setPrivacyPopupOpen(false)}
+				/>
+			)}
+			{isTermsPopupOpen && (
+				<TermsAndCondition
+					isOpen={isTermsPopupOpen}
+					onClose={() => setTermsPopupOpen(false)}
+				/>
+			)}
 		</div>
 	);
 };

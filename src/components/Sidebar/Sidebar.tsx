@@ -18,7 +18,6 @@ interface MenuItem {
 // Constants (moved Chat and Cart to a separate array for bottom alignment)
 const menuItems: MenuItem[] = [
 	{ img: Marketplace, text: "Marketplace", path: "marketplace" },
-	{ img: Crop, text: "Crop Maintenance", path: "crop_maintenance" },
 	{ img: Labor, text: "Labor Management", path: "labor" },
 	{ img: Storehouse, text: "Storehouse Rental", path: "storehouse" },
 	{ img: Helpline, text: "AgroAegis", path: "agroaegis" },

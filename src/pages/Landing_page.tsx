@@ -15,6 +15,7 @@ import Farmer from "../assets/farmer.jpg";
 import Investor from "../assets/admin.jpg";
 import Logo from "../assets/laangol.png";
 import rightArow from "../assets/rightArrow.svg";
+import { Link } from "react-router-dom";
 
 const Landing_page = () => {
 	return (
@@ -38,10 +39,12 @@ const Landing_page = () => {
 								<p className="mt-2 font-normal text-lg text-lime-800">
 									With an easy to use application, solve your own problem!
 								</p>
-								<button className="mt-5 py-3 pr-5 pl-3 bg-lime-100 rounded-3xl flex items-center gap-x-4 transition duration-300 ease-in-out transform hover:bg-lime-200 hover:text-white  ">
-									<p>Get an advisor for free </p>
-									<img src={arrow} alt="" className=" w-4 h-4 " />
-								</button>
+								<Link to="/login">
+									<button className="mt-5 py-3 pr-5 pl-3 bg-lime-100 rounded-3xl flex items-center gap-x-4 transition duration-300 ease-in-out transform hover:bg-lime-200 hover:text-white  ">
+										<p>Get an advisor for free </p>
+										<img src={arrow} alt="" className=" w-4 h-4 " />
+									</button>
+								</Link>
 							</div>
 							<div className="banner_images flex items-end relative justify-end">
 								<img src={Leaf} alt="" className="" />
@@ -92,17 +95,8 @@ const Landing_page = () => {
 						</div>
 					</div>
 				</div>
-				<div className="review_content">
-					<div className="my-32">
-						<div className="heading_part">
-							<h1 className="flex items-center justify-center text-xl font-bold text-lime-200">
-								Trusted by your fellow!
-							</h1>
-						</div>
-						<div className="user_review_content"></div>
-					</div>
-				</div>
-				<div className="faq_content">
+
+				<div className="faq_content" id="faq">
 					<div className="my-36">
 						<div className="heading">
 							<h1 className="flex items-center justify-center text-xl font-bold text-lime-200">

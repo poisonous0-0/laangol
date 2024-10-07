@@ -6,7 +6,7 @@ import Profile from "../../components/Profile/Profile";
 import left from "../../assets/left.png";
 import right from "../../assets/right.png";
 import user from "../../assets/user.png";
-
+import { Link } from "react-router-dom";
 const Dashboard = () => {
 	const [userImage, setUserImage] = useState<string>(user);
 
@@ -33,7 +33,9 @@ const Dashboard = () => {
 			<div className="flex flex-col h-screen bg-lime-50">
 				{/* Top Part */}
 				<div className="top_part flex items-center justify-between px-4 py-2">
-					<img src={Laangol} alt="Laangol" className=" sm:w-48 md:w-56" />
+					<Link to="/">
+						<img src={Laangol} alt="Laangol" className=" sm:w-48 md:w-56" />
+					</Link>
 					<Profile
 						imageSrc={userImage}
 						menuItems={[

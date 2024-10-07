@@ -1,8 +1,12 @@
 import React from "react";
+import Navbar from "../../components/Navbar/Navbar";
 
 const LegalPolicies = () => {
 	return (
 		<>
+			<header>
+				<Navbar />
+			</header>
 			<div className="term_and_condition bg-lime-100 bg-opacity-10">
 				<div className="header text-lime-200 text-5xl font-semibold">
 					<h1>Terms and Conditions</h1>
