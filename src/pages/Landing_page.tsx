@@ -89,9 +89,21 @@ const Landing_page = () => {
 							</div>
 						</div>
 						<div className="card_section my-20 flex items-center gap-x-10 justify-center">
-							<Card imageSrc={Customer} title="Consumer" />
-							<Card imageSrc={Farmer} title="Farmer" />
-							<Card imageSrc={Investor} title="Investor" />
+							<Card
+								imageSrc={Customer}
+								title="Consumer"
+								description="Easily rent their storagehouse and get themselves hired for labor. Creates a job opportunity for the unemployed"
+							/>
+							<Card
+								imageSrc={Farmer}
+								title="Farmer"
+								description="Easily hire labor and storage alongside having a fair marketprice. They dont have to depend on the middleman"
+							/>
+							<Card
+								imageSrc={Investor}
+								title="Investor"
+								description="Can manage all the farmers and consumers. "
+							/>
 						</div>
 					</div>
 				</div>
