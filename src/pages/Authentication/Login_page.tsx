@@ -38,6 +38,7 @@ const Login_page = () => {
 			const data = await response.json();
 			localStorage.setItem("token", data.token);
 			localStorage.setItem("image", data.user.image);
+			localStorage.setItem("user_id", data.user_id);
 			navigate("/dashboard");
 		} catch (error) {
 			console.error("Error during login:", error);
