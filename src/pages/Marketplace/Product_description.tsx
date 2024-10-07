@@ -4,7 +4,7 @@ import Button from "../../components/Button/Button";
 import Selector from "../../components/Button/Selector";
 import Product_card from "../../components/Dynamic_card/Product_card";
 import axios from "axios";
-import AddItems from "../../components/Popup/AddItems"; // Import AddItems component
+import AddItems from "../../components/Popup/AddItems"; // Import the AddItems component
 
 // Define the Product interface
 interface Product {
@@ -13,7 +13,7 @@ interface Product {
 	name: string;
 	seller: string;
 	price: number;
-	seller_image: string;
+	seller_image: string; // Make sure this property matches your API response
 }
 
 const Product_description = () => {
@@ -21,17 +21,14 @@ const Product_description = () => {
 	const product = location.state?.product;
 	const token = localStorage.getItem("token");
 
-	// Fallback for when product data isn't available
 	if (!product) {
 		return <p>No product data available</p>;
 	}
 
-	// State to store additional products fetched from the API, typed as an array of Product
 	const [moreProducts, setMoreProducts] = useState<Product[]>([]);
-	const [quantity, setQuantity] = useState<number>(1); // State for quantity
-	const [isAddItemsOpen, setIsAddItemsOpen] = useState(false); // State for controlling the AddItems popup
+	const [quantity, setQuantity] = useState<number>(1);
+	const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false); // State to control popup visibility
 
-	// Fetch additional products from the API when the component loads
 	useEffect(() => {
 		const fetchMoreProducts = async () => {
 			try {
@@ -53,7 +50,6 @@ const Product_description = () => {
 		fetchMoreProducts();
 	}, [product.product_id]);
 
-	// Function to handle adding to cart
 	const handleAddToCart = async () => {
 		try {
 			const response = await axios.post(
@@ -69,21 +65,11 @@ const Product_description = () => {
 					},
 				}
 			);
-
-			// Check if the response indicates the product was successfully added
-			if (response.status === 200) {
-				console.log("Product added to cart:", response.data);
-				setIsAddItemsOpen(true); // Open AddItems popup after adding to cart
-			}
+			console.log("Product added to cart:", response.data);
+			setIsPopupOpen(true); // Open the popup after adding to cart
 		} catch (error) {
 			console.error("Error adding product to cart:", error);
-			// Optionally handle error feedback here (e.g., show an error message)
 		}
-	};
-
-	// Function to close the AddItems popup
-	const closeAddItemsPopup = () => {
-		setIsAddItemsOpen(false);
 	};
 
 	return (
@@ -132,7 +118,7 @@ const Product_description = () => {
 						{/* Seller info */}
 						<div className="seller_info flex items-center space-x-2">
 							<img
-								src={product.sellerImage}
+								src={product.seller_image} // Correct property name
 								alt="Seller"
 								className="w-8 md:w-10 rounded-lg"
 							/>
@@ -153,8 +139,7 @@ const Product_description = () => {
 
 						{/* Action Buttons */}
 						<div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-							<Button text="Add to cart" onClick={handleAddToCart} />{" "}
-							{/* Add click handler */}
+							<Button text="Add to cart" onClick={handleAddToCart} />
 							<Button text="Chat with Seller" />
 						</div>
 					</div>
@@ -185,10 +170,8 @@ const Product_description = () => {
 				</div>
 			</div>
 
-			{/* The AddItems Popup */}
-			{isAddItemsOpen && (
-				<AddItems isOpen={isAddItemsOpen} onClose={closeAddItemsPopup} />
-			)}
+			{/* AddItems Popup */}
+			<AddItems isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
 		</>
 	);
 };
