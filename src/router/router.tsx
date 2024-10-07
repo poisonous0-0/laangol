@@ -29,6 +29,9 @@ import Labor_details from "../pages/Labor/Labor_details";
 import Requests_labor from "../pages/Labor/Requests_labor";
 import Requests_storehouse from "../pages/StoreHouse/Requests_storehouse";
 import Chat from "../pages/Chat/Chat";
+import TermsAndCondition from "../components/Popup/TermsAndCondition";
+import T_and_C from "../pages/OtherPages/T_and_C";
+import LegalPolicies from "../pages/OtherPages/Legal_Policies";
 
 const router = createBrowserRouter([
 	{
@@ -165,6 +168,14 @@ const router = createBrowserRouter([
 				element: <Admin_Profile />,
 			},
 		],
+	},
+	{
+		path: "/terms_and_conditions",
+		element: <T_and_C />,
+	},
+	{
+		path: "/privacy_policy",
+		element: <LegalPolicies />,
 	},
 ]);
 

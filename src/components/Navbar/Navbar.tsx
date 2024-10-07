@@ -3,7 +3,13 @@ import Laangol from "../../assets/laangol.png";
 import Button from "../Button/Button";
 
 const Navbar = () => {
-	const items = ["Features", "Dashboard", "FAQ", "About us"];
+	// Define paths for each item
+	const items = [
+		{ name: "Features", path: "/features" },
+		{ name: "Dashboard", path: "/dashboard" },
+		{ name: "FAQ", path: "/#faq" },
+	];
+
 	return (
 		<div>
 			<nav className="p-7 flex items-center justify-between bg-lime-50">
@@ -19,7 +25,7 @@ const Navbar = () => {
 								key={index}
 								className="scale-110 font-medium transition ease-in-out delay-50 hover:text-lime-700 duration-300"
 							>
-								<a href="">{item}</a>
+								<Link to={item.path}>{item.name}</Link>
 							</li>
 						))}
 					</ul>

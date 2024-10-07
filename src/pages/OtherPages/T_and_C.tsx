@@ -1,8 +1,12 @@
 import React from "react";
+import Navbar from "../../components/Navbar/Navbar";
 
 export const T_and_C = () => {
 	return (
 		<>
+			<header>
+				<Navbar />
+			</header>
 			<div className="t_and_c bg-lime-100 bg-opacity-10">
 				<div className="header text-5xl font-semibold text-lime-200">
 					<h1>Terms and Condition</h1>
