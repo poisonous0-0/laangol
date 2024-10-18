@@ -1,11 +1,9 @@
-import Signup_page from "./pages/Authentication/Signup_page";
+// src/App.tsx
+import React from "react";
+import Product_Management from "./pages/Admin/Product_Management";
 
-const App = () => {
-	return (
-		<div>
-			<Signup_page />
-		</div>
-	);
+const App: React.FC = () => {
+	return <Product_Management />;
 };
 
 export default App;
